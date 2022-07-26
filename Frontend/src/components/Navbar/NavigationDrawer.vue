@@ -1,15 +1,15 @@
 <template>
   <v-navigation-drawer app clipped>
       <v-list-item two-line class="my-2">
-        <v-list-item-avatar color="pink">
-          <span class="white--text">PR</span>
+        <v-list-item-avatar color="blue">
+          <span class="white--text">AA</span>
         </v-list-item-avatar>
         <v-list-item-content>
           <v-list-item-title>
-            Prak Rathdavy
+            Ahmed Allam
           </v-list-item-title>
           <v-list-item-subtitle class="caption text-uppercase">
-            Doctor
+            Dentist
           </v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
@@ -17,8 +17,8 @@
       <v-divider></v-divider>
 
       <v-list>
-          <v-subheader class="text-uppercase">Modules</v-subheader>
-          <v-list-item-group color="primary">
+          <v-subheader class="text-uppercase">Menu</v-subheader>
+          <v-list-item-group color="#26b3ff">
               <v-list-item v-for="(route, i) in routes" :key="i" router :to="route.route">
                   <v-list-item-icon>
                       <v-icon>{{ route.icon }}</v-icon>
@@ -56,17 +56,18 @@ export default {
                 name: "Billing",
                 route: "/billing",
                 icon: "mdi-file-document"
-            },
-            {
-                name: "Inventory",
-                route: "/inventory",
-                icon: "mdi-magnify"
             }
         ]
     })
 }
 </script>
 
-<style>
+<style lang="scss">
+
+    a {
+        &:hover {
+            text-decoration: none;
+        }
+    }
 
 </style>

@@ -760,17 +760,17 @@
 
                             <ul>
                                 <li>
-                                    <a href="#">home<span class="sr-only">(current)</span></a>
+                                    <a href="#">Home<span class="sr-only">(current)</span></a>
                                 </li>
                                 <li>
-                                    <a href="javascript:void()" @click="scrollTo('features')">features</a>
+                                    <a href="javascript:void()" @click="scrollTo('features')">Features</a>
                                 </li>
                                 <li>
-                                    <a href="javascript:void()" @click="scrollTo('details')">request demo</a>
+                                    <a href="javascript:void()" @click="scrollTo('details')">Request Demo</a>
                                 </li>
 
                                 <li>
-                                    <a href="javascript:void()" @click="scrollTo('pricing')">pricing</a>
+                                    <a href="javascript:void()" @click="scrollTo('pricing')">Pricing</a>
                                 </li>
                             </ul>
                         </div>

@@ -12,7 +12,7 @@ export default new Vuex.Store({
     appointment: {},
     appointmentStats: {},
     newPatientStats: {},
-    isLoggedIn: false
+    isLoggedIn: true
   },
   mutations: {
     // Gets all patients

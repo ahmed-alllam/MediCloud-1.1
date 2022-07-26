@@ -1,9 +1,7 @@
 <template>
-    <v-app-bar dark app flat clipped-left class="px-3" color="primary">
+    <v-app-bar dark app flat clipped-left class="px-3" color="#26b3ff">
         <v-toolbar-title class="headline">
-            <span class="font-weight-bold">Check</span>
-            <span class="font-weight-light">up</span>    
-            <span class="font-weight-black red--text">+</span>
+            <span class="font-weight-bold">MediCloud</span>
         </v-toolbar-title>
         <v-spacer></v-spacer>
         <v-text-field flat
@@ -13,7 +11,7 @@
             color="#000"
             background-color="#fff"
             dense
-            label="Search"
+            label="Search For Patient ID"
             hide-details
             single-line
             append-icon="mdi-magnify"
