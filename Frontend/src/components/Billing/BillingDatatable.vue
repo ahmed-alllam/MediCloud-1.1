@@ -3,8 +3,7 @@
       <v-card flat>
           <v-card-title>Billing List
               <v-spacer></v-spacer>
-              <v-text-field label="Search" append-icon="mdi-magnify" v-model="billingSearch"></v-text-field>
-              <v-btn text router to="/billing/add">Add billing</v-btn>
+              <v-text-field label="Search" append-icon="mdi-magnify" v-model="billingSearch" class="mr-10"></v-text-field>
               <v-btn outlined>
                   <v-icon left @click="getBillings">mdi-refresh</v-icon>
                   Refresh

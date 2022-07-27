@@ -2,8 +2,8 @@
   <v-app>
     <div v-if="loggedIn">
       <v-app-bar dark app flat clipped-left class="px-3" color="#26b3ff">
-        <v-app-bar-nav-icon @click.stop="drawer = !drawer" v-if="$vuetify.breakpoint.xsOnly" />
-        <v-toolbar-title class="">
+        <v-app-bar-nav-icon @click.stop="drawer = !drawer" v-if="$vuetify.breakpoint.smAndDown" />
+        <v-toolbar-title class="brand-name">
           <span class="font-weight-bold">MediCloud</span>
         </v-toolbar-title>
         <v-spacer></v-spacer>
@@ -15,7 +15,7 @@
           <v-icon>mdi-bell</v-icon>
         </v-btn>
       </v-app-bar>
-      <v-navigation-drawer v-model="drawer" :permanent="!$vuetify.breakpoint.xsOnly" hide-overlay clipped app>
+      <v-navigation-drawer v-model="drawer" :permanent="$vuetify.breakpoint.mdAndUp" hide-overlay clipped app>
         <v-list-item two-line class="my-2">
           <v-list-item-avatar color="blue">
             <span class="white--text">AA</span>
@@ -48,7 +48,7 @@
       </v-navigation-drawer>
 
       <v-content>
-        <h1 class="display-1 mt-8 ml-5 mb-2">{{ $route.name }}</h1>
+        <h1 class="display-1 mt-8 mb-2 ml-10">{{ $route.name }}</h1>
         <router-view></router-view>
       </v-content>
     </div>
@@ -70,14 +70,9 @@ export default {
       loggedIn: this.$store.state.isLoggedIn,
       routes: [
         {
-          name: "Dashboard",
+          name: "Overview",
           route: "/",
           icon: "mdi-speedometer"
-        },
-        {
-          name: "Patients",
-          route: "/patients",
-          icon: "mdi-account-group"
         },
         {
           name: "Appointments",
@@ -85,9 +80,19 @@ export default {
           icon: "mdi-clipboard-text-outline"
         },
         {
-          name: "Billing",
-          route: "/billing",
+          name: "Finances",
+          route: "/finances",
           icon: "mdi-file-document"
+        },
+        {
+          name: "Messages",
+          route: "/messages",
+          icon: "mdi-exit-to-app" // todo
+        },
+        {
+          name: "Manage Clinic",
+          route: "/manage-clinic",
+          icon: "mdi-exit-to-app" // todo
         },
         {
           name: "Logout",
@@ -101,14 +106,16 @@ export default {
 </script>
 
 
-<style lang="scss">
+<style lang="scss" scoped>
 a {
   &:hover {
     text-decoration: none;
   }
 }
 
-.headline {
-  font-size: 1.1rem !important;
+@media screen and (max-width: 600px){
+  .brand-name {
+    display: none;
+  }
 }
 </style>

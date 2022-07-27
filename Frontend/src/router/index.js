@@ -7,7 +7,7 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'Dashboard',
+    name: 'Overview',
     component: () => import("../views/Home.vue"),
     meta: {
       requireAuth: true
@@ -27,14 +27,6 @@ const routes = [
     path: '/patient/:id',
     name: 'Patient Detail',
     component: () => import("../views/PatientDetail.vue"),
-  },
-  {
-    path: '/patients',
-    name: 'Patients',
-    component: () => import("../views/Patients.vue"),
-    meta: {
-      requireAuth: true
-    }
   },
   {
     path: '/appointments',
@@ -61,29 +53,54 @@ const routes = [
     }
   },
   {
-    path: "/visits",
-    name: "Visits",
-    component: () => import("../views/Visits.vue"),
+    path: "/patients/new",
+    name: "New Patient",
+    component:() => import("../views/AddPatient.vue"),
     meta: {
       requireAuth: true
     }
   },
   {
-    path: "/billing",
-    name: "Billing",
+    path: "/appointments/new/patient/:id",
+    name: "New Patient Appointment",
+    component:() => import("../views/PatientAppointment.vue"),
+    meta: {
+      requireAuth: true
+    }
+  },
+  {
+    path: "/finances",
+    name: "Finances",
     component:() => import("../views/Billing.vue"),
     meta: {
       requireAuth: true
     }
   },
   {
-    path: "/billing/add",
-    name: "New Billing",
-    component: () => import("../views/AddBilling.vue"),
+    path: "/messages",
+    name: "Messages",
+    component: () => import("../views/Billing.vue"), // todo
     meta: {
       requireAuth: true
-    }
-  }
+    } 
+  },  
+  {
+    path: "/manage-clinic",
+    name: "Manage Clinic",
+    component: () => import("../views/Billing.vue"), // todo
+    meta: {
+      requireAuth: true
+    } 
+  },
+  {
+    path: "/logout",
+    name: "Logout",
+    component: () => import("../views/Billing.vue"), // todo
+    meta: {
+      requireAuth: true
+    } 
+  },
+
 ]
 
 const router = new VueRouter({
@@ -107,7 +124,7 @@ router.beforeEach((to, from, next) => {
     next();
 
   if(isLoggedIn && to.matched.some(record => record.name === 'Login')) {
-    next({ name: 'Dashboard' })
+    next({ name: 'Overview' })
   }
 });
 

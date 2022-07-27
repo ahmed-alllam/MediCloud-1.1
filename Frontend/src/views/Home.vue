@@ -1,14 +1,17 @@
 <template>
     <v-container class="mx-2">
         <DashboardStats />
-        <v-row>
-            <v-col cols="8">
-                <DashboardAppointmentsLineChart />
-                <DashboardPatientTable />
-                <DashboardAppointmentsTable />
+        <v-row class="stats-row">
+            <v-col cols="12" lg="6">
+                <DashboardAppointmentsLineChart class="appointments-per-day" />
             </v-col>
-            <v-col cols="4">
-                <DashboardNewPatientsColumnChart />
+            <v-col cols="12" lg="6">
+                <DashboardNewPatientsColumnChart class="new-patients" />
+            </v-col>
+        </v-row>
+        <v-row class="stats-row">
+            <v-col cols="12">
+                <DashboardAppointmentsTable class="latest-appointments" />
             </v-col>
         </v-row>
     </v-container>
@@ -21,14 +24,13 @@ import moment from "moment"
 
 import DashboardStats from "../components/Dashboard/DashboardStats"
 import DashboardAppointmentsLineChart from "../components/Dashboard/DashboardAppointmentsLineChart"
-import DashboardPatientTable from "../components/Dashboard/DashboardPatientTable"
 import DashboardAppointmentsTable from "../components/Dashboard/DashboardAppointmentsTable"
 import DashboardNewPatientsColumnChart from "../components/Dashboard/DashboardNewPatientsColumnChart"
 
 export default {
     name: 'Home',
     components: {
-       DashboardStats, DashboardPatientTable, DashboardAppointmentsTable, DashboardAppointmentsLineChart, DashboardNewPatientsColumnChart
+        DashboardStats, DashboardAppointmentsTable, DashboardAppointmentsLineChart, DashboardNewPatientsColumnChart
     },
     methods: {
         // Get all patients
@@ -40,7 +42,7 @@ export default {
         },
 
         // Get all visits
-        async getVisits(){
+        async getVisits() {
             axios.get("http://localhost:5000/api/visits/").then(res => {
                 this.$store.commit('getVisits', res.data)
                 this.getDates()
@@ -48,7 +50,7 @@ export default {
         },
 
         // Get all items in inventory
-        async getInventory(){
+        async getInventory() {
             axios.get("http://localhost:5000/api/inventory/").then(res => {
                 this.$store.commit("getInventory", res.data)
             }).catch(err => console.log(err))
@@ -86,7 +88,7 @@ export default {
         // Get all billings
         async getBillings() {
             axios.get("http://localhost:5000/api/billing/").then(res => this.$store.commit("getBillings", res.data))
-            .catch(err => console.log(err))
+                .catch(err => console.log(err))
         }
     },
     computed: {
@@ -101,6 +103,9 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang="scss" scoped>
+    .stats-row {
+        margin-left: 5px;
+        margin-right: 20px;
+    }
 </style>

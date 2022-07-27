@@ -10,7 +10,7 @@
                         single-line
                         >
                     </v-text-field>
-                    <v-btn text router to="/appointments/new">Add Appointment</v-btn>
+                    <v-btn text router to="/appointments/new" class="add-appointment-button">Add Appointment</v-btn>
                     <v-btn @click="getVisits" outlined>
                         <v-icon left>mdi-refresh</v-icon>
                         Refresh
@@ -93,6 +93,18 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
+
+.add-appointment-button {
+    color: white !important;
+    background-color: #26b3ff;
+    border-radius: 25px;
+    margin: 0 20px;
+    text-decoration: none;
+
+    &:hover {
+        opacity: 0.6;
+    }
+}
 
 </style>
