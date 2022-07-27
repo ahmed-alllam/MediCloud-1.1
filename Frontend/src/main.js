@@ -6,7 +6,6 @@ import vuetify from './plugins/vuetify';
 import Chartkick from "vue-chartkick"
 import Chart from "chart.js"
 
-
 import PrimeVue from 'primevue/config';
 
 import Button from 'primevue/button';
