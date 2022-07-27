@@ -4,7 +4,7 @@
         <PatientDetail />
         <hr/>
         <div class="appointment-details">
-            <v-card outlined class="appointment-card">
+            <v-card class="appointment-card">
                 <v-list-item two-line>
                     <v-list-item-content>
                         <v-list-item-title class="headline">
@@ -129,12 +129,15 @@ export default {
 
 <style lang="scss" scoped>
 .appointment-details {
-    margin: 0 7%;
-    padding: 30px;
+    margin: 30px 4%;
+    padding: 10px;
 }
 
 .appointment-card {
     padding: 20px;
+    border: rgba(0, 0, 0, 0.1) 1px solid;
+    border-radius: 10px !important;
+    box-shadow: none;
 }
 
 .add-appointment-button {

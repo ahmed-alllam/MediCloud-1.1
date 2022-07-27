@@ -15,7 +15,7 @@
                     </h3>
                 </div>
 
-                <div id="basic-info" class="col-sm-10 offset-xl-1 col-xl-6 float-right">
+                <div id="basic-info" class="col-sm-11 offset-xl-1 col-xl-6 float-right">
                     <div id="id">
                         <span class="name">
                             ID
@@ -873,17 +873,18 @@ body {
     display: flex;
     flex-wrap: wrap;
     margin-top: 40px;
+    padding: 5px !important;
 }
 
 #top-content #basic-info>div {
     display: flex;
-    margin: 0 0 10px 200px;
+    margin: 0 0 10px 10px;
 }
 
 #top-content #basic-info div {
     display: block;
     flex-basis: auto;
-    margin-left: 30px;
+    margin-right: 30px;
 }
 
 #top-content #basic-info .value {
@@ -909,11 +910,11 @@ body {
 }
 
 #medical-details {
-    margin: 50px 7%;
+    margin: 50px 4%;
 }
 
 #medical-details>div {
-    padding: 30px;
+    padding: 10px;
     margin-top: 20px;
     /* box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); */
     border-radius: 10px;

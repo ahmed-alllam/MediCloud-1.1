@@ -18,7 +18,7 @@
                     </h4>
                     <v-text-field label="Patient ID" single-line>
                     </v-text-field>
-                    <v-btn text router to="/appointments/new/patient/:id" class="submit-button">Submit</v-btn>
+                    <v-btn text router to="/appointments/new/patient/:id" class="submit-button">Continue</v-btn>
                 </div>
 
             </v-col>
@@ -63,9 +63,9 @@
 
     .option-col {
         margin-bottom: 5vh;
-        padding: 50px;
+        padding: 30px;
         border-radius: 25px;
-        width: 70% !important;
+        width: 80% !important;
         height: 100%;
         margin: 0 auto;
     }
