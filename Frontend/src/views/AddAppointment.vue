@@ -140,7 +140,7 @@ export default {
                 see all their medical history and update it, to show automatically in their app.
             </h5>
         </v-row>
-        <v-row class="question-row ml-6 options">
+        <v-row class="question-row options">
             <v-col cols="12" md="6">
                 <div class="option-col yes-option">
                     <h4>
