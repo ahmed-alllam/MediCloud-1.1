@@ -121,6 +121,7 @@
 
                         <span class="value">
                             Mother: +2012345678
+                            <br/>
                             Father: +2012345678
                         </span>
 
@@ -804,7 +805,7 @@ body {
     padding-top: 20px;
     padding-bottom: 20px;
     width: 100%;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    /* box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); */
     border-bottom-right-radius: 20px;
     border-bottom-left-radius: 20px;
 }
@@ -914,7 +915,7 @@ body {
 #medical-details>div {
     padding: 30px;
     margin-top: 20px;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    /* box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); */
     border-radius: 10px;
     background-color: #FFFFFF;
 }

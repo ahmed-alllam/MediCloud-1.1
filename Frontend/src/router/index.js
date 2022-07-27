@@ -26,7 +26,7 @@ const routes = [
   {
     path: '/patient/:id',
     name: 'Patient Detail',
-    component: () => import("../views/PatientDetail.vue"),
+    component: () => import("../components/Patients/PatientDetail.vue"),
   },
   {
     path: '/appointments',
@@ -53,7 +53,7 @@ const routes = [
     }
   },
   {
-    path: "/patients/new",
+    path: "/appointments/new/patient",
     name: "New Patient",
     component:() => import("../views/AddPatient.vue"),
     meta: {

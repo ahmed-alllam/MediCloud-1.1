@@ -11,8 +11,8 @@
                         class="mr-6"
                         >
                     </v-text-field>
-                    <v-btn text router to="/appointments/new" class="add-appointment-button mr-10 mb-4">Add Appointment</v-btn>
-                    <v-btn @click="getVisits" outlined>
+                    <v-btn text router to="/appointments/new" class="add-appointment-button mr-10">Add Appointment</v-btn>
+                    <v-btn @click="getVisits" outlined class="mt-4 mb-4">
                         <v-icon left>mdi-refresh</v-icon>
                         Refresh
                     </v-btn>

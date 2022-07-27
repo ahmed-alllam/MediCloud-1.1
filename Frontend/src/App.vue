@@ -82,17 +82,17 @@ export default {
         {
           name: "Finances",
           route: "/finances",
-          icon: "mdi-file-document"
+          icon: "mdi-currency-usd"
         },
         {
           name: "Messages",
           route: "/messages",
-          icon: "mdi-exit-to-app" // todo
+          icon: "mdi-message" // todo
         },
         {
           name: "Manage Clinic",
           route: "/manage-clinic",
-          icon: "mdi-exit-to-app" // todo
+          icon: "mdi-account-supervisor" // todo
         },
         {
           name: "Logout",
