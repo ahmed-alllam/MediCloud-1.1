@@ -3,774 +3,49 @@
         <div id="top-content">
             <div id="row">
                 <div id="image" class="col-xs-12 col-md-5 col-xl-2">
-                    <img id="profile-photo" :src="require('@/assets/images/img.jpg')" />
+                    <img id="profile-photo" :src="patient_data.header_info['Profile Photo']" />
                 </div>
 
                 <div id="name-container" class="col-xs-12 col-md-7 col-xl-3">
-                    <h3 id="name">
-                        Ahmed Allam
-                    </h3>
-                    <h3 id="email">
-                        ahmedeallam@aucegypt.edu
-                    </h3>
+                    <h3 id="name">{{patient_data.header_info.Name}}</h3>
+                    <h3 id="email">{{patient_data.header_info.Email}}</h3>
                 </div>
 
                 <div id="basic-info" class="col-sm-11 offset-xl-1 col-xl-6 float-right">
-                    <div id="id">
-                        <span class="name">
-                            ID
-                        </span>
+                    <div v-for="(value, key, index) in patient_data.basic_info" :key="`${key}-${index}`">
+                        <span class="name">{{key}}</span>
 
-                        <span class="value">
-                            900214493
-                        </span>
-
-                    </div>
-
-                    <div id="birthdate">
-                        <span class="name">
-                            Birthdate
-                        </span>
-
-                        <span class="value">
-                            08-09-2003
-                        </span>
-                    </div>
-
-                    <div id="city">
-                        <span class="name">
-                            City
-                        </span>
-
-                        <span class="value">
-                            Cairo, Egypt
-                        </span>
-
-                    </div>
-
-                    <div id="blood-type">
-                        <span class="name">
-                            Blood Type
-                        </span>
-
-                        <span class="value">
-                            A-
-                        </span>
-
-                    </div>
-
-                    <div id="phone">
-                        <span class="name">
-                            Phone
-                        </span>
-
-                        <span class="value">
-                            +201553554224
-                        </span>
-
-                    </div>
-
-                    <div id="height">
-                        <span class="name">
-                            Height
-                        </span>
-
-                        <span class="value">
-                            186cm
-                        </span>
-
-                    </div>
-
-                    <div id="weight">
-                        <span class="name">
-                            Weight
-                        </span>
-
-                        <span class="value">
-                            75KG
-                        </span>
-
-                    </div>
-
-                    <div id="martial-status">
-                        <span class="name">
-                            Martial Status
-                        </span>
-
-                        <span class="value">
-                            Single
-                        </span>
-
-                    </div>
-
-                    <div id="gender">
-                        <span class="name">
-                            Gender
-                        </span>
-
-                        <span class="value">
-                            Male
-                        </span>
-
-                    </div>
-
-                    <div id="emergency-contacts">
-                        <span class="name">
-                            Emergency Contacts
-                        </span>
-
-                        <span class="value">
-                            Mother: +2012345678
-                            <br/>
-                            Father: +2012345678
-                        </span>
-
+                        <span class="value">{{value}}</span>
                     </div>
                 </div>
             </div>
         </div>
 
         <div id="medical-details">
-            <div id="medications">
-                <h2>
-                    Medications
-                </h2>
+            <div v-for="value in patient_data.details_sections" v-bind:key="value">
+                <h2>{{value.name}}</h2>
 
                 <div class="row no-gutters">
 
-                    <div class="col-md-6 col-xs-12">
+                    <div v-for="item in value.list" v-bind:key="item" class="col-md-6 col-xs-12">
                         <div class="record-item row no-gutters">
 
-                            <img class="record-image" :src="require('@/assets/images/medi3.jpg')" />
+                            <img class="record-image" v-if="item.image" :src="item.image" />
 
                             <div>
-                                <div class="record-title">
-                                    <span>
-                                        Lisinopril
-                                    </span>
+                                <div class="record-title" v-if="item.title">
+                                    <span>{{item.title}}</span>
                                 </div>
 
-                                <div class="record-date">
-                                    <span>
-                                        Since: 19-8-2021
-                                    </span>
+                                <div class="record-date" v-if="item.date">
+                                    <span>{{item.date}}</span>
                                 </div>
 
-                                <div class="record-details">
-                                    <span>
-                                        Used to treat high blood pressure, heart failure
-                                        <br />
-                                        <br />
-                                        Dose: 600mg daily before meals
-                                    </span>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <div class="col-md-6 col-xs-12">
-                        <div class="record-item row no-gutters">
-
-                            <img class="record-image" :src="require('@/assets/images/medi1.webp')" />
-
-                            <div>
-                                <div class="record-title">
-                                    <span>
-                                        Metformin
-                                    </span>
-                                </div>
-
-                                <div class="record-date">
-                                    <span>
-                                        Since: 12-12-2020
-                                    </span>
-                                </div>
-
-                                <div class="record-details">
-                                    <span>
-                                        Used to treat type 2 Diabetes.
-                                        <br />
-                                        <br />
-                                        Dose: 500mg daily after meals
-                                    </span>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <div class="col-md-6 col-xs-12">
-                        <div class="record-item row no-gutters">
-
-                            <img class="record-image" :src="require('@/assets/images/medi2.jpeg')" />
-
-                            <div>
-                                <div class="record-title">
-                                    <span>
-                                        Amoxicillin
-                                    </span>
-                                </div>
-
-                                <div class="record-date">
-                                    <span>
-                                        Since: 31-1-2022
-                                    </span>
-                                </div>
-
-                                <div class="record-details">
-                                    <span>
-                                        An antibiotic used to treat a number of bacterial infections
-                                        <br />
-                                        <br />
-                                        Dose: 200mg twice a day before meals
-                                    </span>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-
-            </div>
-
-
-            <div id="chronic-disease">
-                <h2>
-                    Chronic Disease
-                </h2>
-
-                <div class="row no-gutters">
-                    <div class="col-md-6 col-xs-12">
-                        <div class="record-item row no-gutters">
-                            <img class="record-image" :src="require('@/assets/images/causes-of-diabetes.webp')" />
-
-                            <div>
-                                <div class="record-title">
-                                    <span>
-                                        Diabetes
-                                    </span>
-                                </div>
-
-                                <div class="record-date">
-                                    <span>
-                                        Since: 12-12-2020
-                                    </span>
-                                </div>
-
-                                <div class="record-details">
-                                    <span>
-                                        A lifelong condition that causes a person's blood sugar level to become too high
-                                        <br />
-                                        <br />
-                                        Medication: Metformin
-                                    </span>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <div class="col-md-6 col-xs-12">
-                        <div class="record-item row no-gutters">
-
-                            <img class="record-image" :src="require('@/assets/images/hypertension.jpg')" />
-
-                            <div>
-                                <div class="record-title">
-                                    <span>
-                                        High Blood Preasure
-                                    </span>
-                                </div>
-
-                                <div class="record-date">
-                                    <span>
-                                        Since: 18-8-2021
-                                    </span>
-                                </div>
-
-                                <div class="record-details">
-                                    <span>
-                                        A common condition in which the long-term force of the blood against your artery
-                                        walls is high
-                                        <br />
-                                        <br />
-                                        Medication: Lisinopril
-                                    </span>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-
-            <div id="infectous-disease">
-                <h2>
-                    Infectous Disease
-                </h2>
-
-                <div class="row no-gutters">
-                    <div class="col-md-6 col-xs-12">
-                        <div class="record-item row no-gutters">
-
-                            <img class="record-image" :src="require('@/assets/images/influenza.png')"/>
-
-                            <div>
-                                <div class="record-title">
-                                    <span>
-                                        Influenza
-                                    </span>
-                                </div>
-
-                                <div class="record-date">
-                                    <span>
-                                        Since: 12-4-2022
-                                    </span>
-                                </div>
-
-                                <div class="record-details">
-                                    <span>
-                                        A virus that causes a person to cough, sneeze, and have a runny nose
-                                        <br />
-                                        <br />
-                                        Medication: Amoxicillin
-                                    </span>
+                                <div class="record-details" v-if="item.details">
+                                    <span>{{item.details}} </span>span
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <div id="past-disease">
-                <h2>
-                    Past Disease
-                </h2>
-
-                <div class="row no-gutters">
-                    <div class="col-md-6 col-xs-12">
-                        <div class="record-item row no-gutters">
-                            <img class="record-image" :src="require('@/assets/images/covid-19.jpg.webp')" />
-
-                            <div>
-                                <div class="record-title">
-                                    <span>
-                                        Covid-19
-                                    </span>
-                                </div>
-
-                                <div class="record-date">
-                                    <span>
-                                        Since: 5-2-2020
-                                        <br />
-                                        Until: 2-3-2020
-                                    </span>
-                                </div>
-
-                                <div class="record-details">
-                                    <span>
-                                        A disease caused by SARS-CoV-2 that can trigger what doctors call a respiratory
-                                        tract infection.
-                                        <br />
-                                        <br />
-                                        Medication: Dexamethasone
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6 col-xs-12">
-                        <div class="record-item row no-gutters">
-
-                            <img class="record-image" :src="require('@/assets/images/images.jpeg')"/>
-
-                            <div>
-                                <div class="record-title">
-                                    <span>
-                                        Shingles
-                                    </span>
-                                </div>
-
-                                <div class="record-date">
-                                    <span>
-                                        Since: 10-6-2018
-                                        <br />
-                                        Until: 17-8-2018
-                                    </span>
-                                </div>
-
-                                <div class="record-details">
-                                    <span>
-                                        A painful rash that develops on one side of the face or body
-                                        <br />
-                                        <br />
-                                        Medication: Zovirax
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6 col-xs-12">
-                        <div class="record-item row no-gutters">
-                            <img class="record-image" :src="require('@/assets/images/dengyee.jpg')"/>
-
-                            <div>
-                                <div class="record-title">
-                                    <span>
-                                        Dengue
-                                    </span>
-                                </div>
-
-                                <div class="record-date">
-                                    <span>
-                                        Since: 5-1-2016
-                                        <br />
-                                        Until: 7-9-2016
-                                    </span>
-                                </div>
-
-                                <div class="record-details">
-                                    <span>
-                                        A viral infection transmitted to humans through the bite of infected mosquitoes
-                                        <br />
-                                        <br />
-                                        Medication: Acetaminophen
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-            <div id="family-history">
-                <h2>
-                    Family History
-                </h2>
-
-                <div class="row no-gutters">
-                    <div class="col-md-6 col-xs-12">
-                        <div class="record-item row no-gutters">
-                            <img class="record-image" :src="require('@/assets/images/causes-of-diabetes.webp')" />
-
-                            <div>
-                                <div class="record-title">
-                                    <span>
-                                        Diabetes
-                                    </span>
-                                </div>
-
-                                <div class="record-details">
-                                    <span>
-                                        A lifelong condition that causes a person's blood sugar level to become too high
-                                        <br />
-                                        <br />
-                                        Member: Father
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-
-            <div id="immunizations">
-                <h2>
-                    Immunizations
-                </h2>
-
-                <div class="row no-gutters">
-                    <div class="col-md-6 col-xs-12">
-                        <div class="record-item row no-gutters">
-                            <img class="record-image" :src="require('@/assets/images/Unknown.png')" />
-
-                            <div>
-                                <div class="record-title">
-                                    <span>
-                                        Pfizer
-                                    </span>
-                                </div>
-
-                                <div class="record-date">
-                                    <span>
-                                        First Dose: 8-1-2022
-                                        <br />
-                                        Second Dose: 5-4-2022
-                                    </span>
-                                </div>
-
-                                <div class="record-details">
-                                    <span>
-                                        The BioNTech, Pfizer vaccine is a vaccine that aims to protect against COVID-19
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-
-            <div id="allergies">
-                <h2>
-                    Allergies
-                </h2>
-
-                <div class="row no-gutters">
-                    <div class="col-md-6 col-xs-12">
-                        <div class="record-item row no-gutters">
-                            <img class="record-image" :src="require('@/assets/images/Unknown.jpeg')" />
-
-                            <div>
-                                <div class="record-title">
-                                    <span>
-                                        Lactose Intolerance
-                                    </span>
-                                </div>
-
-                                <div class="record-details">
-                                    <span>
-                                        People with lactose intolerance are unable to fully digest the sugar (lactose)
-                                        in
-                                        milk.
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6 col-xs-12">
-                        <div class="record-item row no-gutters">
-                            <img class="record-image" :src="require('@/assets/images/images-2.jpeg')" />
-
-                            <div>
-                                <div class="record-title">
-                                    <span>
-                                        Gluten Intolerance
-                                    </span>
-                                </div>
-
-                                <div class="record-details">
-                                    <span>
-                                        Gluten intolerance is a condition that causes a bad reaction to the gluten in
-                                        wheat,
-                                        rye, and barley. It is similar to, but different from, celiac disease. </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-
-            <div id="prescriptions">
-                <h2>
-                    Prescriptions
-                </h2>
-
-                <div class="row no-gutters">
-                    <div class="col-md-6 col-xs-12">
-                        <div class="record-item row no-gutters">
-                            <img class="record-image" :src="require('@/assets/images/pre1.png')" />
-
-                            <div>
-                                <div class="record-date">
-                                    <span>
-                                        Date: 10-6-2018
-                                    </span>
-                                </div>
-
-                                <div class="record-details">
-                                    <span>
-                                        Doctor: Ahmed Al-Sayed
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6 col-xs-12">
-                        <div class="record-item row no-gutters">
-                            <img class="record-image" :src="require('@/assets/images/pre2.jpg')" />
-
-                            <div>
-                                <div class="record-date">
-                                    <span>
-                                        Date: 11-9-2020
-                                    </span>
-                                </div>
-
-                                <div class="record-details">
-                                    <span>
-                                        Doctor: Hassan Mohamed
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="scans">
-                <h2>
-                    Scans
-                </h2>
-
-                <div class="row no-gutters">
-                    <div class="col-md-6 col-xs-12">
-                        <div class="record-item row no-gutters">
-                            <img class="record-image" :src="require('@/assets/images/scan1.png')" />
-
-                            <div>
-                                <div class="record-title">
-                                    <span>
-                                        X-Ray for Chest
-                                    </span>
-                                </div>
-
-                                <div class="record-date">
-                                    <span>
-                                        Date: 18-1-2021
-                                    </span>
-                                </div>
-
-                                <div class="record-details">
-                                    <span>
-                                        Doctor: Mostafa Soliman
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6 col-xs-12">
-
-                        <div class="record-item row no-gutters">
-                            <img class="record-image" :src="require('@/assets/images/scan2.jpg')" />
-
-                            <div>
-                                <div class="record-title">
-                                    <span>
-                                        Brain MRI
-                                    </span>
-                                </div>
-
-                                <div class="record-date">
-                                    <span>
-                                        Date: 18-1-2021
-                                    </span>
-                                </div>
-
-                                <div class="record-details">
-                                    <span>
-                                        Doctor: Ahmed Emad
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="col-md-6 col-xs-12">
-
-                        <div class="record-item row no-gutters">
-                            <img class="record-image" :src="require('@/assets/images/s.jpg.webp')" />
-
-                            <div>
-                                <div class="record-title">
-                                    <span>
-                                        CT Scan
-                                    </span>
-                                </div>
-
-                                <div class="record-date">
-                                    <span>
-                                        Date: 21-3-2022
-                                    </span>
-                                </div>
-
-                                <div class="record-details">
-                                    <span>
-                                        Doctor: Naglaa Al-Sayed
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-            <div id="lab-tests">
-                <h2>
-                    Lab Tests
-                </h2>
-
-                <div class="row no-gutters">
-                    <div class="col-md-6 col-xs-12">
-                        <div class="record-item row no-gutters">
-                            <img class="record-image" :src="require('@/assets/images/lab1.jpg')" />
-
-                            <div>
-                                <div class="record-title">
-                                    <span>
-                                        Blood Test
-                                    </span>
-                                </div>
-
-                                <div class="record-date">
-                                    <span>
-                                        Date: 7-8-2018
-                                    </span>
-                                </div>
-
-                                <div class="record-details">
-                                    <span>
-                                        Doctor: Hassan Ahmed
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6 col-xs-12">
-
-                        <div class="record-item row no-gutters">
-                            <img class="record-image" :src="require('@/assets/images/lab2.png')" />
-
-                            <div>
-                                <div class="record-title">
-                                    <span>
-                                        Urine Test
-                                    </span>
-                                </div>
-
-                                <div class="record-date">
-                                    <span>
-                                        Date: 9-11-2020
-                                    </span>
-                                </div>
-
-                                <div class="record-details">
-                                    <span>
-                                        Doctor: Emad Allam
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-
                     </div>
                 </div>
             </div>
@@ -783,6 +58,160 @@
 
 export default {
     name: 'PatientDetail',
+    data: () => ({
+        patient_data: {
+            header_info: {
+                "Profile Photo": "/img/img.cb21a1a6.jpg",
+                "Name": "Ahmed Allam",
+                "Email": "ahmedeallam@aucegypt.edu",
+            },
+            basic_info: {
+                "ID": "900214493",
+                "Birth Date": "08-09-2003",
+                "City": "Cairo, Egypt",
+                "Blood Type": "A-",
+                "Phone": "+201553554224",
+                "Height": "186cm",
+                "Weight": "75KG",
+                "Status": "Single",
+                "Gender": "Male",
+                "Emergency Contacts": "Mother: +2012345678",
+            },
+            details_sections: [
+                {
+                    name: "Medications",
+                    list: [
+                        {
+                            image: "/img/medi3.1167af21.jpg",
+                            title: "Lisinopril",
+                            date: "Since: 19-8-2021",
+                            details: "Used to treat high blood pressure, heart failure \n\n Dose: 600mg daily before meals"
+                        },
+                        {
+                            image: "/img/medi1.8c68e4c4.webp",
+                            title: "Metformin",
+                            date: "Since: 12-12-2020",
+                            details: "Used to treat type 2 Diabetes. \n\n Dose: 500mg daily after meals"
+                        },
+                        {
+                            image: "/img/medi3.1167af21.jpg",
+                            title: "Amoxicillin",
+                            date: "Since: 31-1-2022",
+                            details: "An antibiotic used to treat a number of bacterial infections \n\n Dose: 200mg twice a day before meals"
+                        },
+                    ]
+                },
+                {
+                    name: "Disease",
+                    list: [
+                        {
+                            "image": "/img/causes-of-diabetes.1f867aa1.webp",
+                            "title": "Diabetes",
+                            "date": "Since: 12-12-2020",
+                            "details": "A lifelong condition that causes a person's blood sugar level to become too high \n\nMedication: Metformin"
+                        },
+                        {
+                            "image": "/img/hypertension.33d2aae1.jpg",
+                            "title": "High Blood Preasure",
+                            "date": "Since: 18-8-2021",
+                            "details": "A common condition in which the long-term force of the blood against your artery walls is high \n\nMedication: Lisinopril"
+                        },
+                        {
+                            "image": "/img/influenza.9e25d6f0.png",
+                            "title": "Influenza",
+                            "date": "Since: 12-4-2022",
+                            "details": "A virus that causes a person to cough, sneeze, and have a runny nose \n\nMedication: Amoxicilli"
+                        },
+                    ]
+                },
+                {
+                    name: "Family History",
+                    list: [
+                        {
+                            "image": "/img/causes-of-diabetes.1f867aa1.webp",
+                            "title": "Diabetes",
+                            "details": "A lifelong condition that causes a person's blood sugar level to become too high"
+                        },
+                    ],
+                },
+                {
+                    name: "Immunizations",
+                    list: [
+                        {
+                            "image": "/img/Unknown.f31aecaa.png",
+                            "date": "First Dose: 8-1-2022 \nSecond Dose: 5-4-2022",
+                            "title": "Pfizer",
+                            "details": "The BioNTech, Pfizer vaccine is a vaccine that aims to protect against COVID-19"
+                        }
+                    ]
+                },
+                {
+                    name: "Allergies",
+                    list: [
+                        {
+                            "image": "/img/Unknown.e7b4e80f.jpeg",
+                            "title": "Lactose Intolerance",
+                            "details": "People with lactose intolerance are unable to fully digest the sugar (lactose) in milk."
+                        },
+                        {
+                            "image": "/img/images-2.7538c5bb.jpeg",
+                            "title": "Gluten Intolerance",
+                            "details": "Gluten intolerance is a condition that causes a bad reaction to the gluten in wheat, rye, and barley. It is similar to, but different from, celiac disease"
+                        }
+                    ]
+                },
+                {
+                    name: "Prescriptions",
+                    list: [
+                        {
+                            "image": "/img/pre1.2bb68b64.png",
+                            "date": "Date: 10-6-2018",
+                            "details": "Doctor: Ahmed Al-Sayed"
+                        },
+                        {
+                            "image": "/img/pre2.249223e6.jpg",
+                            "date": "Date: 11-9-2020",
+                            "details": "Doctor: Hassan Mohamed"
+                        }
+                    ]
+                },
+                {
+                    name: "Scans",
+                    list: [
+                        {
+                            "image": "/img/scan1.de066e86.png",
+                            "title": "X-Ray for Chest",
+                            "date": "Date: 18-1-2021",
+                            "details": "Doctor: Mostafa Soliman"
+                        },
+                        {
+                            "image": "/img/scan2.1762588f.jpg",
+                            "title": "Brain MRI",
+                            "date": "Date: 18-1-2021",
+                            "details": "Doctor: Ahmed Emad"
+                        },
+                        {
+                            "image": "/img/s.jpg.3c13150c.webp",
+                            "title": "CT Scan",
+                            "date": "Date: 21-3-2022",
+                            "details": "Doctor: Naglaa Al-Sayed"
+                        },
+                    ]
+                },
+                {
+                    name: "Lab Tests",
+                    list: [
+                        {
+                            "title": "Blood Test",
+                            "image": "/img/lab1.1b54cef4.jpg",
+                            "date": "Date: 7-8-2018",
+                            "details": "Doctor: Hassan Ahmed"
+                        }
+                    ]
+                }
+            ]
+        }
+    }),
 };
 
 </script>
@@ -957,7 +386,8 @@ body {
 }
 
 #medical-details span {
-    word-break: break-all;
+    word-break: break-word;
+    white-space: pre-wrap;
 }
 
 #medical-details .record-date {

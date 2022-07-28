@@ -105,7 +105,10 @@ const routes = [
 
 const router = new VueRouter({
   mode: 'history',
-  routes
+  routes,
+  scrollBehavior() {
+    window.scrollTo(0,0);
+  }
 })
 
 router.beforeEach((to, from, next) => {
