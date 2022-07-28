@@ -21,13 +21,18 @@
             </div>
         </div>
 
+        <v-btn text large class="font-weight-bold add-record-button">Add New Records
+            <v-icon>mdi-plus-circle</v-icon>
+        </v-btn>
+
+
         <div id="medical-details">
-            <div v-for="value in patient_data.details_sections" v-bind:key="value">
+            <div v-for="value in patient_data.details_sections" v-bind:key="value.name">
                 <h2>{{ value.name }}</h2>
 
                 <div class="row no-gutters">
 
-                    <div v-for="item in value.list" v-bind:key="item" class="col-md-6 col-xs-12">
+                    <div v-for="item in value.list" v-bind:key="item.title" class="col-md-6 col-xs-12">
                         <div class="record-item row no-gutters">
 
                             <img class="record-image" v-if="item.image" :src="item.image" />
@@ -469,4 +474,23 @@ body {
         opacity: 0.6;
     }
 }
+
+.add-record-button {
+    color: white !important;
+    background-color: #26b3ff;
+    border-radius: 25px;
+    text-decoration: none;
+
+    margin: 0 auto;
+    display: block;
+
+    i {
+        margin-left: 5px;
+    }
+
+    &:hover {
+        opacity: 0.6;
+    }
+}
+
 </style>
