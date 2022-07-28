@@ -7,15 +7,15 @@
                 </div>
 
                 <div id="name-container" class="col-xs-12 col-md-7 col-xl-3">
-                    <h3 id="name">{{patient_data.header_info.Name}}</h3>
-                    <h3 id="email">{{patient_data.header_info.Email}}</h3>
+                    <h3 id="name">{{ patient_data.header_info.Name }}</h3>
+                    <h3 id="email">{{ patient_data.header_info.Email }}</h3>
                 </div>
 
                 <div id="basic-info" class="col-sm-11 offset-xl-1 col-xl-6 float-right">
                     <div v-for="(value, key, index) in patient_data.basic_info" :key="`${key}-${index}`">
-                        <span class="name">{{key}}</span>
+                        <span class="name">{{ key }}</span>
 
-                        <span class="value">{{value}}</span>
+                        <span class="value">{{ value }}</span>
                     </div>
                 </div>
             </div>
@@ -23,7 +23,7 @@
 
         <div id="medical-details">
             <div v-for="value in patient_data.details_sections" v-bind:key="value">
-                <h2>{{value.name}}</h2>
+                <h2>{{ value.name }}</h2>
 
                 <div class="row no-gutters">
 
@@ -32,18 +32,60 @@
 
                             <img class="record-image" v-if="item.image" :src="item.image" />
 
+
+                            <v-menu top>
+                                <template v-slot:activator="{ on, attrs }">
+                                    <v-btn icon v-if="can_edit" v-bind="attrs" v-on="on" class="edit-button">
+                                        <v-icon>mdi-dots-vertical</v-icon>
+                                    </v-btn>
+                                </template>
+
+                                <v-list>
+                                    <v-list-item link>
+                                        <v-list-item-title>Edit</v-list-item-title>
+                                    </v-list-item>
+                                    <v-list-item link>
+                                        <v-list-item-title>Delete</v-list-item-title>
+                                    </v-list-item>
+                                </v-list>
+                            </v-menu>
+
                             <div>
                                 <div class="record-title" v-if="item.title">
-                                    <span>{{item.title}}</span>
+                                    <span>{{ item.title }}</span>
                                 </div>
 
                                 <div class="record-date" v-if="item.date">
-                                    <span>{{item.date}}</span>
+                                    <span>{{ item.date }}</span>
                                 </div>
 
                                 <div class="record-details" v-if="item.details">
-                                    <span>{{item.details}} </span>span
+                                    <span>{{ item.details }} </span>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div v-if="addMediCard">
+                <h2>MediCard</h2>
+
+                <div class="row no-gutters">
+
+                    <div class="col-md-6 col-xs-12">
+                        <div class="record-item row no-gutters">
+
+                            <div>
+                                <div class="record-details">
+                                    <span>Link a MediCard to this patient</span>
+                                </div>
+
+                                <form>
+                                    <v-text-field clearable label="Card ID">
+                                    </v-text-field>
+                                    <v-btn text large class="font-weight-bold add-medicard-button">SAVE</v-btn>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -59,6 +101,8 @@
 export default {
     name: 'PatientDetail',
     data: () => ({
+        addMediCard: true,
+        can_edit: true,
         patient_data: {
             header_info: {
                 "Profile Photo": "/img/img.cb21a1a6.jpg",
@@ -216,7 +260,7 @@ export default {
 
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 body {
     background-color: #F0F2F5;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -400,5 +444,29 @@ body {
     font-size: 15px;
     color: #666666;
     margin-bottom: 10px;
+}
+
+.edit-button {
+    margin-right: 40px;
+    margin-top: 40px;
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    &:focus {
+        outline: none;
+    }
+}
+
+.add-medicard-button {
+    color: white !important;
+    background-color: #26b3ff;
+    border-radius: 25px;
+    text-decoration: none;
+    padding: 20px !important;
+
+    &:hover {
+        opacity: 0.6;
+    }
 }
 </style>

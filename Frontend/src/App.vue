@@ -87,12 +87,12 @@ export default {
         {
           name: "Messages",
           route: "/messages",
-          icon: "mdi-message" // todo
+          icon: "mdi-message"
         },
         {
           name: "Manage Clinic",
           route: "/manage-clinic",
-          icon: "mdi-account-supervisor" // todo
+          icon: "mdi-account-supervisor"
         },
         {
           name: "Logout",
