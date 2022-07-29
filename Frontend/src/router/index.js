@@ -79,7 +79,7 @@ const routes = [
   {
     path: "/messages",
     name: "Messages",
-    component: () => import("../views/Billing.vue"), // todo
+    component: () => import("../views/Messages.vue"),
     meta: {
       requireAuth: true
     } 
@@ -87,7 +87,7 @@ const routes = [
   {
     path: "/manage-clinic",
     name: "Manage Clinic",
-    component: () => import("../views/Billing.vue"), // todo
+    component: () => import("../views/ManageClinic.vue"),
     meta: {
       requireAuth: true
     } 
@@ -95,7 +95,7 @@ const routes = [
   {
     path: "/logout",
     name: "Logout",
-    component: () => import("../views/Billing.vue"), // todo
+    component: () => import("../views/Logout.vue"),
     meta: {
       requireAuth: true
     } 
