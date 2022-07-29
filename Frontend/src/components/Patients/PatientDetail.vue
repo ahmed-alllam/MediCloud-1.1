@@ -21,9 +21,17 @@
             </div>
         </div>
 
-        <v-btn text large class="font-weight-bold add-record-button">Add New Records
-            <v-icon>mdi-plus-circle</v-icon>
-        </v-btn>
+
+        <v-dialog v-model="add_dialog" width="500">
+            <template v-slot:activator="{ on, attrs }">
+                <v-btn v-bind="attrs" v-on="on" v-if="can_edit" text large class="font-weight-bold add-record-button">
+                    Add New Records
+                    <v-icon>mdi-plus-circle</v-icon>
+                </v-btn>
+            </template>
+
+            <AddRecord @update="update_add_dialog"/>
+        </v-dialog>
 
 
         <div id="medical-details">
@@ -46,12 +54,46 @@
                                 </template>
 
                                 <v-list>
-                                    <v-list-item link>
-                                        <v-list-item-title>Edit</v-list-item-title>
-                                    </v-list-item>
-                                    <v-list-item link>
-                                        <v-list-item-title>Delete</v-list-item-title>
-                                    </v-list-item>
+
+                                    <v-dialog v-model="edit_dialog" width="500">
+                                        <template v-slot:activator="{ on, attrs }">
+
+                                            <v-list-item link v-bind="attrs" v-on="on">
+                                                <v-list-item-title>Edit</v-list-item-title>
+                                            </v-list-item>
+                                        </template>
+
+                                        <EditRecord @update="update_edit_dialog" />
+
+                                    </v-dialog>
+
+                                    <v-dialog v-model="delete_dialog" width="500">
+                                        <template v-slot:activator="{ on, attrs }">
+
+                                            <v-list-item link v-bind="attrs" v-on="on">
+                                                <v-list-item-title>Delete</v-list-item-title>
+                                            </v-list-item>
+                                        </template>
+
+                                        <v-card>
+                                            <v-card-title class="text-h5 grey lighten-2">
+                                                Delete
+                                            </v-card-title>
+
+                                            <v-card-text>
+                                                Are you sure you want to delete this record?
+                                            </v-card-text>
+
+                                            <v-divider></v-divider>
+
+                                            <v-card-actions>
+                                                <v-spacer></v-spacer>
+                                                <v-btn color="red" text @click="delete_dialog = false">
+                                                    Delete
+                                                </v-btn>
+                                            </v-card-actions>
+                                        </v-card>
+                                    </v-dialog>
                                 </v-list>
                             </v-menu>
 
@@ -102,10 +144,15 @@
 </template>
 
 <script>
+import EditRecord from "./EditRecord.vue";
+import AddRecord from "./AddRecord.vue";
 
 export default {
-    name: 'PatientDetail',
+    name: "PatientDetail",
     data: () => ({
+        add_dialog: false,
+        edit_dialog: false,
+        delete_dialog: false,
         addMediCard: true,
         can_edit: true,
         patient_data: {
@@ -261,6 +308,16 @@ export default {
             ]
         }
     }),
+    methods: {
+        update_add_dialog(add_dialog) {
+            this.add_dialog = add_dialog
+        },
+        update_edit_dialog(edit_dialog) {
+            console.log("ediiiti")
+            this.edit_dialog = edit_dialog
+        },
+    },
+    components: { EditRecord, AddRecord }
 };
 
 </script>
@@ -492,5 +549,4 @@ body {
         opacity: 0.6;
     }
 }
-
 </style>
