@@ -213,7 +213,7 @@
                                             <p>Save your medical data in a secure cloud, and never worry about losing
                                                 it.
                                                 We will take care of it for you with 100% security
-                                                Have an emergency profile to save your life withMediCard</p>
+                                                Have an emergency profile to save your life with MediCard</p>
                                         </div> <!-- end of text-container -->
                                     </div> <!-- end of col -->
                                 </div> <!-- end of row -->
@@ -1331,7 +1331,7 @@ screen and (-ms-high-contrast: none) {
 /************************/
 
 #features {
-    padding: 0px 10px;
+    padding: 30px 10px;
 }
 
 .tabs {
