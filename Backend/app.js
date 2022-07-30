@@ -22,6 +22,8 @@ const Doctor = require("./models/doctors/Doctors");
 const Visit = require("./models/visits/Visits");
 const Patient = require("./models/patients/Patients");
 const Admin = require("./models/admins/Admins");
+const DemoForm = require("./models/forms/DemoForm");
+const NewsletterForm = require("./models/forms/NewsletterForm");
 
 
 beforeSave = async (request) => {
@@ -57,7 +59,7 @@ admin_options = {
 
 const adminBro = new AdminBro({
   resources: [{ resource: Admin, options: admin_options },
-  { resource: Doctor, options: admin_options }, Visit, Patient],
+  { resource: Doctor, options: admin_options }, Visit, Patient, DemoForm, NewsletterForm],
   rootPath: '/admin',
   branding: {
     companyName: "MediCloud"
@@ -116,6 +118,9 @@ app.use('/', billingRoutes)
 
 const doctorsRoutes = require("./routes/doctors")
 app.use('/', doctorsRoutes)
+
+const formsRoutes = require("./routes/forms")
+app.use('/', formsRoutes)
 
 app.get("/", (req, res) => {
   res.send("Ok");

@@ -855,8 +855,10 @@ export default {
             if (this.newsLetterEmail === '') {
                 this.newsLetterError = "Please enter your email";
             } else {
-                axios.post("https://docs.google.com/forms/d/e/1FAIpQLSd5Kyzhw23Majn_dGHqCVbwKNY4R3MeIVZy7m9gIa2qAWnY1g/formResponse", 
-                    "entry.1394933709=ahmed"
+                axios.post("https://medicloudeg.herokuapp.com/forms/newsletter", 
+                    {
+                        "email": this.newsLetterEmail
+                    }
                 )
                 .then(() => { 
                     this.newsLetterError = "Thanks for sumbitting you email, now you will get all news about MediCloud"; 
