@@ -1,8 +1,16 @@
 const mongoose = require("mongoose");
 
 const VisitSchema = mongoose.Schema({
+  created: {
+    type: Date,
+    default: Date.now
+  },
   patientId: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    required: true
+  },
+  doctorId: {
+    type: mongoose.Schema.Types.ObjectId,
     required: true
   },
   patientName: {
@@ -17,17 +25,13 @@ const VisitSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  patientVisitDate: {
-    type: Date,
-    default: Date.now
-  },
   patientMedications: {
     type: Array,
     default: []
+  },
+  visitCost: {
+    type: Number
   }
-  // patientNextVisitDate: {
-  //   type: Date
-  // }
 });
 
 module.exports = mongoose.model("Visits", VisitSchema);
