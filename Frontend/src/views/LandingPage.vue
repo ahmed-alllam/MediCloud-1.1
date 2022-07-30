@@ -57,7 +57,15 @@
             <div class="header-content">
                 <div class="container">
                     <div class="row">
-                        <div class="col-lg-6 col-xl-5">
+                        <div class="col-lg-6 order-lg-2">
+                            <div class="image-container">
+                                <div class="img-wrapper">
+                                    <img class="img-fluid" :src="require('@/assets/images/header-software-app.png')"
+                                        alt="alternative">
+                                </div> <!-- end of img-wrapper -->
+                            </div> <!-- end of image-container -->
+                        </div> <!-- end of col -->
+                        <div class="col-lg-6 order-lg-1">
                             <div class="text-container">
                                 <h1>Reshaping the healthcare tech industry</h1>
                                 <p class="p-large">MediCloud is a fast-growing healthcare tech startup founded in
@@ -65,14 +73,6 @@
                                 <a class="btn-solid-lg page-scroll" href="javascript:void()"
                                     @click="scrollTo('details')">SIGN UP</a>
                             </div> <!-- end of text-container -->
-                        </div> <!-- end of col -->
-                        <div class="col-lg-6 col-xl-7">
-                            <div class="image-container">
-                                <div class="img-wrapper">
-                                    <img class="img-fluid" :src="require('@/assets/images/header-software-app.png')"
-                                        alt="alternative">
-                                </div> <!-- end of img-wrapper -->
-                            </div> <!-- end of image-container -->
                         </div> <!-- end of col -->
                     </div> <!-- end of row -->
                 </div> <!-- end of container -->
@@ -1222,7 +1222,7 @@ screen and (-ms-high-contrast: none) {
 }
 
 .header .header-content {
-    padding-top: 8rem;
+    // padding-top: 8rem;
     padding-bottom: 4rem;
     text-align: center;
 }
