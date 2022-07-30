@@ -119,7 +119,7 @@ app.use('/', billingRoutes)
 const doctorsRoutes = require("./routes/doctors")
 app.use('/', doctorsRoutes)
 
-const formsRoutes = require("./routes/forms")
+const formsRoutes = require("./routes/Forms")
 app.use('/', formsRoutes)
 
 app.get("/", (req, res) => {
