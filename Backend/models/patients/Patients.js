@@ -30,9 +30,12 @@ const PatientSchema = mongoose.Schema({
   patientBloodType: {
     type: String
   },
-  patientEmergencyContacts: {
-    type: String
-  },
+  patientEmergencyContacts: [
+    {
+      name: String,
+      phone: Number
+    }
+  ],
   patientGender: {
     type: String
   },
@@ -50,38 +53,71 @@ const PatientSchema = mongoose.Schema({
     default: Date.now
   },
 
-  patientMedications: {
-    type: Array,
-    default: []
-  },
-  patientDiseases: {
-    type: Array,
-    default: []
-  },
-  patientFamilyHistory: {
-    type: Array,
-    default: []
-  },
-  patientImmunizations: {
-    type: Array,
-    default: []
-  },
-  patientAllergies: {
-    type: Array,
-    default: []
-  },
-  patientPrescriptions: {
-    type: Array,
-    default: []
-  },
-  patientScans: {
-    type: Array,
-    default: []
-  },
-  patientLabTests: {
-    type: Array,
-    default: []
-  },
+  patientMedications: [
+    {
+      name: String,
+      dose: String,
+      image: String,
+      startDate: Date,
+      endDate: Date
+    }
+  ],
+  patientDiseases: [
+    {
+      name: String,
+      details: String,
+      image: String,
+      startDate: Date,
+      endDate: Date
+    }
+  ],
+  patientFamilyHistory: [
+    {
+      name: String,
+      member: String,
+      image: String,
+      startDate: Date,
+      endDate: Date
+    }
+  ],
+  patientImmunizations: [
+    {
+      name: String,
+      details: String,
+      image: String,
+      date: Date,
+    }
+  ],
+  patientAllergies: [
+    {
+      name: String,
+      details: String,
+      image: String,
+      startDate: Date,
+      endDate: Date
+    }
+  ],
+  patientPrescriptions: [
+    {
+      details: String,
+      image: String,
+      date: Date,
+    }
+  ],
+  patientScans:  [
+    {
+      details: String,
+      image: String,
+      date: Date,
+    }
+  ],
+  patientLabTests:  [
+    {
+      details: String,
+      image: String,
+      date: Date,
+    }
+  ],
 });
 
 module.exports = mongoose.model("Patients", PatientSchema);

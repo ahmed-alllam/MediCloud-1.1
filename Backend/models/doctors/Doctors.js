@@ -42,6 +42,8 @@ const DoctorSchema = mongoose.Schema({
   }
 });
 
+const bcrypt = require('bcrypt');
+
 DoctorSchema.methods.comparePassword = function(password) {
   return bcrypt.compareSync(password, this.doctorPassword);
 };

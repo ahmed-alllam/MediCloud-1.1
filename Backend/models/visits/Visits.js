@@ -25,10 +25,13 @@ const VisitSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  patientMedications: {
-    type: Array,
-    default: []
-  },
+  patientMedications:
+  [{
+      name: String,
+      dose: String,
+      image: String,
+    }
+  ],
   visitCost: {
     type: Number
   }
