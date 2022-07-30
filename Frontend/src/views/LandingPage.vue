@@ -82,8 +82,8 @@
 
 
         <!-- Customers -->
-        <div class="slider-1">
-            <div class="container">
+        <!-- <div class="slider-1"> -->
+            <!-- <div class="container"> -->
                 <!-- <div class="row">
                     <div class="col-lg-12">
                         <h3 class="section-title">Our New Partners and Customers</h3>
@@ -93,8 +93,8 @@
                             style="width: 100%; height: auto; object-fit: cover;">
                     </div> 
                 </div>  -->
-            </div> <!-- end of container -->
-        </div> <!-- end of slider-1 -->
+            <!-- </div> -->
+        <!-- </div> -->
         <!-- end of customers -->
 
 
@@ -1218,11 +1218,11 @@ screen and (-ms-high-contrast: none) {
 .header {
     background: url('~@/assets/images/background.svg') no-repeat;
     background-size: cover;
-    padding-bottom: 250px;
+    padding-bottom: 200px;
 }
 
 .header .header-content {
-    // padding-top: 1rem;
+    padding-top: 8rem;
     padding-bottom: 4rem;
     text-align: center;
 }
@@ -2172,7 +2172,7 @@ screen and (-ms-high-contrast: none) {
 
     /* Header */
     .header .header-content {
-        // padding-top: 3rem;
+        padding-top: 3rem;
         padding-bottom: 5rem;
     }
 
