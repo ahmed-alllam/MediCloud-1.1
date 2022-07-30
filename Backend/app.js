@@ -123,8 +123,7 @@ app.get("/", (req, res) => {
 
 //  DB Connection
 mongoose.connect(
-  // process.env.DB_CONNECTION,
-  "mongodb://localhost/MediCloud",
+  process.env.DB_CONNECTION,
   { useNewUrlParser: true, useUnifiedTopology: true },
   () => {
     console.log("Database connection successful");
@@ -132,5 +131,4 @@ mongoose.connect(
 );
 
 // Listen
-// app.listen(process.env.PORT);
-app.listen(5000);
+app.listen(process.env.PORT);
