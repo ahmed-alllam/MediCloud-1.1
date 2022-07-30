@@ -67,7 +67,7 @@ export default {
   data() {
     return {
       drawer: true,
-      loggedIn: this.$store.state.isLoggedIn,
+      loggedIn: false,
       routes: [
         {
           name: "Overview",
@@ -102,6 +102,16 @@ export default {
       ]
     }
   },
+  methods: {
+    checkLoggedIn() {
+      this.$store.dispatch("fetchAccessToken").then(() => {
+        this.loggedIn = this.$store.state.isLoggedIn
+      });
+    },
+  },
+  updated() {
+    this.checkLoggedIn();
+  },
 };
 </script>
 
@@ -113,7 +123,7 @@ a {
   }
 }
 
-@media screen and (max-width: 600px){
+@media screen and (max-width: 600px) {
   .brand-name {
     display: none;
   }

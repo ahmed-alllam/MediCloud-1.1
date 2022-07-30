@@ -3,7 +3,7 @@
         <div class="col-md-8 col-12">
             <div class="login-page">
                 <div class="container">
-                    <div class="login" v-bind:class="{ error: emptyFields }">
+                    <div class="login">
                         <h1>Log in</h1>
                         <form class="form-group">
                             <div class="p-float-label input-group">
@@ -15,7 +15,9 @@
                                 <InputText id="password" type="password" v-model="passwordLogin" required />
                                 <label for="password">Password</label>
                             </div>
-                            <button type="submit" class="btn btn-primary submit" @click="doLogin">Submit</button>
+                            <button type="button" class="btn btn-primary submit" @click="doLogin">Submit</button>
+
+                            <label class="error">{{ error }}</label>
                         </form>
                     </div>
                 </div>
@@ -28,20 +30,36 @@
 
 <script>
 
+import axios from "axios"
+
 export default {
     data() {
         return {
             emailLogin: "",
-            passwordLogin: ""
+            passwordLogin: "",
+            error: "",
         };
     },
 
     methods: {
-        doLogin() {
+        async doLogin() {
             if (this.emailLogin === "" || this.passwordLogin === "") {
-                this.emptyFields = true;
+                this.error = "Please Fill empty fields"
             } else {
-                alert("You are now logged in");
+                axios.post("http://localhost:5000/api/doctors/login/", {
+                    email: this.emailLogin,
+                    password: this.passwordLogin
+                }).then(async res => {
+                    const token = res.data.token;
+                    console.log(token);
+                    this.$store.commit('loggedIn', token);
+                    this.$router.push("/");
+                }).catch(err => {
+                    if(String(err).includes("401")) {
+                        this.error = "Wrong Email or Password"
+                    } else 
+                        this.error = "An error occured, please check your internet"
+                })
             }
         },
     }
@@ -102,5 +120,11 @@ export default {
     @media (max-width: 768px) {
         margin-top: 50px;
     }
+}
+
+.error {
+    background-color: transparent !important;
+    color: red;
+    margin-top: 20px;
 }
 </style>

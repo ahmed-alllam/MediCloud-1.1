@@ -18,7 +18,7 @@ const DoctorSchema = mongoose.Schema({
   doctorEmail: {
     type: String
   },
-  doctorPassword: {
+  password: {
     type: String
   },
   doctorID: {
@@ -45,7 +45,7 @@ const DoctorSchema = mongoose.Schema({
 const bcrypt = require('bcrypt');
 
 DoctorSchema.methods.comparePassword = function(password) {
-  return bcrypt.compareSync(password, this.doctorPassword);
+  return bcrypt.compareSync(password, this.password);
 };
 
 module.exports = mongoose.model("Doctors", DoctorSchema);

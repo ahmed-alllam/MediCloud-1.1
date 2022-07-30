@@ -111,8 +111,10 @@ const router = new VueRouter({
   }
 })
 
-router.beforeEach((to, from, next) => {
-  const isLoggedIn = store.state.isLoggedIn;
+
+router.beforeEach(async (to, from, next) => {
+  await store.dispatch("fetchAccessToken")
+  const isLoggedIn = store.state.isLoggedIn
 
   if (to.matched.some(record => record.meta.requireAuth)) {
     if(isLoggedIn)

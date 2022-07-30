@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken');
 
 router.post("/api/doctors/login/", async (req, res) => {
     Doctors.findOne({
-        email: req.body.email
+        doctorEmail: req.body.email
     }, function (err, user) {
         if (err) throw err;
         if (!user || !user.comparePassword(req.body.password)) {
@@ -15,3 +15,5 @@ router.post("/api/doctors/login/", async (req, res) => {
         return res.json({ token: jwt.sign({ email: user.doctorEmail, fullName: user.doctorFirstName + user.doctorLastName, _id: user._id }, 'RESTFULAPIs') });
     });
 });
+
+module.exports = router;

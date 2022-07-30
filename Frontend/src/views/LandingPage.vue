@@ -62,7 +62,8 @@
                                 <h1>Reshaping the healthcare tech industry</h1>
                                 <p class="p-large">MediCloud is a fast-growing healthcare tech startup founded in
                                     Egypt that aims to bring the latest technologies into the medical field</p>
-                                <a class="btn-solid-lg page-scroll" href="sign-up.html">SIGN UP</a>
+                                <a class="btn-solid-lg page-scroll" href="javascript:void()"
+                                    @click="scrollTo('details')">SIGN UP</a>
                             </div> <!-- end of text-container -->
                         </div> <!-- end of col -->
                         <div class="col-lg-6 col-xl-7">
@@ -83,16 +84,15 @@
         <!-- Customers -->
         <div class="slider-1">
             <div class="container">
-                <div class="row">
-                    <!-- add title saying our new parteners and customers -->
+                <!-- <div class="row">
                     <div class="col-lg-12">
                         <h3 class="section-title">Our New Partners and Customers</h3>
-                    </div> <!-- end of col -->
+                    </div> 
                     <div class="col-lg-12">
                         <img :src="require('@/assets/images/customers.png')" alt="new-customers"
                             style="width: 100%; height: auto; object-fit: cover;">
-                    </div> <!-- end of col -->
-                </div> <!-- end of row -->
+                    </div> 
+                </div>  -->
             </div> <!-- end of container -->
         </div> <!-- end of slider-1 -->
         <!-- end of customers -->
@@ -353,15 +353,14 @@
         <div id="details" ref="details" class="basic-1">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-6">
+                    <!-- <div class="col-lg-6">
                         <div class="image-container">
                             <img class="img-fluid" :src="require('@/assets/images/features-6.png')" alt="alternative">
-                        </div> <!-- end of image-container -->
-                    </div> <!-- end of col -->
+                        </div>
+                    </div> -->
 
-
-                    <div class="col-lg-6">
-                        <div class="text-container">
+                    <div class="col-lg-8 details-container">
+                        <div class="text-container" style="text-align: center;">
                             <h2>Now Is The Time to use the latest technologies in healthcare</h2>
 
                             <div class="row">
@@ -372,7 +371,7 @@
                                         benefit now from our healthcare solutions
                                     </p>
 
-                                    <p>Register now to get a Free demo!</p>
+                                    <p style="color:#26b3ff;">Register now to get a Free demo!</p>
                                 </div>
 
 
@@ -450,7 +449,8 @@
                                         </li>
                                     </ul>
                                     <div class="button-wrapper">
-                                        <a class="btn-solid-reg page-scroll pricing-signup" href="sign-up.html">SIGN
+                                        <a class="btn-solid-reg page-scroll pricing-signup" href="javascript:void()"
+                                            @click="scrollTo('details')">SIGN
                                             UP</a>
                                     </div>
                                 </div>
@@ -488,7 +488,8 @@
                                         </li>
                                     </ul>
                                     <div class="button-wrapper">
-                                        <a class="btn-solid-reg page-scroll pricing-signup" href="sign-up.html">SIGN
+                                        <a class="btn-solid-reg page-scroll pricing-signup" href="javascript:void()"
+                                            @click="scrollTo('details')">SIGN
                                             UP</a>
                                     </div>
                                 </div>
@@ -518,7 +519,7 @@
                                             <div class="media-body">Access patient's medical profile</div>
                                         </li>
                                         <li class="media">
-                                            <i class="fas fa-check"></i>
+                                            <i class="fas fa-times"></i>
                                             <div class="media-body">Manage your clinic financially</div>
                                         </li>
                                         <li class="media">
@@ -531,7 +532,8 @@
                                         </li>
                                     </ul>
                                     <div class="button-wrapper">
-                                        <a class="btn-solid-reg page-scroll pricing-signup" href="sign-up.html">SIGN
+                                        <a class="btn-solid-reg page-scroll pricing-signup" href="javascript:void()"
+                                            @click="scrollTo('details')">SIGN
                                             UP</a>
                                     </div>
                                 </div>
@@ -561,16 +563,17 @@
                                             <div class="media-body">Manage your clinic financially</div>
                                         </li>
                                         <li class="media">
-                                            <i class="fas fa-check"></i>
+                                            <i class="fas fa-times"></i>
                                             <div class="media-body">Get important statistical insights</div>
                                         </li>
                                         <li class="media">
-                                            <i class="fas fa-check"></i>
+                                            <i class="fas fa-times"></i>
                                             <div class="media-body">Connect and message with patients</div>
                                         </li>
                                     </ul>
                                     <div class="button-wrapper">
-                                        <a class="btn-solid-reg page-scroll pricing-signup" href="sign-up.html">SIGN
+                                        <a class="btn-solid-reg page-scroll pricing-signup" href="javascript:void()"
+                                            @click="scrollTo('details')">SIGN
                                             UP</a>
                                     </div>
                                 </div>
@@ -612,7 +615,8 @@
                                         </li>
                                     </ul>
                                     <div class="button-wrapper">
-                                        <a class="btn-solid-reg page-scroll pricing-signup" href="sign-up.html">SIGN
+                                        <a class="btn-solid-reg page-scroll pricing-signup" href="javascript:void()"
+                                            @click="scrollTo('details')">SIGN
                                             UP</a>
                                     </div>
                                 </div>
@@ -633,32 +637,29 @@
                 <div class="row">
                     <div class="col-lg-12">
 
-                        <!-- Text Slider -->
                         <div class="slider-container">
                             <div class="swiper-container text-slider">
                                 <div class="swiper-wrapper">
-
+                                    <!-- 
                                     <Carousel :value="testmonals" :autoplayInterval="5000" :circular="true">
 
                                         <template #item="slotProps">
-                                            <!-- Slide -->
                                             <div class="swiper-slide">
                                                 <div class="image-wrapper">
                                                     <img class="img-fluid"
                                                         :src="require(`@/assets/images/${slotProps.data.image}`)"
                                                         alt="alternative">
-                                                </div> <!-- end of image-wrapper -->
+                                                </div>
                                                 <div class="text-wrapper">
                                                     <div class="testimonial-text">
                                                         {{ slotProps.data.text }}
                                                     </div>
                                                     <div class="testimonial-author">{{ slotProps.data.author }}</div>
-                                                </div> <!-- end of text-wrapper -->
-                                            </div> <!-- end of swiper-slide -->
+                                                </div>
+                                            </div> 
                                         </template>
-                                        <!-- end of slide -->
                                     </Carousel>
-
+ -->
 
                                 </div> <!-- end of swiper-wrapper -->
                             </div> <!-- end of swiper-container -->
@@ -683,9 +684,14 @@
 
                             <!-- Newsletter Form -->
                             <form id="newsletterForm" data-toggle="validator" data-focus="false">
-                                <InputText id="email" type="email" placeholder="Email" required />
+                                <InputText id="newsletterEmail" type="email" placeholder="Email"
+                                    v-model="newsLetterEmail" required />
                                 <br />
-                                <a class="btn-solid-reg page-scroll submit" href="/">SEND</a>
+                                <a class="btn-solid-reg page-scroll" href="javascript:void()"
+                                    @click="sendNewsLetterForm">SEND</a>
+                                <br/>
+                                <br/>
+                                <label>{{newsLetterError}}</label>
                             </form>
                             <!-- end of newsletter form -->
 
@@ -733,17 +739,17 @@
                                     <div class="media-body">
                                         <i class="fa fa-map"></i>
                                         <span>
-                                            teseen, 5th District, New Cairo
+                                            South Teseen, 5th District, New Cairo
                                         </span>
                                     </div>
                                 </li>
                                 <li class="media">
                                     <div class="media-body">
-                                        <i class="fas fa-envelope"></i>
-                                        <a href="mailto:contact@medicloud.com">contact@medicloud.com</a>
-                                        <br />
-                                        <i class="fas fa-globe"></i>
-                                        <a href="#your-link">www.medicloud.com</a>
+                                        <!-- <i class="fas fa-envelope"></i> -->
+                                        <!-- <a href="mailto:contact@medicloud.com">contact@medicloud.com</a> -->
+                                        <!-- <br /> -->
+                                        <!-- <i class="fas fa-globe"></i> -->
+                                        <!-- <a href="#your-link">www.medicloud.com</a> -->
                                     </div>
                                 </li>
 
@@ -800,10 +806,13 @@
 
 
 <script>
+import axios from "axios"
 
 export default {
     data() {
         return {
+            newsLetterError: "",
+            newsLetterEmail: "",
             testmonals: [],
             isPatient: true,
             navOpen: false,
@@ -841,7 +850,22 @@ export default {
         scrollTo(refName) {
             const el = this.$refs[refName]
             el.scrollIntoView({ behavior: 'smooth' })
-        }
+        },
+        async sendNewsLetterForm() {
+            if (this.newsLetterEmail === '') {
+                this.newsLetterError = "Please enter your email";
+            } else {
+                axios.post("https://docs.google.com/forms/d/e/1FAIpQLSd5Kyzhw23Majn_dGHqCVbwKNY4R3MeIVZy7m9gIa2qAWnY1g/formResponse", 
+                    "entry.1394933709=ahmed"
+                )
+                .then(() => { 
+                    this.newsLetterError = "Thanks for sumbitting you email, now you will get all news about MediCloud"; 
+                })
+                .catch(() => {
+                     this.newsLetterError = "An error Occured, please try again"; 
+                });
+            }
+        },
     }
 }
 
@@ -1240,7 +1264,7 @@ screen and (-ms-high-contrast: none) {
 /*     06. Description     */
 /***************************/
 .cards-1 {
-    padding-top: 3.25rem;
+    padding-top: 0.25rem;
     padding-bottom: 3rem;
     text-align: center;
 }
@@ -1398,6 +1422,10 @@ screen and (-ms-high-contrast: none) {
 /***********************/
 /*     09. Details     */
 /***********************/
+.details-container {
+    margin: 0 auto !important;
+}
+
 #details {
     padding: 35px 20px;
     text-align: center;

@@ -24,6 +24,16 @@ const Patient = require("./models/patients/Patients");
 const Admin = require("./models/admins/Admins");
 
 
+beforeSave = async (request) => {
+  if (request.payload.password) {
+    request.payload = {
+      ...request.payload,
+      password: await bcrypt.hash(request.payload.password, 10)
+    }
+  }
+  return request
+};
+
 admin_options = {
   properties: {
     password: {
@@ -35,15 +45,10 @@ admin_options = {
   },
   actions: {
     new: {
-      before: async (request) => {
-        if (request.payload.password) {
-          request.payload = {
-            ...request.payload,
-            password: await bcrypt.hash(request.payload.password, 10)
-          }
-        }
-        return request
-      },
+      before: beforeSave,
+    },
+    edit: {
+      before: beforeSave,
     }
   }
 }
@@ -109,6 +114,9 @@ app.use('/', visitsRoutes)
 const billingRoutes = require("./routes/billing")
 app.use('/', billingRoutes)
 
+const doctorsRoutes = require("./routes/doctors")
+app.use('/', doctorsRoutes)
+
 app.get("/", (req, res) => {
   res.send("Ok");
 });
@@ -116,7 +124,7 @@ app.get("/", (req, res) => {
 //  DB Connection
 mongoose.connect(
   // process.env.DB_CONNECTION,
-  "mongodb://localhost",
+  "mongodb://localhost/MediCloud",
   { useNewUrlParser: true, useUnifiedTopology: true },
   () => {
     console.log("Database connection successful");
