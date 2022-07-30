@@ -377,14 +377,17 @@
 
                                 <form class="form-group col-12 col-md-6">
                                     <div>
-                                        <InputText id="name" type="text" class="p-inputtext-sm" placeholder="Name"
+                                        <InputText v-model="demoName" id="name" type="text" class="p-inputtext-sm" placeholder="Name"
                                             required />
-                                        <InputText id="email" type="email" class="p-inputtext-sm" placeholder="Email"
+                                        <InputText v-model="demoEmail" id="email" type="email" class="p-inputtext-sm" placeholder="Email"
                                             required />
-                                        <InputText id="phone" type="tel" class="p-inputtext-sm"
+                                        <InputText v-model="demoPhone" id="phone" type="tel" class="p-inputtext-sm"
                                             placeholder="Phone Number" required />
                                         <br />
-                                        <a class="btn-solid-reg page-scroll submit" href="/">SEND</a>
+                                        <a class="btn-solid-reg page-scroll" href="javascript:void()" @click="sendDemoForm">SEND</a>
+                                        <br />
+                                        <br />
+                                        <label>{{ demoError }}</label>
                                     </div>
                                 </form>
                             </div>
@@ -811,6 +814,10 @@ import axios from "axios"
 export default {
     data() {
         return {
+            demoError: "",
+            demoEmail: "",
+            demoPhone: "",
+            demoName: "",
             newsLetterError: "",
             newsLetterEmail: "",
             testmonals: [],
@@ -864,7 +871,26 @@ export default {
                     this.newsLetterError = "Thanks for sumbitting you email, now you will get all news about MediCloud"; 
                 })
                 .catch(() => {
-                     this.newsLetterError = "An error Occured, please try again"; 
+                     this.newsLetterError = "An error occured, please try again"; 
+                });
+            }
+        },
+        async sendDemoForm() {
+            if (this.demoEmail === '' || this.demoPhone === '' || this.demoName === '') {
+                this.demoError = "Please fill the fields in the form.";
+            } else {
+                axios.post("https://medicloudeg.herokuapp.com/forms/demo", 
+                    {
+                        "email": this.demoEmail,
+                        "name": this.demoName,
+                        "phone": this.demoPhone,
+                    }
+                )
+                .then(() => { 
+                    this.demoError = "Thanks for sumbitting the form, we will contact you soon!"; 
+                })
+                .catch(() => {
+                     this.demoError = "An error occured, please try again"; 
                 });
             }
         },
