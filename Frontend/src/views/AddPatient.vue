@@ -30,6 +30,7 @@ export default {
         errorLabel: '',
         valid: null,
         model: {
+            "Photo": '',
             "First Name": '',
             'Last Name': '',
             'Email': '',
@@ -201,10 +202,11 @@ export default {
                 ...this.model
             }).then(res => {
                 const Patient = res.data;
-                this.errorLabel = Patient;
-
-                // todo
-
+                
+                this.errorLabel = "Patient added successfully, redirecting to the next page"
+                this.$router.push({
+                    path: '/appointments/new/patient/' + Patient._id,
+                })
             }).catch(err => {
                 console.log(err);
                 this.errorLabel = "An error occured, please try again"

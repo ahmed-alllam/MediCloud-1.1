@@ -68,7 +68,8 @@
                 </v-card-text>
                 <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn text large class="font-weight-bold add-appointment-button" @click="addAppointment">Add Appointment</v-btn>
+                    <v-btn text large class="font-weight-bold add-appointment-button" @click="addAppointment">Add
+                        Appointment</v-btn>
                     <v-spacer></v-spacer>
                 </v-card-actions>
             </v-card>

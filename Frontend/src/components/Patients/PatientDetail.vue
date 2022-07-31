@@ -2,8 +2,12 @@
     <div>
         <div id="top-content">
             <div id="row">
-                <div id="image" class="col-xs-12 col-md-5 col-xl-2">
+                <div v-if="patient_data.header_info['Profile Photo']" id="image" class="col-xs-12 col-md-5 col-xl-2">
                     <img id="profile-photo" :src="patient_data.header_info['Profile Photo']" />
+                </div>
+
+                <div v-else-if="loaded" id="image" class="col-xs-12 col-md-5 col-xl-2">
+                    <img id="profile-photo" :src="require('@/assets/images/Profile.jpg')" />
                 </div>
 
                 <div id="name-container" class="col-xs-12 col-md-7 col-xl-3">
@@ -12,7 +16,7 @@
                 </div>
 
                 <div id="basic-info" class="col-sm-11 offset-xl-1 col-xl-6 float-right">
-                    <div v-for="(value, key, index) in patient_data.basic_info" :key="`${key}-${index}`">
+                    <div v-for="(value, key, index) in this.patient_info" :key="`${key}-${index}`">
                         <span class="name">{{ key }}</span>
 
                         <span class="value">{{ value }}</span>
@@ -22,29 +26,29 @@
         </div>
 
 
-        <v-dialog v-model="add_dialog" width="500">
+        <v-dialog v-model="add_dialog" width="500" v-if="loaded && can_edit">
             <template v-slot:activator="{ on, attrs }">
-                <v-btn v-bind="attrs" v-on="on" v-if="can_edit" text large class="font-weight-bold add-record-button">
+                <v-btn v-bind="attrs" v-on="on" text large class="font-weight-bold add-record-button">
                     Add New Records
                     <v-icon>mdi-plus-circle</v-icon>
                 </v-btn>
             </template>
 
-            <AddRecord @update="update_add_dialog"/>
+            <AddRecord @update="update_add_dialog" />
         </v-dialog>
 
 
         <div id="medical-details">
-            <div v-for="value in patient_data.details_sections" v-bind:key="value.name">
-                <h2>{{ value.name }}</h2>
+            <div v-for="(value, key, index) in this.patient_details" :key="`${key}-${index}`">
+
+                <h2>{{ key }}</h2>
 
                 <div class="row no-gutters">
 
-                    <div v-for="item in value.list" v-bind:key="item.title" class="col-md-6 col-xs-12">
+                    <div v-for="item in value" v-bind:key="item.title" class="col-md-6 col-xs-12">
                         <div class="record-item row no-gutters">
 
-                            <img class="record-image" v-if="item.image" :src="item.image" />
-
+                            <img class="record-image" v-if="item.Image" :src="item.Image" />
 
                             <v-menu top>
                                 <template v-slot:activator="{ on, attrs }">
@@ -98,16 +102,30 @@
                             </v-menu>
 
                             <div>
-                                <div class="record-title" v-if="item.title">
-                                    <span>{{ item.title }}</span>
+                                <div class="record-title" v-if="item.Name">
+                                    <span>{{ item.Name }}</span>
                                 </div>
 
-                                <div class="record-date" v-if="item.date">
-                                    <span>{{ item.date }}</span>
+                                <div class="record-date" v-if="item.Date">
+                                    <span>Date: {{ item.Date | formatDate }}</span>
                                 </div>
 
-                                <div class="record-details" v-if="item.details">
-                                    <span>{{ item.details }} </span>
+                                <div class="record-date" v-if="item['Start Date']">
+                                    <span>Start Date: {{ item['Start Date'] | formatDate  }}</span>
+                                </div>
+
+                                <div class="record-date" v-if="item['End Date']">
+                                    <span>End Date: {{ item['End Date'] | formatDate  }}</span>
+                                </div>
+
+                                <div class="record-details" v-if="item.Phone">
+                                    <span>Phone: {{ item.Phone }} </span>
+                                </div>
+                                <div class="record-details" v-if="item['Family Member']">
+                                    <span>{{ item['Family Member'] }} </span>
+                                </div>
+                                <div class="record-details" v-if="item.Details">
+                                    <span>{{ item.Details }} </span>
                                 </div>
                             </div>
                         </div>
@@ -147,168 +165,91 @@
 import EditRecord from "./EditRecord.vue";
 import AddRecord from "./AddRecord.vue";
 
+import axios from "axios";
+const moment = require('moment');
+
 export default {
     name: "PatientDetail",
     data: () => ({
+        loaded: false,
         add_dialog: false,
         edit_dialog: false,
         delete_dialog: false,
-        addMediCard: true,
+        addMediCard: false,
         can_edit: true,
         patient_data: {
-            header_info: {
-                "Profile Photo": "/img/img.cb21a1a6.jpg",
-                "Name": "Ahmed Allam",
-                "Email": "ahmedeallam@aucegypt.edu",
-            },
-            basic_info: {
-                "ID": "900214493",
-                "Birth Date": "08-09-2003",
-                "City": "Cairo, Egypt",
-                "Blood Type": "A-",
-                "Phone": "+201553554224",
-                "Height": "186cm",
-                "Weight": "75KG",
-                "Status": "Single",
-                "Gender": "Male",
-                "Emergency Contacts": "Mother: +2012345678",
-            },
-            details_sections: [
-                {
-                    name: "Medications",
-                    list: [
-                        {
-                            image: "/img/medi3.1167af21.jpg",
-                            title: "Lisinopril",
-                            date: "Since: 19-8-2021",
-                            details: "Used to treat high blood pressure, heart failure \n\n Dose: 600mg daily before meals"
-                        },
-                        {
-                            image: "/img/medi1.8c68e4c4.webp",
-                            title: "Metformin",
-                            date: "Since: 12-12-2020",
-                            details: "Used to treat type 2 Diabetes. \n\n Dose: 500mg daily after meals"
-                        },
-                        {
-                            image: "/img/medi3.1167af21.jpg",
-                            title: "Amoxicillin",
-                            date: "Since: 31-1-2022",
-                            details: "An antibiotic used to treat a number of bacterial infections \n\n Dose: 200mg twice a day before meals"
-                        },
-                    ]
-                },
-                {
-                    name: "Disease",
-                    list: [
-                        {
-                            "image": "/img/causes-of-diabetes.1f867aa1.webp",
-                            "title": "Diabetes",
-                            "date": "Since: 12-12-2020",
-                            "details": "A lifelong condition that causes a person's blood sugar level to become too high \n\nMedication: Metformin"
-                        },
-                        {
-                            "image": "/img/hypertension.33d2aae1.jpg",
-                            "title": "High Blood Preasure",
-                            "date": "Since: 18-8-2021",
-                            "details": "A common condition in which the long-term force of the blood against your artery walls is high \n\nMedication: Lisinopril"
-                        },
-                        {
-                            "image": "/img/influenza.9e25d6f0.png",
-                            "title": "Influenza",
-                            "date": "Since: 12-4-2022",
-                            "details": "A virus that causes a person to cough, sneeze, and have a runny nose \n\nMedication: Amoxicilli"
-                        },
-                    ]
-                },
-                {
-                    name: "Family History",
-                    list: [
-                        {
-                            "image": "/img/causes-of-diabetes.1f867aa1.webp",
-                            "title": "Diabetes",
-                            "details": "A lifelong condition that causes a person's blood sugar level to become too high"
-                        },
-                    ],
-                },
-                {
-                    name: "Immunizations",
-                    list: [
-                        {
-                            "image": "/img/Unknown.f31aecaa.png",
-                            "date": "First Dose: 8-1-2022 \nSecond Dose: 5-4-2022",
-                            "title": "Pfizer",
-                            "details": "The BioNTech, Pfizer vaccine is a vaccine that aims to protect against COVID-19"
-                        }
-                    ]
-                },
-                {
-                    name: "Allergies",
-                    list: [
-                        {
-                            "image": "/img/Unknown.e7b4e80f.jpeg",
-                            "title": "Lactose Intolerance",
-                            "details": "People with lactose intolerance are unable to fully digest the sugar (lactose) in milk."
-                        },
-                        {
-                            "image": "/img/images-2.7538c5bb.jpeg",
-                            "title": "Gluten Intolerance",
-                            "details": "Gluten intolerance is a condition that causes a bad reaction to the gluten in wheat, rye, and barley. It is similar to, but different from, celiac disease"
-                        }
-                    ]
-                },
-                {
-                    name: "Prescriptions",
-                    list: [
-                        {
-                            "image": "/img/pre1.2bb68b64.png",
-                            "date": "Date: 10-6-2018",
-                            "details": "Doctor: Ahmed Al-Sayed"
-                        },
-                        {
-                            "image": "/img/pre2.249223e6.jpg",
-                            "date": "Date: 11-9-2020",
-                            "details": "Doctor: Hassan Mohamed"
-                        }
-                    ]
-                },
-                {
-                    name: "Scans",
-                    list: [
-                        {
-                            "image": "/img/scan1.de066e86.png",
-                            "title": "X-Ray for Chest",
-                            "date": "Date: 18-1-2021",
-                            "details": "Doctor: Mostafa Soliman"
-                        },
-                        {
-                            "image": "/img/scan2.1762588f.jpg",
-                            "title": "Brain MRI",
-                            "date": "Date: 18-1-2021",
-                            "details": "Doctor: Ahmed Emad"
-                        },
-                        {
-                            "image": "/img/s.jpg.3c13150c.webp",
-                            "title": "CT Scan",
-                            "date": "Date: 21-3-2022",
-                            "details": "Doctor: Naglaa Al-Sayed"
-                        },
-                    ]
-                },
-                {
-                    name: "Lab Tests",
-                    list: [
-                        {
-                            "title": "Blood Test",
-                            "image": "/img/lab1.1b54cef4.jpg",
-                            "date": "Date: 7-8-2018",
-                            "details": "Doctor: Hassan Ahmed"
-                        }
-                    ]
-                }
-            ]
+            header_info: {},
+            basic_info: {},
+            details_sections:
+            {
+                'Emergency Contacts': [],
+                Medications: [],
+                Disease: [],
+                "Family History": [],
+                Immunizations: [],
+                Allergies: [],
+                Prescriptions: [],
+                Scans: [],
+                "Lab Tests": []
+            }
         }
     }),
     methods: {
+        getPatientData() {
+            var linkID = '';
+            const paramID = this.$route.params.id;
+
+            if (paramID.length > 8)
+                linkID = paramID;
+            else
+                linkID = 'medicard/' + paramID;
+
+            axios.get("http://localhost:5000/api/patients/" + linkID)
+                .then(response => {
+
+                    this.loaded = true;
+
+                    const patient = response.data;
+                    this.patient_data.header_info = {
+                        "Profile Photo": patient.patientPhoto,
+                        "Name": patient.patientFirstName + ' ' + patient.patientLastName,
+                        "Email": patient.patientEmail,
+                    }
+
+                    if (patient.patientBirthDate)
+                        patient.patientBirthDate = moment(patient.patientBirthDate).format('YYYY/MM/DD');
+
+                    this.patient_data.basic_info = {
+                        "ID": patient.patientMediCardID,
+                        "Birth Date": patient.patientBirthDate,
+                        "City": patient.patientCity,
+                        "Blood Type": patient.patientBloodType,
+                        "Phone": patient.patientPhone,
+                        "Height": patient.patientHeight,
+                        "Weight": patient.patientWeight,
+                        "Status": patient.patientStatus,
+                        "Gender": patient.patientGender,
+                    }
+
+                    this.patient_data.details_sections['Emergency Contacts'] = patient.patientEmergencyContacts;
+                    this.patient_data.details_sections.Medications = patient.patientMedications;
+                    this.patient_data.details_sections.Disease = patient.patientDiseases;
+                    this.patient_data.details_sections['Family History'] = patient.patientFamilyHistory;
+                    this.patient_data.details_sections.Immunizations = patient.patientImmunizations;
+                    this.patient_data.details_sections.Allergies = patient.patientAllergies;
+                    this.patient_data.details_sections.Prescriptions = patient.patientPrescriptions;
+                    this.patient_data.details_sections.Scans = patient.patientScans;
+                    this.patient_data.details_sections['Lab Tests'] = patient.patientLabTests;
+
+                    if (patient.patientMediCardID == '')
+                        this.addMediCard = true;
+
+                })
+                .catch(error => {
+                    console.log(error);
+                    //todo
+                });
+        },
         update_add_dialog(add_dialog) {
             this.add_dialog = add_dialog
         },
@@ -316,6 +257,17 @@ export default {
             console.log("ediiiti")
             this.edit_dialog = edit_dialog
         },
+    },
+    created() {
+        this.getPatientData()
+    },
+    computed: {
+        patient_details: function () {
+            return Object.fromEntries(Object.entries(this.patient_data.details_sections).filter(([, v]) => v && v.length > 0));
+        },
+        patient_info: function () {
+            return Object.fromEntries(Object.entries(this.patient_data.basic_info).filter(([, v]) => v && v.length > 0));
+        }
     },
     components: { EditRecord, AddRecord }
 };
@@ -378,13 +330,13 @@ body {
     font-size: 36px;
     font-weight: bold;
     color: #333333;
-    text-align: center;
+    // text-align: center !important;
 }
 
 #top-content #name-container #email {
     font-size: 20px;
     color: #999999;
-    text-align: center;
+    // text-align: center !important;
 }
 
 @media screen and (min-width: 768px) {
@@ -405,6 +357,7 @@ body {
 
 
 #top-content #basic-info {
+    justify-content: center;
     display: flex;
     flex-wrap: wrap;
     margin-top: 40px;

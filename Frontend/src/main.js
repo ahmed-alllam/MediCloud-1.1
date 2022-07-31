@@ -16,6 +16,14 @@ Vue.config.productionTip = false
 Vue.use(Chartkick.use(Chart))
 Vue.use(PrimeVue);
 
+import moment from 'moment';
+
+Vue.filter('formatDate', function(value) {
+    if (value) {
+        return moment(String(value)).format('YYYY/MM/DD')
+    }
+});
+
 
 Vue.component('Button', Button);
 Vue.component('InputText', InputText);
