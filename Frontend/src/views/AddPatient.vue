@@ -7,7 +7,7 @@
         </div>
         <div class="end-buttons">
             <v-btn text class="font-weight-bold add-button" @click="addPatient">Add Patient</v-btn>
-            <v-btn text @click="addPatient" class="cancel-button">Cancel</v-btn>
+            <v-btn text class="cancel-button" router to="/appointments/new">Cancel</v-btn>
             <label class="ml-10">
                 {{ errorLabel }}
             </label>
@@ -34,7 +34,7 @@ export default {
             'Last Name': '',
             'Email': '',
             'MediCard ID': '',
-            'Blood Type': '',
+            'Blood Type': null,
             'Status': '',
             'Height': '',
             'Weight': '',
@@ -70,7 +70,7 @@ export default {
                 'Gender': { type: 'string', 'enum': ['Male', 'Female'], 'x-cols': 5 },
 
                 'Emergency Contacts': {
-                    type: 'array', 'x-cols': 5,
+                    type: 'array', 'x-cols': 5, "x-class": "mr-10",
                     items: {
                         type: 'object',
                         properties: {
@@ -81,7 +81,7 @@ export default {
                     },
                 },
                 'Medications': {
-                    type: 'array', 'x-cols': 5, "x-class": "mr-10",
+                    type: 'array', 'x-cols': 5,
                     items: {
                         type: 'object',
                         properties: {
@@ -94,7 +94,8 @@ export default {
                     },
                 },
                 'Diseases': {
-                    type: 'array', 'x-cols': 5, items: {
+                    type: 'array', 'x-cols': 5, "x-class": "mr-10"
+                    , items: {
                         type: 'object',
                         properties: {
                             'Name': { type: 'string' },
@@ -106,7 +107,7 @@ export default {
                     },
                 },
                 'Family History': {
-                    type: 'array', 'x-cols': 5, "x-class": "mr-10", items: {
+                    type: 'array', 'x-cols': 5, items: {
                         type: 'object',
                         properties: {
                             'Name': { type: 'string' },
@@ -118,7 +119,7 @@ export default {
                     },
                 },
                 'Immunizations': {
-                    type: 'array', 'x-cols': 5, items: {
+                    type: 'array', 'x-cols': 5, "x-class": "mr-10", items: {
                         type: 'object',
                         properties: {
                             'Name': { type: 'string' },
@@ -129,7 +130,7 @@ export default {
                     },
                 },
                 'Allergies': {
-                    type: 'array', 'x-cols': 5, "x-class": "mr-10", items: {
+                    type: 'array', 'x-cols': 5, items: {
                         type: 'object',
                         properties: {
                             'Name': { type: 'string' },
@@ -141,7 +142,7 @@ export default {
                     },
                 },
                 'Prescriptions': {
-                    type: 'array', 'x-cols': 5, items: {
+                    type: 'array', 'x-cols': 5, "x-class": "mr-10", items: {
                         type: 'object',
                         properties: {
                             'Image': {
@@ -155,7 +156,7 @@ export default {
                     },
                 },
                 'Scans': {
-                    type: 'array', 'x-cols': 5, "x-class": "mr-10", items: {
+                    type: 'array', 'x-cols': 5, items: {
                         type: 'object',
                         properties: {
                             'Image': {
@@ -169,7 +170,7 @@ export default {
                     },
                 },
                 'Lab tests': {
-                    type: 'array', 'x-cols': 5, items: {
+                    type: 'array', 'x-cols': 5, "x-class": "mr-10", items: {
                         type: 'object',
                         properties: {
                             'Image': {
@@ -209,7 +210,7 @@ export default {
                 this.errorLabel = "An error occured, please try again"
             }
             )
-        },
+        }
     },
 }
 </script>
@@ -239,6 +240,7 @@ export default {
         background-color: rgb(255, 0, 0);
         color: white !important;
         margin-left: 10px;
+        text-decoration: none;
 
         &:hover {
             opacity: 0.6;

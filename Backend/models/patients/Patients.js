@@ -32,8 +32,8 @@ const PatientSchema = mongoose.Schema({
   },
   patientEmergencyContacts: [
     {
-      name: String,
-      phone: Number
+      Name: String,
+      Phone: Number
     }
   ],
   patientGender: {
@@ -55,67 +55,67 @@ const PatientSchema = mongoose.Schema({
 
   patientMedications: [
     {
-      name: String,
-      dose: String,
-      image: String,
-      startDate: Date,
-      endDate: Date
+      Name: String,
+      Dose: String,
+      Image: String,
+      'Start Date': Date,
+      'End Date': Date
     }
   ],
   patientDiseases: [
     {
-      name: String,
-      details: String,
-      image: String,
-      startDate: Date,
-      endDate: Date
+      'Name': String,
+      'Details': String,
+      'Image': String,
+      'Start Date': Date,
+      'End Date': Date
     }
   ],
   patientFamilyHistory: [
     {
-      name: String,
-      member: String,
-      image: String,
-      startDate: Date,
-      endDate: Date
+      Name: String,
+      'Family Member': String,
+      Image: String,
+      'Start Date': Date,
+      'End Date': Date
     }
   ],
   patientImmunizations: [
     {
-      name: String,
-      details: String,
-      image: String,
-      date: Date,
+      Name: String,
+      Details: String,
+      Image: String,
+      Date: Date,
     }
   ],
   patientAllergies: [
     {
-      name: String,
-      details: String,
-      image: String,
-      startDate: Date,
-      endDate: Date
+      Name: String,
+      Details: String,
+      Image: String,
+      'Start Date': Date,
+      'End Date': Date
     }
   ],
   patientPrescriptions: [
     {
-      details: String,
-      image: String,
-      date: Date,
+      Details: String,
+      Image: String,
+      Date: Date,
     }
   ],
   patientScans:  [
     {
-      details: String,
-      image: String,
-      date: Date,
+      Details: String,
+      Image: String,
+      Date: Date,
     }
   ],
   patientLabTests:  [
     {
-      details: String,
-      image: String,
-      date: Date,
+      Details: String,
+      Image: String,
+      Date: Date,
     }
   ],
 });
