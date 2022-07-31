@@ -1,51 +1,216 @@
 <template>
     <div>
         <div class="patient-form">
-            <v-text-field label="First Name" v-model="patientName"></v-text-field>
-            <v-text-field label="Last Name" v-model="patientName"></v-text-field>
-            <v-text-field label="Birth year" v-model="patientName"></v-text-field>
-            <v-text-field label="Gender" v-model="patientName"></v-text-field>
-            <v-text-field label="Blood Type" v-model="patientName"></v-text-field>
-            <v-text-field label="Height" v-model="patientName"></v-text-field>
-            <v-text-field label="Weight" v-model="patientName"></v-text-field>
-            <v-text-field label="Current Medications" v-model="patientWeight"></v-text-field>
-            <v-text-field label="City" v-model="patientHeight" @keyup.enter="addPatient"></v-text-field>
+            <v-form v-model="valid" ref="form">
+                <v-jsf v-model="model" :schema="schema" />
+            </v-form>
         </div>
         <div class="end-buttons">
-            <v-btn text class="font-weight-bold add-button" router to="/appointments/new/patient/:id" @click="addPatient">Add Patient</v-btn>
+            <v-btn text class="font-weight-bold add-button" @click="addPatient">Add Patient</v-btn>
             <v-btn text @click="addPatient" class="cancel-button">Cancel</v-btn>
+            <label class="ml-10">
+                {{ errorLabel }}
+            </label>
         </div>
+        <br />
     </div>
 </template>
 
 <script>
 import axios from "axios"
-import { mapState } from "vuex"
+import VJsf from '@koumoul/vjsf/lib/VJsf.js'
+import '@koumoul/vjsf/lib/VJsf.css'
+import '@koumoul/vjsf/lib/deps/third-party.js'
+
 
 export default {
+    name: "AddPatient",
+    components: { VJsf },
     data: () => ({
-        patientName: "",
-        patientWeight: "",
-        patientHeight: "",
+        errorLabel: '',
+        valid: null,
+        model: {
+            "First Name": '',
+            'Last Name': '',
+            'Email': '',
+            'MediCard ID': '',
+            'Blood Type': '',
+            'Status': '',
+            'Height': '',
+            'Weight': '',
+            'Birthdate': '',
+            'Gender': null,
+            'City': '',
+
+            'Emergency Contacts': [],
+            'Medications': [],
+            'Diseases': [],
+            'Family History': [],
+            'Immunizations': [],
+            'Allergies': [],
+            'Prescriptions': [],
+            'Scans': [],
+            'Lab tests': [],
+        },
+        schema: {
+            required: ['First Name', 'Last Name'],
+            type: 'object',
+            properties: {
+                'First Name': { type: 'string', 'x-cols': 5, "x-class": "mr-10" },
+                'Last Name': { type: 'string', 'x-cols': 5 },
+                'Phone': { type: 'number', 'x-cols': 5, "x-class": "mr-10" },
+                'Email': { type: 'string', 'x-cols': 5 },
+                'MediCard ID': { type: 'string', 'x-cols': 5, "x-class": "mr-10" },
+                'Birthdate': { type: 'string', format: 'date', 'x-cols': 5 },
+                'Blood Type': {
+                    type: 'string',
+                    'enum': ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'],
+                    'x-cols': 5, "x-class": "mr-10"
+                },
+                'Gender': { type: 'string', 'enum': ['Male', 'Female'], 'x-cols': 5 },
+
+                'Emergency Contacts': {
+                    type: 'array', 'x-cols': 5,
+                    items: {
+                        type: 'object',
+                        properties: {
+                            'Name': { type: 'string' },
+                            'Phone': { type: 'number' }
+                        },
+                        required: ['Phone']
+                    },
+                },
+                'Medications': {
+                    type: 'array', 'x-cols': 5, "x-class": "mr-10",
+                    items: {
+                        type: 'object',
+                        properties: {
+                            'Name': { type: 'string' },
+                            'Dose': { type: 'string' },
+                            'Start Date': { type: 'string', format: 'date' },
+                            'End Date': { type: 'string', format: 'date' },
+                        },
+                        required: ['Name']
+                    },
+                },
+                'Diseases': {
+                    type: 'array', 'x-cols': 5, items: {
+                        type: 'object',
+                        properties: {
+                            'Name': { type: 'string' },
+                            'Details': { type: 'string' },
+                            'Start Date': { type: 'string', format: 'date' },
+                            'End Date': { type: 'string', format: 'date' },
+                        },
+                        required: ['Name']
+                    },
+                },
+                'Family History': {
+                    type: 'array', 'x-cols': 5, "x-class": "mr-10", items: {
+                        type: 'object',
+                        properties: {
+                            'Name': { type: 'string' },
+                            'Family member': { type: 'string' },
+                            'Start Date': { type: 'string', format: 'date' },
+                            'End Date': { type: 'string', format: 'date' },
+                        },
+                        required: ['Name']
+                    },
+                },
+                'Immunizations': {
+                    type: 'array', 'x-cols': 5, items: {
+                        type: 'object',
+                        properties: {
+                            'Name': { type: 'string' },
+                            'Details': { type: 'string' },
+                            'Date': { type: 'string', format: 'date' },
+                        },
+                        required: ['Name']
+                    },
+                },
+                'Allergies': {
+                    type: 'array', 'x-cols': 5, "x-class": "mr-10", items: {
+                        type: 'object',
+                        properties: {
+                            'Name': { type: 'string' },
+                            'Details': { type: 'string' },
+                            'Start Date': { type: 'string', format: 'date' },
+                            'End Date': { type: 'string', format: 'date' },
+                        },
+                        required: ['Name']
+                    },
+                },
+                'Prescriptions': {
+                    type: 'array', 'x-cols': 5, items: {
+                        type: 'object',
+                        properties: {
+                            'Image': {
+                                type: 'string', "contentMediaType": "image/*",
+                                "writeOnly": true
+                            },
+                            'Details': { type: 'string' },
+                            'Date': { type: 'string', format: 'date' },
+                        },
+                        required: ['Details']
+                    },
+                },
+                'Scans': {
+                    type: 'array', 'x-cols': 5, "x-class": "mr-10", items: {
+                        type: 'object',
+                        properties: {
+                            'Image': {
+                                type: 'string', "contentMediaType": "image/*",
+                                "writeOnly": true
+                            },
+                            'Details': { type: 'string' },
+                            'Date': { type: 'string', format: 'date' },
+                        },
+                        required: ['Details']
+                    },
+                },
+                'Lab tests': {
+                    type: 'array', 'x-cols': 5, items: {
+                        type: 'object',
+                        properties: {
+                            'Image': {
+                                type: 'string', "contentMediaType": "image/*",
+                                "writeOnly": true
+                            },
+                            'Details': { type: 'string' },
+                            'Date': { type: 'string', format: 'date' },
+                        },
+                        required: ['Details']
+                    },
+                },
+            }
+        }
     }),
     methods: {
-        // Add a patient
         async addPatient() {
-            axios.post("http://localhost:5000/api/patients/", {
-                patientName: this.patientName,
-                patientWeight: parseInt(this.patientWeight),
-                patientHeight: parseInt(this.patientHeight)
+            await this.$refs.form.validate();
+
+            if (!this.valid) {
+                this.errorLabel = "Please fill all the required fields"
+                return false;
+            }
+
+            this.errorLabel = "Loading..."
+
+            axios.post("https://medicloudeg.herokuapp.com/api/patients/", {
+                ...this.model
             }).then(res => {
-                const Patient = res.data
-                this.$store.commit('addPatient', Patient)
-            }).catch(err => console.log(err))
-            this.patientName = this.patientHeight = this.patientWeight = ""
-            this.addPatientDialog = false
+                const Patient = res.data;
+                this.errorLabel = Patient;
+
+                // todo
+
+            }).catch(err => {
+                console.log(err);
+                this.errorLabel = "An error occured, please try again"
+            }
+            )
         },
     },
-    computed: {
-        ...mapState(['patients'])
-    }
 }
 </script>
 
@@ -53,14 +218,6 @@ export default {
 <style lang="scss" scoped>
 .patient-form {
     margin: 0 40px;
-    display: flex;
-    flex-wrap: wrap;
-    align-content: flex-start;
-
-    .v-input {
-        flex-basis: 33.333%;
-        margin-right: 30px;
-    }
 }
 
 .end-buttons {
@@ -76,7 +233,7 @@ export default {
             opacity: 0.6;
         }
     }
-    
+
     .cancel-button {
         border-radius: 25px;
         background-color: rgb(255, 0, 0);

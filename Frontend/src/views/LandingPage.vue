@@ -1783,12 +1783,6 @@ screen and (-ms-high-contrast: none) {
         margin-right: 5px;
     }
 
-
-    .fa,
-    .fas {
-        font-family: 'Font Awesome 5 Free' !important;
-    }
-
     a {
         color: white;
         text-decoration: none;

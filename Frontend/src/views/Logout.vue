@@ -7,10 +7,23 @@
             Are you sure you want to logout?
         </h3>
 
-        <v-btn text large class="font-weight-bold logout-button">Logout</v-btn>
+        <v-btn text large class="font-weight-bold logout-button" @click="logout">Logout</v-btn>
     </div>
 
 </template>
+
+<script>
+export default {
+    methods: {
+        logout() {
+            this.$store.commit('loggedOut');
+            this.$router.push("/");
+        }
+    }
+}
+
+
+</script>
 
 <style lang="scss" scoped>
 h3,

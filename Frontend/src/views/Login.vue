@@ -46,7 +46,7 @@ export default {
             if (this.emailLogin === "" || this.passwordLogin === "") {
                 this.error = "Please Fill empty fields"
             } else {
-                axios.post("http://localhost:5000/api/doctors/login/", {
+                axios.post("https://medicloudeg.herokuapp.com/api/doctors/login/", {
                     email: this.emailLogin,
                     password: this.passwordLogin
                 }).then(async res => {
