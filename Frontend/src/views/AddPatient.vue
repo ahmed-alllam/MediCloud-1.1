@@ -12,7 +12,6 @@
                 {{ errorLabel }}
             </label>
         </div>
-        <br />
     </div>
 </template>
 

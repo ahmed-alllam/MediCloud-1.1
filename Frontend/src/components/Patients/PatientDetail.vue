@@ -26,7 +26,7 @@
                         </span>
 
                         <span class="value">
-                            {{patient_data.patientMediCardID}}
+                            {{ patient_data.patientMediCardID }}
                         </span>
 
                     </div>
@@ -37,7 +37,7 @@
                         </span>
 
                         <span class="value">
-                            {{patient_data.patientBirthDate | formatDate}}
+                            {{ patient_data.patientBirthDate | formatDate }}
                         </span>
                     </div>
 
@@ -47,7 +47,7 @@
                         </span>
 
                         <span class="value">
-                            {{patient_data.patientCity}}
+                            {{ patient_data.patientCity }}
                         </span>
 
                     </div>
@@ -58,7 +58,7 @@
                         </span>
 
                         <span class="value">
-                            {{patient_data.patientBloodType}}
+                            {{ patient_data.patientBloodType }}
                         </span>
 
                     </div>
@@ -69,7 +69,7 @@
                         </span>
 
                         <span class="value">
-                            {{patient_data.patientPhone}}
+                            {{ patient_data.patientPhone }}
                         </span>
 
                     </div>
@@ -80,7 +80,7 @@
                         </span>
 
                         <span class="value">
-                            {{patient_data.patientHeight}}
+                            {{ patient_data.patientHeight }}
                         </span>
 
                     </div>
@@ -91,7 +91,7 @@
                         </span>
 
                         <span class="value">
-                            {{patient_data.patientWeight}}
+                            {{ patient_data.patientWeight }}
                         </span>
 
                     </div>
@@ -102,7 +102,7 @@
                         </span>
 
                         <span class="value">
-                            {{patient_data.patientMartialStatus}}
+                            {{ patient_data.patientMartialStatus }}
                         </span>
 
                     </div>
@@ -113,7 +113,7 @@
                         </span>
 
                         <span class="value">
-                            {{patient_data.patientGender}}
+                            {{ patient_data.patientGender }}
                         </span>
 
                     </div>
@@ -145,36 +145,30 @@
 
                             <img class="record-image" v-if="item.Image" :src="item.Image" />
 
-                            <v-menu top>
+                            <v-menu top v-model="menu" v-if="can_edit">
                                 <template v-slot:activator="{ on, attrs }">
-                                    <v-btn icon v-if="can_edit" v-bind="attrs" v-on="on" class="edit-button">
+                                    <v-btn icon v-bind="attrs" v-on="on" class="edit-button">
                                         <v-icon>mdi-dots-vertical</v-icon>
                                     </v-btn>
                                 </template>
 
                                 <v-list>
+                                    <v-list-item link @click.stop="edit_dialog = true; menu = false;">
+                                        <v-list-item-title>Edit</v-list-item-title>
+                                    </v-list-item>
 
                                     <v-dialog v-model="edit_dialog" width="500">
-                                        <template v-slot:activator="{ on, attrs }">
 
-                                            <v-list-item link v-bind="attrs" v-on="on">
-                                                <v-list-item-title>Edit</v-list-item-title>
-                                            </v-list-item>
-                                        </template>
-
-                                        <EditRecord @update="update_edit_dialog" />
+                                        <EditRecord @update="edit_dialog = false" :section="key" :index="index2"
+                                            :patient_data="patient_data" />
 
                                     </v-dialog>
 
+                                    <v-list-item link @click.stop="delete_dialog=true; current_dialog_item = [key, index2]; menu = false;">
+                                        <v-list-item-title>Delete</v-list-item-title>
+                                    </v-list-item>
+
                                     <v-dialog v-model="delete_dialog" width="500">
-                                        <template v-slot:activator="{ on, attrs }">
-
-                                            <v-list-item link v-bind="attrs" v-on="on"
-                                                @click="current_dialog_item = [key, index2]">
-                                                <v-list-item-title>Delete</v-list-item-title>
-                                            </v-list-item>
-                                        </template>
-
                                         <v-card>
                                             <v-card-title class="text-h5 grey lighten-2">
                                                 Delete
@@ -218,10 +212,13 @@
                                     <span>Phone: {{ item.Phone }} </span>
                                 </div>
                                 <div class="record-details" v-if="item['Family Member']">
-                                    <span>{{ item['Family Member'] }} </span>
+                                    <span>Family Member: {{ item['Family Member'] }} </span>
                                 </div>
                                 <div class="record-details" v-if="item.Details">
-                                    <span>{{ item.Details }} </span>
+                                    <span>Details: {{ item.Details }} </span>
+                                </div>
+                                <div class="record-details" v-if="item.Dose">
+                                    <span>Dose: {{ item.Dose }} </span>
                                 </div>
                             </div>
                         </div>
@@ -268,13 +265,14 @@ export default {
     data: () => ({
         current_dialog_item: null,
         patient_id: '',
+        menu: false,
         loaded: false,
         add_dialog: false,
         edit_dialog: false,
         delete_dialog: false,
         addMediCard: false,
         can_edit: true,
-        patient_data: {details_sections: {}}
+        patient_data: { details_sections: {} }
     }),
     methods: {
         getPatientData() {
@@ -291,8 +289,8 @@ export default {
                     this.loaded = true;
                     const patient = response.data;
                     this.patient_data = patient;
-                    
-                    
+
+
                     const details_sections = {};
 
                     details_sections['Emergency Contacts'] = patient.patientEmergencyContacts;
@@ -325,7 +323,7 @@ export default {
 
             // delete from database
             axios.patch("http://localhost:5000/api/patients/" + this.patient_data._id + "/", {
-                ['patient' + String(this.current_dialog_item[0]).replace(/ /g,'')]: section
+                ['patient' + String(this.current_dialog_item[0]).replace(/ /g, '')]: section
             }) //todo: change to real url
                 .then(response => {
                     console.log(response);
@@ -339,20 +337,9 @@ export default {
         update_add_dialog(add_dialog) {
             this.add_dialog = add_dialog
         },
-        update_edit_dialog(edit_dialog) {
-            this.edit_dialog = edit_dialog
-        },
     },
     created() {
         this.getPatientData()
-    },
-    computed: {
-        patient_details () {
-            console.log('recomputting');
-            console.log(this.patient_data.details_sections);
-            return this.patient_data.details_sections;
-            // return Object.fromEntries(Object.entries(this.patient_data.details_sections).filter(([, v]) => v && v.length > 0));
-        },
     },
     components: { EditRecord, AddRecord }
 };
