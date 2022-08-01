@@ -2,8 +2,8 @@
     <div>
         <div id="top-content">
             <div id="row">
-                <div v-if="patient_data.header_info['Profile Photo']" id="image" class="col-xs-12 col-md-5 col-xl-2">
-                    <img id="profile-photo" :src="patient_data.header_info['Profile Photo']" />
+                <div v-if="patient_data.patientPhoto" id="image" class="col-xs-12 col-md-5 col-xl-2">
+                    <img id="profile-photo" :src="patient_data.patientPhoto" />
                 </div>
 
                 <div v-else-if="loaded" id="image" class="col-xs-12 col-md-5 col-xl-2">
@@ -11,15 +11,111 @@
                 </div>
 
                 <div id="name-container" class="col-xs-12 col-md-7 col-xl-3">
-                    <h3 id="name">{{ patient_data.header_info.Name }}</h3>
-                    <h3 id="email">{{ patient_data.header_info.Email }}</h3>
+                    <h3 id="name">
+                        {{ patient_data.patientFirstName }} {{ patient_data.patientLastName }}
+                    </h3>
+                    <h3 id="email">
+                        {{ patient_data.patientEmail }}
+                    </h3>
                 </div>
 
                 <div id="basic-info" class="col-sm-11 offset-xl-1 col-xl-6 float-right">
-                    <div v-for="(value, key, index) in this.patient_info" :key="`${key}-${index}`">
-                        <span class="name">{{ key }}</span>
+                    <div id="id" v-if="patient_data.patientMediCardID">
+                        <span class="name">
+                            ID
+                        </span>
 
-                        <span class="value">{{ value }}</span>
+                        <span class="value">
+                            {{patient_data.patientMediCardID}}
+                        </span>
+
+                    </div>
+
+                    <div id="birthdate" v-if="patient_data.patientBirthDate">
+                        <span class="name">
+                            Birthdate
+                        </span>
+
+                        <span class="value">
+                            {{patient_data.patientBirthDate | formatDate}}
+                        </span>
+                    </div>
+
+                    <div id="city" v-if="patient_data.patientCity">
+                        <span class="name">
+                            City
+                        </span>
+
+                        <span class="value">
+                            {{patient_data.patientCity}}
+                        </span>
+
+                    </div>
+
+                    <div id="blood-type" v-if="patient_data.patientBloodType">
+                        <span class="name">
+                            Blood Type
+                        </span>
+
+                        <span class="value">
+                            {{patient_data.patientBloodType}}
+                        </span>
+
+                    </div>
+
+                    <div id="phone" v-if="patient_data.patientPhone">
+                        <span class="name">
+                            Phone
+                        </span>
+
+                        <span class="value">
+                            {{patient_data.patientPhone}}
+                        </span>
+
+                    </div>
+
+                    <div id="height" v-if="patient_data.patientHeight">
+                        <span class="name">
+                            Height
+                        </span>
+
+                        <span class="value">
+                            {{patient_data.patientHeight}}
+                        </span>
+
+                    </div>
+
+                    <div id="weight" v-if="patient_data.patientWeight">
+                        <span class="name">
+                            Weight
+                        </span>
+
+                        <span class="value">
+                            {{patient_data.patientWeight}}
+                        </span>
+
+                    </div>
+
+                    <div id="martial-status" v-if="patient_data.patientMartialStatus">
+                        <span class="name">
+                            Martial Status
+                        </span>
+
+                        <span class="value">
+                            {{patient_data.patientMartialStatus}}
+                        </span>
+
+                    </div>
+
+                    <div id="gender" v-if="patient_data.patientGender">
+                        <span class="name">
+                            Gender
+                        </span>
+
+                        <span class="value">
+                            {{patient_data.patientGender}}
+                        </span>
+
                     </div>
                 </div>
             </div>
@@ -37,9 +133,8 @@
             <AddRecord @update="update_add_dialog" />
         </v-dialog>
 
-
         <div id="medical-details">
-            <div v-for="(value, key, index) in this.patient_details" :key="`${key}-${index}`">
+            <div v-for="(value, key, index) in this.patient_data.details_sections" :key="`${key}-${index}`">
 
                 <h2>{{ key }}</h2>
 
@@ -74,7 +169,8 @@
                                     <v-dialog v-model="delete_dialog" width="500">
                                         <template v-slot:activator="{ on, attrs }">
 
-                                            <v-list-item link v-bind="attrs" v-on="on" @click="current_dialog_item = [key, index2]">
+                                            <v-list-item link v-bind="attrs" v-on="on"
+                                                @click="current_dialog_item = [key, index2]">
                                                 <v-list-item-title>Delete</v-list-item-title>
                                             </v-list-item>
                                         </template>
@@ -111,11 +207,11 @@
                                 </div>
 
                                 <div class="record-date" v-if="item['Start Date']">
-                                    <span>Start Date: {{ item['Start Date'] | formatDate  }}</span>
+                                    <span>Start Date: {{ item['Start Date'] | formatDate }}</span>
                                 </div>
 
                                 <div class="record-date" v-if="item['End Date']">
-                                    <span>End Date: {{ item['End Date'] | formatDate  }}</span>
+                                    <span>End Date: {{ item['End Date'] | formatDate }}</span>
                                 </div>
 
                                 <div class="record-details" v-if="item.Phone">
@@ -178,7 +274,7 @@ export default {
         delete_dialog: false,
         addMediCard: false,
         can_edit: true,
-        patient_data: {}
+        patient_data: {details_sections: {}}
     }),
     methods: {
         getPatientData() {
@@ -194,6 +290,22 @@ export default {
                 .then(response => {
                     this.loaded = true;
                     const patient = response.data;
+                    this.patient_data = patient;
+                    
+                    
+                    const details_sections = {};
+
+                    details_sections['Emergency Contacts'] = patient.patientEmergencyContacts;
+                    details_sections.Medications = patient.patientMedications;
+                    details_sections.Disease = patient.patientDiseases;
+                    details_sections['Family History'] = patient.patientFamilyHistory;
+                    details_sections.Immunizations = patient.patientImmunizations;
+                    details_sections.Allergies = patient.patientAllergies;
+                    details_sections.Prescriptions = patient.patientPrescriptions;
+                    details_sections.Scans = patient.patientScans;
+                    details_sections['Lab Tests'] = patient.patientLabTests;
+
+                    this.patient_data.details_sections = details_sections;
 
                     if (patient.patientMediCardID == '')
                         this.addMediCard = true;
@@ -211,7 +323,7 @@ export default {
 
             // delete from database
             axios.patch("http://localhost:5000/api/patients/" + this.patient_data._id + "/", {
-                [this.current_dialog_item[0]]: section
+                ['patient' + String(this.current_dialog_item[0]).replace(/ /g,'')]: section
             }) //todo: change to real url
                 .then(response => {
                     console.log(response);
@@ -231,14 +343,6 @@ export default {
     },
     created() {
         this.getPatientData()
-    },
-    computed: {
-        patient_details: function () {
-            return Object.fromEntries(Object.entries(this.patient_data.details_sections).filter(([, v]) => v && v.length > 0));
-        },
-        patient_info: function () {
-            return Object.fromEntries(Object.entries(this.patient_data.basic_info).filter(([, v]) => v && v.length > 0));
-        }
     },
     components: { EditRecord, AddRecord }
 };
@@ -301,13 +405,13 @@ body {
     font-size: 36px;
     font-weight: bold;
     color: #333333;
-    // text-align: center !important;
+    text-align: center;
 }
 
 #top-content #name-container #email {
     font-size: 20px;
     color: #999999;
-    // text-align: center !important;
+    text-align: center;
 }
 
 @media screen and (min-width: 768px) {
