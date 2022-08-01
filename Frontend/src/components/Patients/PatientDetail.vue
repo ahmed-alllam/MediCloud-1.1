@@ -305,7 +305,7 @@ export default {
                     details_sections.Scans = patient.patientScans;
                     details_sections['Lab Tests'] = patient.patientLabTests;
 
-                    this.patient_data.details_sections = details_sections;
+                    this.patient_data.details_sections = Object.fromEntries(Object.entries(details_sections).filter(([, v]) => v && v.length > 0));
 
                     if (patient.patientMediCardID == '')
                         this.addMediCard = true;
@@ -320,6 +320,8 @@ export default {
 
             const section = this.patient_data.details_sections[this.current_dialog_item[0]];
             section.splice(this.current_dialog_item[1], 1);
+
+            this.patient_data.details_sections = Object.fromEntries(Object.entries(this.patient_data.details_sections).filter(([, v]) => v && v.length > 0));
 
             // delete from database
             axios.patch("http://localhost:5000/api/patients/" + this.patient_data._id + "/", {
@@ -343,6 +345,14 @@ export default {
     },
     created() {
         this.getPatientData()
+    },
+    computed: {
+        patient_details () {
+            console.log('recomputting');
+            console.log(this.patient_data.details_sections);
+            return this.patient_data.details_sections;
+            // return Object.fromEntries(Object.entries(this.patient_data.details_sections).filter(([, v]) => v && v.length > 0));
+        },
     },
     components: { EditRecord, AddRecord }
 };
