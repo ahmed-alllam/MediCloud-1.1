@@ -5,28 +5,7 @@ const Patients = require("../models/patients/Patients");
 // Adds a patient
 router.post("/api/patients/", async (req, res) => {
   const patient = new Patients({
-    patientPhoto: req.body['Photo'],
-    patientPhone: req.body['Phone'],
-    patientFirstName: req.body['First Name'],
-    patientLastName: req.body['Last Name'],
-    patientEmail: req.body['Email'],
-    patientMediCardID: req.body['MediCard ID'],
-    patientBirthDate: req.body['Birthdate'],
-    patientCity: req.body['City'],
-    patientBloodType: req.body['Blood Type'],
-    patientEmergencyContacts: req.body['Emergency Contacts'],
-    patientGender: req.body['Gender'],
-    patientStatus: req.body['Status'],
-    patientHeight: req.body['Height'],
-    patientWeight: req.body['Weight'],
-    patientMedications: req.body['Medications'],
-    patientDiseases: req.body['Diseases'],
-    patientFamilyHistory: req.body['Family History'],
-    patientImmunizations: req.body['Immunizations'],
-    patientAllergies: req.body['Allergies'],
-    patientPrescriptions: req.body['Prescriptions'],
-    patientScans: req.body['Scans'],
-    patientLabTests: req.body['Lab Tests'],
+    ...req.body,
   });
   try {
     const savedPatient = await patient.save();
@@ -83,38 +62,16 @@ router.get("/api/patients/:patientId", async (req, res) => {
 // Update a specific patient
 router.patch("/api/patients/:patientId", async (req, res) => {
   try {
-    const updatedPatient = await Patients.findById(req.params.patientId);
-
+    const updatedPatient = await Patients.updateOne({_id: req.params.patientId}, {
+      $set: {
+        ...req.body
+      }});
+    
     if (!updatedPatient) {
       res.status(404).json({
         msg: "Patient not found"
       });
     } else {
-
-      updatedPatient.patientPhoto = req.body['Photo'];
-      updatedPatient.patientPhone = req.body['Phone'];
-      updatedPatient.patientFirstName = req.body['First Name'];
-      updatedPatient.patientLastName = req.body['Last Name'];
-      updatedPatient.patientEmail = req.body['Email'];
-      updatedPatient.patientMediCardID = req.body['MediCard ID'];
-      updatedPatient.patientBirthDate = req.body['Birthdate'];
-      updatedPatient.patientCity = req.body['City'];
-      updatedPatient.patientBloodType = req.body['Blood Type'];
-      updatedPatient.patientEmergencyContacts = req.body['Emergency Contacts'];
-      updatedPatient.patientGender = req.body['Gender'];
-      updatedPatient.patientStatus = req.body['Status'];
-      updatedPatient.patientHeight = req.body['Height'];
-      updatedPatient.patientWeight = req.body['Weight'];
-      updatedPatient.patientMedications = req.body['Medications'];
-      updatedPatient.patientDiseases = req.body['Diseases'];
-      updatedPatient.patientFamilyHistory = req.body['Family History'];
-      updatedPatient.patientImmunizations = req.body['Immunizations'];
-      updatedPatient.patientAllergies = req.body['Allergies'];
-      updatedPatient.patientPrescriptions = req.body['Prescriptions'];
-      updatedPatient.patientScans = req.body['Scans'];
-      updatedPatient.patientLabTests = req.body['Lab Tests'];
-
-      await updatedPatient.save();
       res.json(updatedPatient);
     }
   } catch (err) {

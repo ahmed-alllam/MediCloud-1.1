@@ -45,7 +45,7 @@
 
                 <div class="row no-gutters">
 
-                    <div v-for="item in value" v-bind:key="item.title" class="col-md-6 col-xs-12">
+                    <div v-for="(item, index2) in value" v-bind:key="index2" class="col-md-6 col-xs-12">
                         <div class="record-item row no-gutters">
 
                             <img class="record-image" v-if="item.Image" :src="item.Image" />
@@ -74,7 +74,7 @@
                                     <v-dialog v-model="delete_dialog" width="500">
                                         <template v-slot:activator="{ on, attrs }">
 
-                                            <v-list-item link v-bind="attrs" v-on="on">
+                                            <v-list-item link v-bind="attrs" v-on="on" @click="current_dialog_item = [key, index2]">
                                                 <v-list-item-title>Delete</v-list-item-title>
                                             </v-list-item>
                                         </template>
@@ -92,7 +92,7 @@
 
                                             <v-card-actions>
                                                 <v-spacer></v-spacer>
-                                                <v-btn color="red" text @click="delete_dialog = false">
+                                                <v-btn color="red" text @click="deleteItem">
                                                     Delete
                                                 </v-btn>
                                             </v-card-actions>
@@ -166,33 +166,19 @@ import EditRecord from "./EditRecord.vue";
 import AddRecord from "./AddRecord.vue";
 
 import axios from "axios";
-const moment = require('moment');
 
 export default {
     name: "PatientDetail",
     data: () => ({
+        current_dialog_item: null,
+        patient_id: '',
         loaded: false,
         add_dialog: false,
         edit_dialog: false,
         delete_dialog: false,
         addMediCard: false,
         can_edit: true,
-        patient_data: {
-            header_info: {},
-            basic_info: {},
-            details_sections:
-            {
-                'Emergency Contacts': [],
-                Medications: [],
-                Disease: [],
-                "Family History": [],
-                Immunizations: [],
-                Allergies: [],
-                Prescriptions: [],
-                Scans: [],
-                "Lab Tests": []
-            }
-        }
+        patient_data: {}
     }),
     methods: {
         getPatientData() {
@@ -204,57 +190,42 @@ export default {
             else
                 linkID = 'medicard/' + paramID;
 
-            axios.get("http://localhost:5000/api/patients/" + linkID)
+            axios.get("http://localhost:5000/api/patients/" + linkID) //todo: change to real url
                 .then(response => {
-
                     this.loaded = true;
-
                     const patient = response.data;
-                    this.patient_data.header_info = {
-                        "Profile Photo": patient.patientPhoto,
-                        "Name": patient.patientFirstName + ' ' + patient.patientLastName,
-                        "Email": patient.patientEmail,
-                    }
-
-                    if (patient.patientBirthDate)
-                        patient.patientBirthDate = moment(patient.patientBirthDate).format('YYYY/MM/DD');
-
-                    this.patient_data.basic_info = {
-                        "ID": patient.patientMediCardID,
-                        "Birth Date": patient.patientBirthDate,
-                        "City": patient.patientCity,
-                        "Blood Type": patient.patientBloodType,
-                        "Phone": patient.patientPhone,
-                        "Height": patient.patientHeight,
-                        "Weight": patient.patientWeight,
-                        "Status": patient.patientStatus,
-                        "Gender": patient.patientGender,
-                    }
-
-                    this.patient_data.details_sections['Emergency Contacts'] = patient.patientEmergencyContacts;
-                    this.patient_data.details_sections.Medications = patient.patientMedications;
-                    this.patient_data.details_sections.Disease = patient.patientDiseases;
-                    this.patient_data.details_sections['Family History'] = patient.patientFamilyHistory;
-                    this.patient_data.details_sections.Immunizations = patient.patientImmunizations;
-                    this.patient_data.details_sections.Allergies = patient.patientAllergies;
-                    this.patient_data.details_sections.Prescriptions = patient.patientPrescriptions;
-                    this.patient_data.details_sections.Scans = patient.patientScans;
-                    this.patient_data.details_sections['Lab Tests'] = patient.patientLabTests;
 
                     if (patient.patientMediCardID == '')
                         this.addMediCard = true;
-
                 })
                 .catch(error => {
                     console.log(error);
                     //todo
                 });
         },
+        deleteItem() {
+            this.delete_dialog = false;
+
+            const section = this.patient_data.details_sections[this.current_dialog_item[0]];
+            section.splice(this.current_dialog_item[1], 1);
+
+            // delete from database
+            axios.patch("http://localhost:5000/api/patients/" + this.patient_data._id + "/", {
+                [this.current_dialog_item[0]]: section
+            }) //todo: change to real url
+                .then(response => {
+                    console.log(response);
+                })
+                .catch(error => {
+                    console.log(error);
+                    //todo
+                });
+            this.current_dialog_item = null;
+        },
         update_add_dialog(add_dialog) {
             this.add_dialog = add_dialog
         },
         update_edit_dialog(edit_dialog) {
-            console.log("ediiiti")
             this.edit_dialog = edit_dialog
         },
     },
