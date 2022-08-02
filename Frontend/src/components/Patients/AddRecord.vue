@@ -8,63 +8,178 @@
 
         <v-card-text>
             <v-card flat>
-                <v-card-title class="body-1">
-                    Symptoms
-                    <v-spacer></v-spacer>
-                    <v-text-field clearable label="Symptoms">
-                    </v-text-field>
-                </v-card-title>
-                <v-card-text>
-                    <v-list>
-                        <v-list-item >
-                            <v-list-item-content>
-                                symptom
-                            </v-list-item-content>
-                            <v-list-item-action>
-                                <v-btn icon>
-                                    <v-icon>mdi-close</v-icon>
-                                </v-btn>
-                            </v-list-item-action>
-                        </v-list-item>
-                    </v-list>
-                </v-card-text>
-            </v-card>
-            <v-text-field label="Patient Diagnosis" ></v-text-field>
-            <v-card flat>
-                <v-card-title class="body-1">
-                    Medications
-                    <v-spacer></v-spacer>
-                    <v-text-field clearable label="Medications">
-                    </v-text-field>
-                </v-card-title>
-                <v-card-text>
-                    <v-list>
-                        <v-list-item>
-                            <v-list-item-content>
-                                medication
-                            </v-list-item-content>
-                            <v-list-item-action>
-                                <v-btn icon>
-                                    <v-icon>mdi-close</v-icon>
-                                </v-btn>
-                            </v-list-item-action>
-                        </v-list-item>
-                    </v-list>
-                </v-card-text>
+                <div>
+                    <v-select v-model="section" @input="typeSelected" :items="sections" label="Record Type"
+                        class="mr-10 mt-5"></v-select>
+
+                    <v-form v-model="valid" ref="form">
+                        <v-jsf v-model="model" :schema="schema" />
+                    </v-form>
+                </div>
+                <div>
+                    <v-btn text color="primary" class="font-weight-bold" @click="editPatient">Edit Patient</v-btn>
+                    <v-btn text color="red" @click="$emit('update')">Cancel</v-btn>
+                    <label>
+                        {{ errorLabel }}
+                    </label>
+                </div>
             </v-card>
         </v-card-text>
-
-        <v-divider></v-divider>
-
-        <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn color="primary" text @click="$emit('update', false)">
-                Save
-            </v-btn>
-        </v-card-actions>
     </v-card>
 </template>
 
 <script>
+import axios from "axios"
+import VJsf from '@koumoul/vjsf/lib/VJsf.js'
+import '@koumoul/vjsf/lib/VJsf.css'
+import '@koumoul/vjsf/lib/deps/third-party.js'
+
+export default {
+    components: { VJsf },
+    data: () => ({
+        errorLabel: '',
+        valid: null,
+        model: {},
+        section: '',
+        sections: ['Emergency Contacts', 'Medications', 'Diseases', 'Prescriptions', 'Scans', 'Allergies', 'Immunizations', 'Lab Tests', 'Family History'],
+        schema: {
+            type: 'object',
+            properties: {}
+        },
+        schema2: {
+            'Emergency Contacts': {
+                type: 'object',
+                properties: {
+                    'Name': { type: 'string' },
+                    'Phone': { type: 'number' }
+                },
+                required: ['Phone']
+            },
+            'Medications': {
+                type: 'object',
+                properties: {
+                    'Name': { type: 'string' },
+                    'Dose': { type: 'string' },
+                    'Start Date': { type: 'string', format: 'date' },
+                    'End Date': { type: 'string', format: 'date' },
+                },
+                required: ['Name']
+            },
+            'Diseases': {
+                type: 'object',
+                properties: {
+                    'Name': { type: 'string' },
+                    'Details': { type: 'string' },
+                    'Start Date': { type: 'string', format: 'date' },
+                    'End Date': { type: 'string', format: 'date' },
+                },
+                required: ['Name']
+            },
+            'Family History': {
+                type: 'object',
+                properties: {
+                    'Name': { type: 'string' },
+                    'Family member': { type: 'string' },
+                    'Start Date': { type: 'string', format: 'date' },
+                    'End Date': { type: 'string', format: 'date' },
+                },
+                required: ['Name']
+            },
+            'Immunizations': {
+                type: 'object',
+                properties: {
+                    'Name': { type: 'string' },
+                    'Details': { type: 'string' },
+                    'Date': { type: 'string', format: 'date' },
+                },
+                required: ['Name']
+            },
+            'Allergies': {
+                type: 'object',
+                properties: {
+                    'Name': { type: 'string' },
+                    'Details': { type: 'string' },
+                    'Start Date': { type: 'string', format: 'date' },
+                    'End Date': { type: 'string', format: 'date' },
+                },
+                required: ['Name']
+            },
+            'Prescriptions': {
+                type: 'object',
+                properties: {
+                    'Image': {
+                        type: 'string', "contentMediaType": "image/*",
+                        "writeOnly": true
+                    },
+                    'Details': { type: 'string' },
+                    'Date': { type: 'string', format: 'date' },
+                },
+                required: ['Details']
+            },
+            'Scans': {
+                type: 'object',
+                properties: {
+                    'Image': {
+                        type: 'string', "contentMediaType": "image/*",
+                        "writeOnly": true
+                    },
+                    'Details': { type: 'string' },
+                    'Date': { type: 'string', format: 'date' },
+                },
+                required: ['Details']
+            },
+            'Lab tests': {
+                type: 'object',
+                properties: {
+                    'Image': {
+                        type: 'string', "contentMediaType": "image/*",
+                        "writeOnly": true
+                    },
+                    'Details': { type: 'string' },
+                    'Date': { type: 'string', format: 'date' },
+                },
+                required: ['Details']
+            },
+        }
+    }),
+    props: {
+        patient_data: {
+            type: Object,
+            required: true
+        }
+    },
+    methods: {
+        typeSelected: function () {
+            this.schema.properties = this.schema2[this.section].properties
+            this.schema.required = this.schema2[this.section].required
+        },
+        editPatient() {
+            this.$refs.form.validate();
+            if (this.valid) {
+
+                if (this.patient_data.details_sections[this.section] != undefined) {
+                    this.patient_data.details_sections[this.section].push(this.model)
+                } else {
+                    this.patient_data.details_sections[this.section] = [this.model]
+                }
+
+                axios.patch("http://localhost:5000/api/patients/" + this.patient_data._id + "/", {
+                    ['patient' + String(this.section).replace(/ /g, '')]: this.patient_data.details_sections[this.section]
+                }) //todo: change to real url
+                    .then(response => {
+                        console.log(response);
+                    })
+                    .catch(error => {
+                        console.log(error);
+                        //todo
+                    });
+                // update local data
+                this.$emit('update')
+            } else {
+                this.errorLabel = 'Please fill in all required fields';
+            }
+        },
+    }
+}
 
 </script>

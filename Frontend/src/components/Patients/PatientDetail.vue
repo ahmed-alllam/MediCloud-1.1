@@ -130,7 +130,7 @@
                 </v-btn>
             </template>
 
-            <AddRecord @update="update_add_dialog" />
+            <AddRecord @update="add_dialog = false" :patient_data="patient_data" />
         </v-dialog>
 
         <div id="medical-details">
@@ -145,7 +145,7 @@
 
                             <img class="record-image" v-if="item.Image" :src="item.Image" />
 
-                            <v-menu top v-model="menu" v-if="can_edit">
+                            <v-menu top v-if="can_edit">
                                 <template v-slot:activator="{ on, attrs }">
                                     <v-btn icon v-bind="attrs" v-on="on" class="edit-button">
                                         <v-icon>mdi-dots-vertical</v-icon>
@@ -153,41 +153,17 @@
                                 </template>
 
                                 <v-list>
-                                    <v-list-item link @click.stop="edit_dialog = true; menu = false;">
+                                    <v-list-item link
+                                        @click="edit_dialog = true; current_dialog_item = [key, index2];
+                                        current_dialog_data = patient_data.details_sections[current_dialog_item[0]][current_dialog_item[1]]
+                                        ">
                                         <v-list-item-title>Edit</v-list-item-title>
                                     </v-list-item>
 
-                                    <v-dialog v-model="edit_dialog" width="500">
-
-                                        <EditRecord @update="edit_dialog = false" :section="key" :index="index2"
-                                            :patient_data="patient_data" />
-
-                                    </v-dialog>
-
-                                    <v-list-item link @click.stop="delete_dialog=true; current_dialog_item = [key, index2]; menu = false;">
+                                    <v-list-item link
+                                        @click="delete_dialog = true; current_dialog_item = [key, index2];">
                                         <v-list-item-title>Delete</v-list-item-title>
                                     </v-list-item>
-
-                                    <v-dialog v-model="delete_dialog" width="500">
-                                        <v-card>
-                                            <v-card-title class="text-h5 grey lighten-2">
-                                                Delete
-                                            </v-card-title>
-
-                                            <v-card-text>
-                                                Are you sure you want to delete this record?
-                                            </v-card-text>
-
-                                            <v-divider></v-divider>
-
-                                            <v-card-actions>
-                                                <v-spacer></v-spacer>
-                                                <v-btn color="red" text @click="deleteItem">
-                                                    Delete
-                                                </v-btn>
-                                            </v-card-actions>
-                                        </v-card>
-                                    </v-dialog>
                                 </v-list>
                             </v-menu>
 
@@ -222,9 +198,38 @@
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>
+
+
+            <v-dialog v-model="edit_dialog" width="500">
+                <EditRecord @update="edit_dialog = false" :section="current_dialog_item[0]"
+                    :index="current_dialog_item[1]" :patient_data="patient_data" 
+                    :section_data="current_dialog_data"/>
+            </v-dialog>
+
+            <v-dialog v-model="delete_dialog" width="500">
+                <v-card>
+                    <v-card-title class="text-h5 grey lighten-2">
+                        Delete
+                    </v-card-title>
+
+                    <v-card-text>
+                        Are you sure you want to delete this record?
+                    </v-card-text>
+
+                    <v-divider></v-divider>
+
+                    <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-btn color="red" text @click="deleteItem">
+                            Delete
+                        </v-btn>
+                    </v-card-actions>
+                </v-card>
+            </v-dialog>
 
             <div v-if="addMediCard">
                 <h2>MediCard</h2>
@@ -263,9 +268,9 @@ import axios from "axios";
 export default {
     name: "PatientDetail",
     data: () => ({
-        current_dialog_item: null,
+        current_dialog_item: [[]],
+        current_dialog_data: {},
         patient_id: '',
-        menu: false,
         loaded: false,
         add_dialog: false,
         edit_dialog: false,
@@ -295,7 +300,7 @@ export default {
 
                     details_sections['Emergency Contacts'] = patient.patientEmergencyContacts;
                     details_sections.Medications = patient.patientMedications;
-                    details_sections.Disease = patient.patientDiseases;
+                    details_sections.Diseases = patient.patientDiseases;
                     details_sections['Family History'] = patient.patientFamilyHistory;
                     details_sections.Immunizations = patient.patientImmunizations;
                     details_sections.Allergies = patient.patientAllergies;
@@ -332,10 +337,6 @@ export default {
                     console.log(error);
                     //todo
                 });
-            this.current_dialog_item = null;
-        },
-        update_add_dialog(add_dialog) {
-            this.add_dialog = add_dialog
         },
     },
     created() {

@@ -7,15 +7,15 @@
 
         <v-card-text>
             <v-card flat>
-                <div class="edit-form">
+                <div>
                     <v-form v-model="valid" ref="form">
                         <v-jsf v-model="model" :schema="schema" />
                     </v-form>
                 </div>
-                <div class="end-buttons">
-                    <v-btn text class="font-weight-bold add-button" @click="editPatient">Edit Patient</v-btn>
-                    <v-btn text class="cancel-button" @click="$emit('update', false)">Cancel</v-btn>
-                    <label class="ml-10">
+                <div>
+                    <v-btn text color="primary" class="font-weight-bold" @click="editPatient">Edit Patient</v-btn>
+                    <v-btn text color="red" @click="$emit('update', false)">Cancel</v-btn>
+                    <label>
                         {{ errorLabel }}
                     </label>
                 </div>
@@ -38,16 +38,17 @@ export default {
         model: {},
         schema: {
             type: 'object',
-            properties: {
-                'Name': { type: 'string' },
-                'Phone': { type: 'number' },
-                'Date': { type: 'string', format: 'date' },
-                'Start Date': { type: 'string', format: 'date' },
-                'End Date': { type: 'string', format: 'date' },
-                'Family Member': { type: 'string' },
-                'Details': { type: 'string' },
-                'Dose': { type: 'string' },
-            }
+            properties: {}
+        },
+        schema2: {
+            'Name': { type: 'string' },
+            'Phone': { type: 'number' },
+            'Date': { type: 'string', format: 'date' },
+            'Start Date': { type: 'string', format: 'date' },
+            'End Date': { type: 'string', format: 'date' },
+            'Family Member': { type: 'string' },
+            'Details': { type: 'string' },
+            'Dose': { type: 'string' },
         }
     }),
     props: {
@@ -62,22 +63,40 @@ export default {
         index: {
             type: Number,
             required: true
+        },
+        section_data: {
+            type: Object,
+            required: true
+        }
+    },
+    watch: {
+        section_data() {
+            this.update_schema();
         }
     },
     created() {
-        this.model = this.patient_data.details_sections[this.section][this.index]
-
-        for (let field in this.schema.properties) {
-            if (this.model[field] === undefined) {
-                delete this.schema.properties[field]
-            }
-        }
+        this.update_schema();
     },
     methods: {
+        update_schema() {
+            var schema = {
+                type: 'object',
+                properties: {}
+            };
+
+            this.model = this.section_data;
+            for (let field in this.schema2) {
+                if (this.model[field] !== undefined) {
+                    schema.properties[field] = this.schema2[field]
+                }
+            }
+
+            this.schema = schema;
+        },
         editPatient() {
             // delete from database
             axios.patch("http://localhost:5000/api/patients/" + this.patient_data._id + "/", {
-                ['patient' + String(this.section).replace(/ /g,'')]: this.model
+                ['patient' + String(this.section).replace(/ /g, '')]: this.model
             }) //todo: change to real url
                 .then(response => {
                     console.log(response);
