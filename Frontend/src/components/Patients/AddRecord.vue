@@ -163,9 +163,9 @@ export default {
                     this.patient_data.details_sections[this.section] = [this.model]
                 }
 
-                axios.patch("http://localhost:5000/api/patients/" + this.patient_data._id + "/", {
+                axios.patch("https://medicloudeg.herokuapp.com/api/patients/" + this.patient_data._id + "/", {
                     ['patient' + String(this.section).replace(/ /g, '')]: this.patient_data.details_sections[this.section]
-                }) //todo: change to real url
+                })
                     .then(response => {
                         console.log(response);
                     })

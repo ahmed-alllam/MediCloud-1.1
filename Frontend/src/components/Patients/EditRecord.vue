@@ -94,20 +94,23 @@ export default {
             this.schema = schema;
         },
         editPatient() {
-            // delete from database
-            axios.patch("http://localhost:5000/api/patients/" + this.patient_data._id + "/", {
-                ['patient' + String(this.section).replace(/ /g, '')]: this.model
-            }) //todo: change to real url
-                .then(response => {
-                    console.log(response);
+            this.$refs.form.validate();
+
+            if (this.valid) {
+                axios.patch("https://medicloudeg.herokuapp.com/api/patients/" + this.patient_data._id + "/", {
+                    ['patient' + String(this.section).replace(/ /g, '')]: this.model
                 })
-                .catch(error => {
-                    console.log(error);
-                    //todo
-                });
-            // update local data
-            this.patient_data.details_sections[this.section][this.index] = this.model
-            this.$emit('update')
+                    .then(response => {
+                        console.log(response);
+                    })
+                    .catch(error => {
+                        console.log(error);
+                        //todo
+                    });
+
+                this.patient_data.details_sections[this.section][this.index] = this.model
+                this.$emit('update')
+            }
         }
     }
 }

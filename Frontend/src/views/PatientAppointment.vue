@@ -1,9 +1,9 @@
 <template>
 
     <v-container>
-        <PatientDetail />
-        <hr/>
-        <div class="appointment-details">
+        <PatientDetail @loaded="loaded=true"/>
+        <hr v-if="loaded"/>
+        <div class="appointment-details" v-if="loaded">
             <v-card class="appointment-card">
                 <v-list-item two-line>
                     <v-list-item-content>
@@ -91,6 +91,7 @@ export default {
     },
 
     data: () => ({
+        loaded: false,
         visitPatientId: "",
         visitPatientSymptom: "",
         visitPatientSymptoms: [],

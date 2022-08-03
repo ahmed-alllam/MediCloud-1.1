@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div id="top-content">
+        <div id="top-content" v-if="loaded">
             <div id="row">
                 <div v-if="patient_data.patientPhoto" id="image" class="col-xs-12 col-md-5 col-xl-2">
                     <img id="profile-photo" :src="patient_data.patientPhoto" />
@@ -121,6 +121,14 @@
             </div>
         </div>
 
+        <div v-if="!loaded" class="loadingBar">
+            <v-progress-circular indeterminate color="primary" v-if="!errorLabel"></v-progress-circular>
+            <br />
+            <br />
+            <label class="errorLabel">
+                {{errorLabel}}
+            </label>
+        </div>
 
         <v-dialog v-model="add_dialog" width="500" v-if="loaded && can_edit">
             <template v-slot:activator="{ on, attrs }">
@@ -133,7 +141,7 @@
             <AddRecord @update="add_dialog = false" :patient_data="patient_data" />
         </v-dialog>
 
-        <div id="medical-details">
+        <div id="medical-details" v-if="loaded">
             <div v-for="(value, key, index) in this.patient_data.details_sections" :key="`${key}-${index}`">
 
                 <h2>{{ key }}</h2>
@@ -153,10 +161,9 @@
                                 </template>
 
                                 <v-list>
-                                    <v-list-item link
-                                        @click="edit_dialog = true; current_dialog_item = [key, index2];
-                                        current_dialog_data = patient_data.details_sections[current_dialog_item[0]][current_dialog_item[1]]
-                                        ">
+                                    <v-list-item link @click="edit_dialog = true; current_dialog_item = [key, index2];
+current_dialog_data = patient_data.details_sections[current_dialog_item[0]][current_dialog_item[1]]
+                                    ">
                                         <v-list-item-title>Edit</v-list-item-title>
                                     </v-list-item>
 
@@ -206,8 +213,7 @@
 
             <v-dialog v-model="edit_dialog" width="500">
                 <EditRecord @update="edit_dialog = false" :section="current_dialog_item[0]"
-                    :index="current_dialog_item[1]" :patient_data="patient_data" 
-                    :section_data="current_dialog_data"/>
+                    :index="current_dialog_item[1]" :patient_data="patient_data" :section_data="current_dialog_data" />
             </v-dialog>
 
             <v-dialog v-model="delete_dialog" width="500">
@@ -244,11 +250,12 @@
                                     <span>Link a MediCard to this patient</span>
                                 </div>
 
-                                <form>
-                                    <v-text-field clearable label="Card ID">
-                                    </v-text-field>
-                                    <v-btn text large class="font-weight-bold add-medicard-button">SAVE</v-btn>
-                                </form>
+                                <v-form ref="medicardIDForm" v-model="valid" class="mb-5">
+                                    <v-jsf v-model="inputMedicardID" :schema="medicardIDSchema" />
+                                </v-form>
+
+                                <v-btn text large @click="addMediCardID" class="font-weight-bold add-medicard-button">
+                                    SAVE</v-btn>
                             </div>
                         </div>
                     </div>
@@ -265,9 +272,22 @@ import AddRecord from "./AddRecord.vue";
 
 import axios from "axios";
 
+import VJsf from '@koumoul/vjsf/lib/VJsf.js'
+import '@koumoul/vjsf/lib/VJsf.css'
+import '@koumoul/vjsf/lib/deps/third-party.js'
+
 export default {
     name: "PatientDetail",
     data: () => ({
+        valid: null,
+        errorLabel: "",
+        medicardIDSchema: {
+            title: 'MediCard ID',
+            type: 'string',
+            "minLength": 8,
+            "maxLength": 8,
+        },
+        inputMedicardID: '',
         current_dialog_item: [[]],
         current_dialog_data: {},
         patient_id: '',
@@ -289,9 +309,8 @@ export default {
             else
                 linkID = 'medicard/' + paramID;
 
-            axios.get("http://localhost:5000/api/patients/" + linkID) //todo: change to real url
+            axios.get("https://medicloudeg.herokuapp.com/api/patients/" + linkID, {timeout: 30000})
                 .then(response => {
-                    this.loaded = true;
                     const patient = response.data;
                     this.patient_data = patient;
 
@@ -312,10 +331,16 @@ export default {
 
                     if (patient.patientMediCardID == '')
                         this.addMediCard = true;
+
+                    this.loaded = true;
+                    this.$emit('loaded');
                 })
                 .catch(error => {
-                    console.log(error);
-                    //todo
+                    if(error && error.response && error.response.status === 404) {
+                        this.errorLabel = "Wrong Patient ID";
+                    } else {
+                        this.errorLabel = "An error occured, please check your connection and try again";
+                    }
                 });
         },
         deleteItem() {
@@ -327,9 +352,9 @@ export default {
             this.patient_data.details_sections = Object.fromEntries(Object.entries(this.patient_data.details_sections).filter(([, v]) => v && v.length > 0));
 
             // delete from database
-            axios.patch("http://localhost:5000/api/patients/" + this.patient_data._id + "/", {
+            axios.patch("https://medicloudeg.herokuapp.com/api/patients/" + this.patient_data._id + "/", {
                 ['patient' + String(this.current_dialog_item[0]).replace(/ /g, '')]: section
-            }) //todo: change to real url
+            })
                 .then(response => {
                     console.log(response);
                 })
@@ -338,11 +363,28 @@ export default {
                     //todo
                 });
         },
+        addMediCardID() {
+            if (this.valid) {
+
+                axios.patch("https://medicloudeg.herokuapp.com/api/patients/" + this.patient_data._id + "/", {
+                    'patientMediCardID': this.inputMedicardID
+                })
+                    .then(response => {
+                        this.patient_data.patientMediCardID = this.inputMedicardID
+                        this.addMediCard = false;
+                        console.log(response);
+                    })
+                    .catch(error => {
+                        console.log(error);
+                        //todo
+                    });
+            }
+        }
     },
     created() {
         this.getPatientData()
     },
-    components: { EditRecord, AddRecord }
+    components: { EditRecord, AddRecord, VJsf }
 };
 
 </script>
@@ -357,6 +399,15 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Quicksand';
+}
+
+.loadingBar {
+    text-align: center;
+    margin: 150px 0;
+}
+
+.errorLabel {
+    color: red;
 }
 
 #top-content {

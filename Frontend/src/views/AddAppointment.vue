@@ -4,10 +4,6 @@
             <h3>
                 Is your Patient a <span class="brand-name">MediCloud</span> Client?
             </h3>
-            <h5>
-                *By entering your patient's <span class="brand-name">MediCloud</span> ID, you can easily <br />
-                see all their medical history and update it, to show automatically in their app.
-            </h5>
         </v-row>
         <v-row class="question-row options">
             <v-col cols="12" md="6">
@@ -32,6 +28,14 @@
                 </router-link>
             </v-col>
         </v-row>
+        <v-row class="question-row">
+            <br/>
+            <br/>
+            <h5>
+                By entering your patient's <span class="brand-name">MediCloud</span> ID, you can easily <br />
+                see all their medical history and update it, to show automatically in their app.
+            </h5>
+        </v-row>
     </v-container>
 </template>
 
@@ -53,6 +57,7 @@
     }
 
     h5 {
+        font-size: 1rem !important;
         width: 100%;
         margin: 2vh 20px;
     }
