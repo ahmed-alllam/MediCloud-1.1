@@ -8,7 +8,8 @@
         </v-toolbar-title>
         <v-spacer></v-spacer>
         <v-text-field flat light solo class="mx-3" color="#000" background-color="#fff" dense
-          label="Search For Patient ID" hide-details single-line append-icon="mdi-magnify" style="border-radius: 20px">
+          label="Search For Patient MediCard ID" hide-details single-line append-icon="mdi-magnify" style="border-radius: 20px"
+          v-model="mediCardID" @keydown.enter.prevent="searchPatientID" @click:append="searchPatientID">
         </v-text-field>
         <v-spacer></v-spacer>
         <v-btn icon>
@@ -49,7 +50,7 @@
 
       <v-content>
         <h1 class="display-1 mt-8 mb-2 ml-10">{{ $route.name }}</h1>
-        <router-view></router-view>
+        <router-view :key="$route.fullPath"></router-view>
       </v-content>
     </div>
 
@@ -66,6 +67,7 @@ export default {
 
   data() {
     return {
+      mediCardID: '',
       drawer: true,
       loggedIn: false,
       routes: [
@@ -108,6 +110,21 @@ export default {
         this.loggedIn = this.$store.state.isLoggedIn
       });
     },
+    searchPatientID() {
+      if (this.mediCardID.length === 8) {
+        this.$router.push({
+          name: 'Patient Detail',
+          params: {
+            id: this.mediCardID
+          }
+        });
+      } else {
+        this.$toast.open({
+          message: 'Please enter a valid MediCard ID',
+          type: 'error'
+        });
+      }
+    }
   },
   updated() {
     this.checkLoggedIn();

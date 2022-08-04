@@ -16,6 +16,13 @@ Vue.config.productionTip = false
 Vue.use(Chartkick.use(Chart))
 Vue.use(PrimeVue);
 
+
+import VueToast from 'vue-toast-notification';
+import 'vue-toast-notification/dist/theme-sugar.css';
+
+Vue.use(VueToast);
+
+
 import moment from 'moment';
 
 Vue.filter('formatDate', function(value) {

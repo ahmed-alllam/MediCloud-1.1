@@ -1729,7 +1729,7 @@ screen and (-ms-high-contrast: none) {
 .end {
     background: url('~@/assets/images/background.svg') no-repeat;
     background-size: cover;
-    padding-bottom: 50px;
+    padding-bottom: 150px;
 }
 
 .footer {

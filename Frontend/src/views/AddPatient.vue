@@ -56,21 +56,21 @@ export default {
             required: ['First Name', 'Last Name'],
             type: 'object',
             properties: {
-                'First Name': { type: 'string', 'x-cols': 5, "x-class": "mr-10" },
-                'Last Name': { type: 'string', 'x-cols': 5 },
-                'Phone': { type: 'number', 'x-cols': 5, "x-class": "mr-10" },
-                'Email': { type: 'string', 'x-cols': 5 },
-                'MediCard ID': { type: 'string', 'x-cols': 5, "x-class": "mr-10" },
-                'Birthdate': { type: 'string', format: 'date', 'x-cols': 5 },
+                'First Name': { type: 'string', 'x-col': '12', "x-class": "mr-10 col-sm-5" },
+                'Last Name': { type: 'string', 'x-col': '12', "x-class": "col-sm-5" },
+                'Phone': { type: 'number', 'x-col': '12', "x-class": "mr-10 col-sm-5" },
+                'Email': { type: 'string', 'x-col': '12', 'x-class': 'col-sm-5' },
+                'Birthdate': { type: 'string', format: 'date', 'x-col': '12' , "x-class": "mr-10 col-sm-5"},
                 'Blood Type': {
                     type: 'string',
                     'enum': ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'],
-                    'x-cols': 5, "x-class": "mr-10"
+                    'x-col': '12',
+                    'x-class': 'col-sm-5'
                 },
-                'Gender': { type: 'string', 'enum': ['Male', 'Female'], 'x-cols': 5 },
+                'Gender': { type: 'string', 'enum': ['Male', 'Female'], 'x-col': '12' , "x-class": "mr-10 col-sm-5"},
 
                 'Emergency Contacts': {
-                    type: 'array', 'x-cols': 5, "x-class": "mr-10",
+                    type: 'array', 'x-col': '12', 'x-class': 'col-sm-5',
                     items: {
                         type: 'object',
                         properties: {
@@ -81,7 +81,7 @@ export default {
                     },
                 },
                 'Medications': {
-                    type: 'array', 'x-cols': 5,
+                    type: 'array', 'x-col': '12', "x-class": "mr-10 col-sm-5",
                     items: {
                         type: 'object',
                         properties: {
@@ -94,7 +94,7 @@ export default {
                     },
                 },
                 'Diseases': {
-                    type: 'array', 'x-cols': 5, "x-class": "mr-10"
+                    type: 'array', 'x-col': '12', 'x-class': 'col-sm-5'
                     , items: {
                         type: 'object',
                         properties: {
@@ -107,7 +107,7 @@ export default {
                     },
                 },
                 'Family History': {
-                    type: 'array', 'x-cols': 5, items: {
+                    type: 'array', 'x-col': '12', "x-class": "mr-10 col-sm-5", items: {
                         type: 'object',
                         properties: {
                             'Name': { type: 'string' },
@@ -119,7 +119,7 @@ export default {
                     },
                 },
                 'Immunizations': {
-                    type: 'array', 'x-cols': 5, "x-class": "mr-10", items: {
+                    type: 'array', 'x-col': '12', 'x-class': 'col-sm-5', items: {
                         type: 'object',
                         properties: {
                             'Name': { type: 'string' },
@@ -130,7 +130,7 @@ export default {
                     },
                 },
                 'Allergies': {
-                    type: 'array', 'x-cols': 5, items: {
+                    type: 'array', 'x-col': '12', "x-class": "mr-10 col-sm-5", items: {
                         type: 'object',
                         properties: {
                             'Name': { type: 'string' },
@@ -142,7 +142,7 @@ export default {
                     },
                 },
                 'Prescriptions': {
-                    type: 'array', 'x-cols': 5, "x-class": "mr-10", items: {
+                    type: 'array', 'x-col': '12', 'x-class': 'col-sm-5', items: {
                         type: 'object',
                         properties: {
                             'Image': {
@@ -156,7 +156,7 @@ export default {
                     },
                 },
                 'Scans': {
-                    type: 'array', 'x-cols': 5, items: {
+                    type: 'array', 'x-col': '12', "x-class": "mr-10 col-sm-5", items: {
                         type: 'object',
                         properties: {
                             'Image': {
@@ -170,7 +170,7 @@ export default {
                     },
                 },
                 'Lab tests': {
-                    type: 'array', 'x-cols': 5, "x-class": "mr-10", items: {
+                    type: 'array', 'x-col': '12', 'x-class': 'col-sm-5',  items: {
                         type: 'object',
                         properties: {
                             'Image': {
@@ -197,11 +197,17 @@ export default {
 
             this.errorLabel = "Loading..."
 
+            const send_model = {}
+
+            for (const key in this.model) {
+                send_model['patient' + String(key).replace(/ /g, '')] = this.model[key]
+            }
+
             axios.post("https://medicloudeg.herokuapp.com/api/patients/", {
-                ...this.model
+                ...send_model
             }).then(res => {
                 const Patient = res.data;
-                
+
                 this.errorLabel = "Patient added successfully, redirecting to the next page"
                 this.$router.push({
                     path: '/appointments/new/patient/' + Patient._id,

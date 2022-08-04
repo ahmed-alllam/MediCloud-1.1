@@ -12,9 +12,10 @@
                         Yes,
                         Enter their MediCloud ID:
                     </h4>
-                    <v-text-field label="Patient ID" single-line>
-                    </v-text-field>
-                    <v-btn text router to="/appointments/new/patient/:id" class="submit-button">Continue</v-btn>
+                    <v-form v-model="valid" ref="form">
+                        <v-jsf v-model="model" :schema="schema" />
+                    </v-form>
+                    <v-btn text @click="onSubmit" class="submit-button">Continue</v-btn>
                 </div>
 
             </v-col>
@@ -29,8 +30,8 @@
             </v-col>
         </v-row>
         <v-row class="question-row">
-            <br/>
-            <br/>
+            <br />
+            <br />
             <h5>
                 By entering your patient's <span class="brand-name">MediCloud</span> ID, you can easily <br />
                 see all their medical history and update it, to show automatically in their app.
@@ -40,6 +41,44 @@
 </template>
 
 <script>
+
+import VJsf from '@koumoul/vjsf/lib/VJsf.js'
+import '@koumoul/vjsf/lib/VJsf.css'
+import '@koumoul/vjsf/lib/deps/third-party.js'
+
+export default {
+    data() {
+        return {
+            model: '',
+            schema: {
+                title: 'MediCard ID',
+                type: 'string',
+                minLength: 8,
+                maxLength: 8,
+            },
+            valid: false,
+        }
+    },
+    methods: {
+        onSubmit() {
+            this.valid = true;
+            if (this.$refs.form.validate()) {
+                this.$router.push({
+                    name: 'New Patient Appointment',
+                    params: {
+                        id: this.model
+                    }
+                });
+            } else {
+                this.$toast.open({
+                    message: 'Please enter a valid MediCard ID',
+                    type: 'error'
+                });
+            }
+        }
+    },
+    components: { VJsf }
+}
 
 </script>
 
@@ -84,7 +123,7 @@
             color: white !important;
             background-color: #26b3ff;
             border-radius: 25px;
-            margin: 0 20px;
+            margin: 30px 0px 20px;
             text-decoration: none;
 
             &:hover {
