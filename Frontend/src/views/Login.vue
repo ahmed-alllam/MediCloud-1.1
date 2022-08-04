@@ -16,8 +16,6 @@
                                 <label for="password">Password</label>
                             </div>
                             <button type="button" class="btn btn-primary submit" @click="doLogin">Submit</button>
-
-                            <label class="error">{{ error }}</label>
                         </form>
                     </div>
                 </div>
@@ -37,28 +35,37 @@ export default {
         return {
             emailLogin: "",
             passwordLogin: "",
-            error: "",
         };
     },
 
     methods: {
         async doLogin() {
             if (this.emailLogin === "" || this.passwordLogin === "") {
-                this.error = "Please Fill empty fields"
+                this.$toast.clear();
+                this.$toast.error("Please fill all fields");
             } else {
+                this.$toast.clear();
+                this.$toast.info("Logging in...");
+
                 axios.post("https://medicloudeg.herokuapp.com/api/doctors/login/", {
                     email: this.emailLogin,
                     password: this.passwordLogin
                 }).then(async res => {
+                    this.$toast.clear();
+                    this.$toast.success("Logged in");
+
                     const token = res.data.token;
                     console.log(token);
                     this.$store.commit('loggedIn', token);
                     this.$router.push("/");
                 }).catch(err => {
-                    if(String(err).includes("401")) {
-                        this.error = "Wrong Email or Password"
-                    } else 
-                        this.error = "An error occured, please check your internet"
+                    if (String(err).includes("401")) {
+                        this.$toast.clear();
+                        this.$toast.error("Invalid email or password");
+                    } else {
+                        this.$toast.clear();
+                        this.$toast.error("Something went wrong");
+                    }
                 })
             }
         },

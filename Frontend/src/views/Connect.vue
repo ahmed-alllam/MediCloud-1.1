@@ -4,10 +4,10 @@
 
         <v-icon color="#26b3ff">mdi-account-group</v-icon>
         <h3>
-            Connect with other healthcare providers
+            Connect and message with other healthcare providers
         </h3>
         <h3>
-            Send, receive, and manage messages with your nearby Clinics, Labs, and Pharmacies.
+            Send and recieve medical data with your nearby Clinics, Labs, and Pharmacies.
         </h3>
 
         <h5>
