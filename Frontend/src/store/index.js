@@ -3,20 +3,39 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
+import VueJwtDecode from 'vue-jwt-decode'
+
 export default new Vuex.Store({
   state: {
     token: "",
     isLoggedIn: false,
+    user_id: "",
+    user_name: "",
+    user_email: "",
   },
   mutations: {
-    loggedIn(state, response) {
-      state.token = response
+    loggedIn(state, token) {
+      state.token = token
       state.isLoggedIn = true;
-      localStorage.setItem('accessToken', response);
+
+      localStorage.setItem('accessToken', token);
+
+      try {
+        const decoded = VueJwtDecode.decode(token)
+        state.user_id = decoded._id
+        state.user_name = decoded.fullName
+        state.user_email = decoded.email
+      } catch (error) {
+        console.log(error)
+      }
     },
     loggedOut(state) {
       state.token = "";
       state.isLoggedIn = false;
+      state.user_id = "";
+      state.user_name = "";
+      state.user_email = "";
+
       localStorage.setItem('accessToken', "");
     }
   },
@@ -24,10 +43,11 @@ export default new Vuex.Store({
     fetchAccessToken({ commit }) {
       const token = localStorage.getItem('accessToken');
       console.log("token +" + token)
-      if(token)
+      if (token) {
         commit('loggedIn', token);
-      else
+      } else {
         commit('loggedOut');
+      }
     }
   },
 })

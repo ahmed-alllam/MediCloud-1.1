@@ -8,8 +8,9 @@
         </v-toolbar-title>
         <v-spacer></v-spacer>
         <v-text-field flat light solo class="mx-3" color="#000" background-color="#fff" dense
-          label="Search For Patient MediCard ID" hide-details single-line append-icon="mdi-magnify" style="border-radius: 20px"
-          v-model="mediCardID" @keydown.enter.prevent="searchPatientID" @click:append="searchPatientID">
+          label="Search For Patient MediCard ID" hide-details single-line append-icon="mdi-magnify"
+          style="border-radius: 20px" v-model="mediCardID" @keydown.enter.prevent="searchPatientID"
+          @click:append="searchPatientID">
         </v-text-field>
         <v-spacer></v-spacer>
         <v-btn icon>
@@ -18,15 +19,15 @@
       </v-app-bar>
       <v-navigation-drawer v-model="drawer" :permanent="$vuetify.breakpoint.mdAndUp" hide-overlay clipped app>
         <v-list-item two-line class="my-2">
-          <v-list-item-avatar color="blue">
-            <span class="white--text">AA</span>
+          <v-list-item-avatar color="primary">
+            <span class="white--text">{{ initials }}</span>
           </v-list-item-avatar>
           <v-list-item-content>
             <v-list-item-title>
-              Ahmed Allam
+              {{ user_name }}
             </v-list-item-title>
-            <v-list-item-subtitle class="caption text-uppercase">
-              Dentist
+            <v-list-item-subtitle class="caption">
+              {{ user_email }}
             </v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
@@ -50,11 +51,11 @@
 
       <v-content>
         <h1 class="display-1 mt-8 mb-2 ml-10">{{ $route.name }}</h1>
-        <router-view :key="$route.fullPath"></router-view>
+        <router-view @loginChanged="checkLoggedIn" :key="$route.fullPath"></router-view>
       </v-content>
     </div>
 
-    <router-view v-else>
+    <router-view @loginChanged="checkLoggedIn" v-else>
     </router-view>
 
 
@@ -67,6 +68,8 @@ export default {
 
   data() {
     return {
+      user_name: '',
+      user_email: '',
       mediCardID: '',
       drawer: true,
       loggedIn: false,
@@ -113,6 +116,11 @@ export default {
     checkLoggedIn() {
       this.$store.dispatch("fetchAccessToken").then(() => {
         this.loggedIn = this.$store.state.isLoggedIn
+
+        if (this.loggedIn) {
+          this.user_name = this.$store.state.user_name
+          this.user_email = this.$store.state.user_email
+        }
       });
     },
     searchPatientID() {
@@ -129,9 +137,21 @@ export default {
           type: 'error'
         });
       }
+    },
+  },
+  computed: {
+    initials() {
+      let name = this.$store.state.user_name;
+
+      if (name) {
+        let initials = name.match(/\b\w/g) || [];
+        return ((initials.shift() || '') + (initials.pop() || '')).toUpperCase();
+      }
+
+      return '';
     }
   },
-  updated() {
+  created() {
     this.checkLoggedIn();
   },
 };

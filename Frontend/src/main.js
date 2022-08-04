@@ -37,8 +37,8 @@ Vue.component('InputText', InputText);
 Vue.component('Carousel', Carousel);
 
 const app = new Vue({
-  router,
   store,
+  router,
   vuetify,
   render: h => h(App)
 });

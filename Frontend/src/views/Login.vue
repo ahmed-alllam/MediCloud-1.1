@@ -55,8 +55,8 @@ export default {
                     this.$toast.success("Logged in");
 
                     const token = res.data.token;
-                    console.log(token);
                     this.$store.commit('loggedIn', token);
+                    this.$emit("loginChanged");
                     this.$router.push("/");
                 }).catch(err => {
                     if (String(err).includes("401")) {

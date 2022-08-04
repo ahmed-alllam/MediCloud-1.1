@@ -47,7 +47,7 @@ const routes = [
   {
     path: "/appointments/new",
     name: "New Appointment",
-    component:() => import("../views/AddAppointment.vue"),
+    component: () => import("../views/AddAppointment.vue"),
     meta: {
       requireAuth: true
     }
@@ -55,7 +55,7 @@ const routes = [
   {
     path: "/appointments/new/patient",
     name: "New Patient",
-    component:() => import("../views/AddPatient.vue"),
+    component: () => import("../views/AddPatient.vue"),
     meta: {
       requireAuth: true
     }
@@ -63,7 +63,7 @@ const routes = [
   {
     path: "/appointments/new/patient/:id",
     name: "New Patient Appointment",
-    component:() => import("../views/PatientAppointment.vue"),
+    component: () => import("../views/PatientAppointment.vue"),
     meta: {
       requireAuth: true
     }
@@ -71,7 +71,7 @@ const routes = [
   {
     path: "/finances",
     name: "Finances",
-    component:() => import("../views/Billing.vue"),
+    component: () => import("../views/Billing.vue"),
     meta: {
       requireAuth: true
     }
@@ -82,23 +82,23 @@ const routes = [
     component: () => import("../views/Messages.vue"),
     meta: {
       requireAuth: true
-    } 
-  },  
+    }
+  },
   {
     path: "/connect",
     name: "Connect",
     component: () => import("../views/Connect.vue"),
     meta: {
       requireAuth: true
-    } 
-  },  
+    }
+  },
   {
     path: "/manage-clinic",
     name: "Manage Clinic",
     component: () => import("../views/ManageClinic.vue"),
     meta: {
       requireAuth: true
-    } 
+    }
   },
   {
     path: "/logout",
@@ -106,7 +106,7 @@ const routes = [
     component: () => import("../views/Logout.vue"),
     meta: {
       requireAuth: true
-    } 
+    }
   },
 
 ]
@@ -115,7 +115,7 @@ const router = new VueRouter({
   mode: 'history',
   routes,
   scrollBehavior() {
-    window.scrollTo(0,0);
+    window.scrollTo(0, 0);
   }
 })
 
@@ -125,18 +125,18 @@ router.beforeEach(async (to, from, next) => {
   const isLoggedIn = store.state.isLoggedIn
 
   if (to.matched.some(record => record.meta.requireAuth)) {
-    if(isLoggedIn)
+    if (isLoggedIn)
       next();
     else {
-      if(to.matched.some(record => record.path === ""))
-        next({ name : 'Landing Page' })
-      else 
+      if (to.matched.some(record => record.path === ""))
+        next({ name: 'Landing Page' })
+      else
         next({ name: 'Login' })
     }
   } else
     next();
 
-  if(isLoggedIn && to.matched.some(record => record.name === 'Login')) {
+  if (isLoggedIn && to.matched.some(record => record.name === 'Login')) {
     next({ name: 'Overview' })
   }
 });

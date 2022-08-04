@@ -15,8 +15,9 @@
 <script>
 export default {
     methods: {
-        logout() {
+        async logout() {
             this.$store.commit('loggedOut');
+            this.$emit("loginChanged");
             this.$router.push("/");
         }
     }
