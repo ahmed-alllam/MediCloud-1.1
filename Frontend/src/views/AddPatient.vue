@@ -8,9 +8,6 @@
         <div class="end-buttons">
             <v-btn text class="font-weight-bold add-button" @click="addPatient">Add Patient</v-btn>
             <v-btn text class="cancel-button" router to="/appointments/new">Cancel</v-btn>
-            <label class="ml-10">
-                {{ errorLabel }}
-            </label>
         </div>
     </div>
 </template>
@@ -26,7 +23,6 @@ export default {
     name: "AddPatient",
     components: { VJsf },
     data: () => ({
-        errorLabel: '',
         valid: null,
         model: {
             "Photo": '',
@@ -191,11 +187,11 @@ export default {
             await this.$refs.form.validate();
 
             if (!this.valid) {
-                this.errorLabel = "Please fill all the required fields"
+                this.$toast.error('Please fill all the required fields');
                 return false;
             }
 
-            this.errorLabel = "Loading..."
+            this.$toast.info('Adding patient...');
 
             const send_model = {}
 
@@ -207,14 +203,15 @@ export default {
                 ...send_model
             }).then(res => {
                 const Patient = res.data;
+                this.$toast.success('Patient added successfully, redirecting to patient profile...');
 
-                this.errorLabel = "Patient added successfully, redirecting to the next page"
                 this.$router.push({
                     path: '/appointments/new/patient/' + Patient._id,
                 })
             }).catch(err => {
                 console.log(err);
-                this.errorLabel = "An error occured, please try again"
+                this.$toast.clear();
+                this.$toast.error('Error adding patient');
             }
             )
         }

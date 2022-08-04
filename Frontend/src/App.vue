@@ -92,9 +92,14 @@ export default {
           icon: "mdi-message"
         },
         {
+          name: "Connect",
+          route: "/connect",
+          icon: "mdi-account-group"
+        },
+        {
           name: "Manage Clinic",
           route: "/manage-clinic",
-          icon: "mdi-account-supervisor"
+          icon: "mdi-hospital"
         },
         {
           name: "Logout",

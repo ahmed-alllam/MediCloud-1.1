@@ -329,7 +329,7 @@ export default {
 
                     this.patient_data.details_sections = Object.fromEntries(Object.entries(details_sections).filter(([, v]) => v && v.length > 0));
 
-                    if (patient.patientMediCardID == '')
+                    if (!patient.patientMediCardID)
                         this.addMediCard = true;
 
                     this.loaded = true;
