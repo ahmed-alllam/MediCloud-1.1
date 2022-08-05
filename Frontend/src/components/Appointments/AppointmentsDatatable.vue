@@ -3,30 +3,22 @@
         <v-card flat>
             <v-card-title>Appointments List
                 <v-spacer></v-spacer>
-                    <v-text-field
-                        v-model="patientSearch"
-                        append-icon="mdi-magnify"
-                        label="Search for a patient"
-                        single-line
-                        class="mr-6"
-                        >
-                    </v-text-field>
-                    <v-btn text router to="/appointments/new" class="add-appointment-button mr-10">Add Appointment</v-btn>
-                    <v-btn @click="getVisits" outlined class="mt-4 mb-4">
-                        <v-icon left>mdi-refresh</v-icon>
-                        Refresh
-                    </v-btn>
+                <v-text-field v-model="patientSearch" append-icon="mdi-magnify" label="Search for a patient" single-line
+                    class="mr-6">
+                </v-text-field>
+                <v-btn text router to="/appointments/new" class="add-appointment-button mr-10">Add Appointment</v-btn>
+                <v-btn @click="loading = true; getVisits()" outlined class="mt-4 mb-4">
+                    <v-icon left>mdi-refresh</v-icon>
+                    Refresh
+                </v-btn>
             </v-card-title>
-            <v-data-table
-                :headers="appointmentHeaders"
-                :items="visits"
-                :search="patientSearch"
-                >
+            <v-data-table v-if="!loading" :headers="appointmentHeaders" :items="visits" :search="patientSearch">
                 <template v-slot:item="props">
                     <tr>
                         <td>{{ props.item.patientName }}</td>
                         <td>{{ props.item.patientDiagnosis }}</td>
-                        <td>{{ formatLastVisit(props.item.patientVisitDate) }}</td>
+                        <td>{{ props.item.patientComplaint }}</td>
+                        <td>{{ props.item.created | formatDate }}</td>
                         <td>
                             <v-btn outlined small class="mr-2" @click="getAppointment(props.item)">
                                 <v-icon left>mdi-account-edit-outline</v-icon>
@@ -40,53 +32,54 @@
                     </tr>
                 </template>
             </v-data-table>
+            <div v-else class="loadingBar">
+                <v-progress-circular indeterminate color="primary" v-if="loading"></v-progress-circular>
+            </div>
         </v-card>
     </v-container>
 </template>
 
 <script>
-import { mapState } from "vuex"
-import moment from "moment"
 import axios from "axios"
 
 export default {
     name: "AppointmentsDatatable",
     data: () => ({
+        loading: true,
+        visits: [],
         patientSearch: "",
         appointmentHeaders: [
-            {text: "Patient Name", value: "patientName"},
-            {text: "Diagnosis", value: "patientDiagnosis"},
-            {text: "Patient Visit Date", value: "patientVisitDate"},
-            {text: "Settings"}
+            { text: "Patient Name", value: "patientName" },
+            { text: "Complaint", value: "patientComplaint" },
+            { text: "Diagnosis", value: "patientDiagnosis" },
+            { text: "Date", value: "created" },
+            { text: "Settings" }
         ]
     }),
     methods: {
-        // Formats Last Visit Date
-        formatLastVisit(date) {
-            return moment(date).format("LLLL")
+        async getVisits() {
+            axios.get("https://medicloudeg.herokuapp.com/api/visits/")
+                .then(res => {
+                    this.loading = false;
+                    this.visits = res.data;
+                })
+                .catch(err => {
+                    this.$toast.error('Error loading data');
+                    this.loading = false;
+                    console.log(err)
+                })
         },
 
-        // Get all visits
-        async getVisits(){
-            axios.get("http://localhost:5000/api/visits/").then(res => this.$store.commit('getVisits', res.data)).catch(err => console.log(err))
-        },
-
-        // Delete a patient
         async deleteVisit(id) {
-            axios.delete(`http://localhost:5000/api/visits/${id}`).then(res => {
+            axios.delete(`https://medicloudeg.herokuapp.com/api/visits/${id}`).then(res => {
                 console.log(res)
-                this.$store.commit('deleteVisit', id)
             }).catch(err => console.log(err))
         },
 
         // Get an appointment
         getAppointment(appointment){
-            this.$store.commit('getAppointment', appointment)
             this.$router.push(`/appointments/edit/${appointment._id}`)
         }
-    },
-    computed: {
-        ...mapState(["visits"])
     },
     created() {
         this.getVisits()
@@ -95,6 +88,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.loadingBar {
+    text-align: center;
+    margin: 150px 0;
+}
 
 .add-appointment-button {
     color: white !important;
@@ -106,5 +103,4 @@ export default {
         opacity: 0.6;
     }
 }
-
 </style>

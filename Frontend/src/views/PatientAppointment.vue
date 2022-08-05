@@ -1,7 +1,7 @@
 <template>
 
     <v-container>
-        <PatientDetail @loaded="onLoaded" />
+        <PatientDetail @loaded="onLoaded" :patient_id="patient_id" v-if="visit_loaded" />
         <hr v-if="loaded" />
         <div class="appointment-details" v-if="loaded">
             <v-card class="appointment-card">
@@ -23,11 +23,16 @@
 
                 <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn text large class="font-weight-bold add-appointment-button" @click="addAppointment">Add
+                    <v-btn v-if="edit" text large class="font-weight-bold add-appointment-button" @click="editAppointment">Edit
+                        Appointment</v-btn>
+                    <v-btn v-else text large class="font-weight-bold add-appointment-button" @click="addAppointment">Add
                         Appointment</v-btn>
                     <v-spacer></v-spacer>
                 </v-card-actions>
             </v-card>
+        </div>
+        <div v-if="!visit_loaded" class="loadingBar">
+            <v-progress-circular indeterminate color="primary" />
         </div>
     </v-container>
 
@@ -47,8 +52,15 @@ export default {
     components: {
         PatientDetail, VJsf
     },
+    props: {
+        edit: {
+            type: Boolean,
+            default: false,
+        },
+    },
 
     data: () => ({
+        visit_loaded: false,
         loaded: false,
         patient_id: '',
         valid: null,
@@ -57,7 +69,7 @@ export default {
         schema: {
             type: 'object',
             properties: {
-                'complaint': { title: 'Patient Complaint', type: 'string' },
+                'patientComplaint': { title: 'Patient Complaint', type: 'string' },
                 'patientDiagnosis': { title: 'Diagnosis', type: 'string' },
                 'followUpDate': { title: 'Follow Up Date', type: 'string', format: 'date' },
                 'notes': { title: 'Notes', type: 'string' },
@@ -73,6 +85,19 @@ export default {
         formatDate() {
             return moment().format("LLLL")
         },
+        getVisit() {
+            axios.get(`https://medicloudeg.herokuapp.com/api/visits/${this.$route.params.id}`)
+                .then(response => {
+                    this.model = response.data[0];
+                    this.patient_id = this.model.patientId;
+                    this.valid = true;
+                    this.visit_loaded = true;
+                })
+                .catch(error => {
+                    this.valid = false;
+                    console.log(error);
+                })
+        },
         async addAppointment() {
             await this.$refs.form.validate();
 
@@ -85,7 +110,7 @@ export default {
                 patientId: this.patient_id,
                 ...this.model,
             })
-                .then(res => {
+                .then(() => {
                     this.$toast.success('Appointment added successfully');
                     this.$router.push("/appointments")
                 })
@@ -94,11 +119,46 @@ export default {
                     console.log(err);
                 })
         },
+        async editAppointment() {
+            await this.$refs.form.validate();
+
+            if (!this.valid) {
+                this.$toast.error('Please fill all the required fields');
+                return false;
+            }
+
+            axios.patch(`https://medicloudeg.herokuapp.com/api/visits/${this.$route.params.id}`, {
+                patientId: this.patient_id,
+                ...this.model,
+            })
+                .then(() => {
+                    this.$toast.success('Appointment updated successfully');
+                    this.$router.push("/appointments")
+                })
+                .catch(err => {
+                    this.$toast.error('Error updating appointment');
+                    console.log(err);
+                })
+        },
+    },
+    created() {
+        if(this.edit)
+            this.getVisit();
+        else {
+            this.visit_loaded = true;
+            this.patient_id = this.params.id;
+        }
     }
 }
 </script>
 
 <style lang="scss" scoped>
+
+
+.loadingBar {
+    text-align: center;
+    margin: 150px 0;
+}
 .appointment-details {
     margin: 30px 4%;
     padding: 10px;

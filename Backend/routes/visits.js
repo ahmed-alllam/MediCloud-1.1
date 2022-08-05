@@ -74,9 +74,10 @@ router.patch("/api/visits/:visitId", async (req, res) => {
         _id: req.params.visitId,
         doctorId: req.user._id
       });
-      updatedVisit.patientSymptoms = req.body.patientSymptoms
+      updatedVisit.patientComplaint = req.body.patientComplaint
       updatedVisit.patientDiagnosis = req.body.patientDiagnosis
-      updatedVisit.patientMedications = req.body.patientMedications
+      updatedVisit.notes = req.body.notes
+      updatedVisit.followUpDate = req.body.followUpDate
       updatedVisit.visitCost = req.body.visitCost
 
       await updatedVisit.save();

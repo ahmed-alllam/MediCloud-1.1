@@ -39,7 +39,10 @@ const routes = [
   {
     path: "/appointments/edit/:id",
     name: 'Edit Appointments',
-    component: () => import("../views/Appointments.vue"),
+    props: {
+      edit: true
+    },
+    component: () => import("../views/PatientAppointment.vue"),
     meta: {
       requireAuth: true
     }

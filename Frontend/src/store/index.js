@@ -4,6 +4,7 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 import VueJwtDecode from 'vue-jwt-decode'
+import axios from 'axios'
 
 export default new Vuex.Store({
   state: {
@@ -28,6 +29,8 @@ export default new Vuex.Store({
       } catch (error) {
         console.log(error)
       }
+
+      axios.defaults.headers.common['Authorization'] = `JWT ${token}` 
     },
     loggedOut(state) {
       state.token = "";
@@ -37,6 +40,8 @@ export default new Vuex.Store({
       state.user_email = "";
 
       localStorage.setItem('accessToken', "");
+
+      axios.defaults.headers.common['Authorization'] = '' 
     }
   },
   actions: {

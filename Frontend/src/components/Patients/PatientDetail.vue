@@ -278,6 +278,12 @@ import '@koumoul/vjsf/lib/deps/third-party.js'
 
 export default {
     name: "PatientDetail",
+    props: {
+        patient_id: {
+            type: String,
+            default: ""
+        }
+    },
     data: () => ({
         valid: null,
         errorLabel: "",
@@ -290,7 +296,6 @@ export default {
         inputMedicardID: '',
         current_dialog_item: [[]],
         current_dialog_data: {},
-        patient_id: '',
         loaded: false,
         add_dialog: false,
         edit_dialog: false,
@@ -302,12 +307,17 @@ export default {
     methods: {
         getPatientData() {
             var linkID = '';
-            const paramID = this.$route.params.id;
 
-            if (paramID.length > 8)
-                linkID = paramID;
-            else
-                linkID = 'medicard/' + paramID;
+            if (this.patient_id) {
+                linkID = this.patient_id;
+            } else {
+                const paramID = this.$route.params.id;
+
+                if (paramID.length > 8)
+                    linkID = paramID;
+                else
+                    linkID = 'medicard/' + paramID;
+            }
 
             axios.get("https://medicloudeg.herokuapp.com/api/patients/" + linkID, { timeout: 30000 })
                 .then(response => {
