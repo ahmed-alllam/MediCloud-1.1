@@ -75,10 +75,10 @@ router.get("/api/visits/:visitId", async (req, res) => {
 router.patch("/api/visits/:visitId", async (req, res) => {
   try {
     if (req.user) {
-      const updatedVisit = await Visits.find({
+      const updatedVisit = await Visits.findOne({
         _id: req.params.visitId,
         doctorId: req.user._id
-      })[0];
+      });
 
       if(!updatedVisit) {
         return res.status(404).send("Visit not found");
