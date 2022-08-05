@@ -1,8 +1,8 @@
 <template>
 
     <v-container>
-        <PatientDetail @loaded="loaded=true"/>
-        <hr v-if="loaded"/>
+        <PatientDetail @loaded="onLoaded" />
+        <hr v-if="loaded" />
         <div class="appointment-details" v-if="loaded">
             <v-card class="appointment-card">
                 <v-list-item two-line>
@@ -16,56 +16,11 @@
                     </v-list-item-content>
                 </v-list-item>
                 <v-card-text>
-                    <v-card flat>
-                        <v-card-title class="body-1">
-                            Symptoms
-                            <v-spacer></v-spacer>
-                            <v-text-field clearable label="Symptoms" v-model="visitPatientSymptom"
-                                @keyup.enter="visitPatientSymptoms.push(visitPatientSymptom); visitPatientSymptom = ''">
-                            </v-text-field>
-                        </v-card-title>
-                        <v-card-text>
-                            <v-list>
-                                <v-list-item v-for="(symptom, i) in visitPatientSymptoms" :key="i">
-                                    <v-list-item-content>
-                                        {{ symptom }}
-                                    </v-list-item-content>
-                                    <v-list-item-action>
-                                        <v-btn icon
-                                            @click="visitPatientSymptoms = visitPatientSymptoms.filter(x => x !== symptom)">
-                                            <v-icon>mdi-close</v-icon>
-                                        </v-btn>
-                                    </v-list-item-action>
-                                </v-list-item>
-                            </v-list>
-                        </v-card-text>
-                    </v-card>
-                    <v-text-field label="Patient Diagnosis" v-model="visitPatientDiagnosis"></v-text-field>
-                    <v-card flat>
-                        <v-card-title class="body-1">
-                            Medications
-                            <v-spacer></v-spacer>
-                            <v-text-field clearable label="Medications" v-model="visitPatientMedication"
-                                @keyup.enter="visitPatientMedications.push(visitPatientMedication); visitPatientMedication = ''">
-                            </v-text-field>
-                        </v-card-title>
-                        <v-card-text>
-                            <v-list>
-                                <v-list-item v-for="(medication, i) in visitPatientMedications" :key="i">
-                                    <v-list-item-content>
-                                        {{ medication }}
-                                    </v-list-item-content>
-                                    <v-list-item-action>
-                                        <v-btn icon
-                                            @click="visitPatientMedications = visitPatientMedications.filter(x => x !== medication)">
-                                            <v-icon>mdi-close</v-icon>
-                                        </v-btn>
-                                    </v-list-item-action>
-                                </v-list-item>
-                            </v-list>
-                        </v-card-text>
-                    </v-card>
+                    <v-form v-model="valid" ref="form">
+                        <v-jsf v-model="model" :schema="schema" />
+                    </v-form>
                 </v-card-text>
+
                 <v-card-actions>
                     <v-spacer></v-spacer>
                     <v-btn text large class="font-weight-bold add-appointment-button" @click="addAppointment">Add
@@ -79,52 +34,66 @@
 </template>
 
 <script>
-import moment from "moment"
-import { mapState } from "vuex"
 import axios from "axios"
+import moment from "moment"
+
+import VJsf from '@koumoul/vjsf/lib/VJsf.js'
+import '@koumoul/vjsf/lib/VJsf.css'
+import '@koumoul/vjsf/lib/deps/third-party.js'
 
 import PatientDetail from "../components/Patients/PatientDetail"
 
 export default {
     components: {
-        PatientDetail
+        PatientDetail, VJsf
     },
 
     data: () => ({
         loaded: false,
-        visitPatientId: "",
-        visitPatientSymptom: "",
-        visitPatientSymptoms: [],
-        visitPatientDiagnosis: "",
-        visitPatientMedication: "",
-        visitPatientMedications: [],
+        patient_id: '',
+        valid: null,
+        model: {
+        },
+        schema: {
+            type: 'object',
+            properties: {
+                'complaint': { title: 'Patient Complaint', type: 'string' },
+                'patientDiagnosis': { title: 'Diagnosis', type: 'string' },
+                'followUpDate': { title: 'Follow Up Date', type: 'string', format: 'date' },
+                'notes': { title: 'Notes', type: 'string' },
+                'visitCost': { title: 'Appointment Cost (EGP)', type: 'number', default: 0 },
+            }, required: ['complaint', 'patientDiagnosis']
+        },
     }),
     methods: {
-        // Formats Last Visit Date
+        onLoaded(id) {
+            this.loaded = true;
+            this.patient_id = id;
+        },
         formatDate() {
             return moment().format("LLLL")
         },
+        async addAppointment() {
+            await this.$refs.form.validate();
 
-        // Adds appointment
-        addAppointment() {
-            axios.post("http://localhost:5000/api/visits/", {
-                patientId: this.visitPatientId,
-                patientName: this.patients.find(x => x._id === this.visitPatientId).patientName,
-                patientSymptoms: this.visitPatientSymptoms,
-                patientDiagnosis: this.visitPatientDiagnosis,
-                patientVisitDate: Date.now,
-                patientMedications: this.visitPatientMedications
-            }).then(res => this.visits.push(res.data)).catch(err => console.log(err))
-            this.$router.push("/appointments")
-        },
+            if (!this.valid) {
+                this.$toast.error('Please fill all the required fields');
+                return false;
+            }
 
-        // Get patients
-        async getPatients() {
-            axios.get("http://localhost:5000/api/patients/").then(res => this.$store.commit('getPatients', res.data)).catch(err => console.log(err))
+            axios.post("https://medicloudeg.herokuapp.com/api/visits/", {
+                patientId: this.patient_id,
+                ...this.model,
+            })
+                .then(res => {
+                    this.$toast.success('Appointment added successfully');
+                    this.$router.push("/appointments")
+                })
+                .catch(err => {
+                    this.$toast.error('Error adding appointment');
+                    console.log(err);
+                })
         },
-    },
-    computed: {
-        ...mapState(['patients', 'visits'])
     }
 }
 </script>

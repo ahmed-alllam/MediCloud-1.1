@@ -17,21 +17,20 @@ const VisitSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  patientSymptoms: {
-    type: Array(String),
+  patientComplaint: {
+    type: String,
     required: true
   },
   patientDiagnosis: {
     type: String,
     required: true
   },
-  patientMedications:
-  [{
-      name: String,
-      dose: String,
-      image: String,
-    }
-  ],
+  notes: {
+    type: String,
+  },
+  followUpDate: {
+    type: Date,
+  },
   visitCost: {
     type: Number
   }

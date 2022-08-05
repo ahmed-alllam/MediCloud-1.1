@@ -12,7 +12,7 @@
                         Yes,
                         Enter their MediCloud ID:
                     </h4>
-                    <v-form v-model="valid" ref="form">
+                    <v-form v-model="valid" ref="form" @submit.prevent="onSubmit">
                         <v-jsf v-model="model" :schema="schema" />
                     </v-form>
                     <v-btn text @click="onSubmit" class="submit-button">Continue</v-btn>

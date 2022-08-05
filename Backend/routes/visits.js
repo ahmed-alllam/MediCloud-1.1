@@ -1,20 +1,21 @@
 const express = require("express");
 const router = express.Router();
 const Visits = require("../models/visits/Visits");
+const Patients = require("../models/patients/Patients");
 
 // Adds a Visit
 router.post("/api/visits/", async (req, res) => {
   try {
     if (req.user) {
+      const patient = await Patients.findById(req.body.patientId);
+      if(!patient) {
+        return res.status(404).send("Patient not found");
+      }
+
       const visit = new Visits({
         doctorId: req.user._id,
-        patientId: req.body.patientId,
-        patientName: req.body.patientName,
-        patientSymptoms: req.body.patientSymptoms,
-        patientDiagnosis: req.body.patientDiagnosis,
-        patientVisitDate: req.body.patientVisitDate,
-        patientMedications: req.body.patientMedications,
-        visitCost: req.body.visitCost,
+        patientName: patient.patientFirstName + " " + patient.patientLastName,
+        ...req.body
       });
 
       const savedVisit = await visit.save();

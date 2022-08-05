@@ -50,7 +50,7 @@ export default {
             'Emergency Contacts': {
                 type: 'object',
                 properties: {
-                    'Name': { type: 'string' },
+                    'Name': { type: 'string', default: '' },
                     'Phone': { type: 'number' }
                 },
                 required: ['Phone']
@@ -59,9 +59,9 @@ export default {
                 type: 'object',
                 properties: {
                     'Name': { type: 'string' },
-                    'Dose': { type: 'string' },
-                    'Start Date': { type: 'string', format: 'date' },
-                    'End Date': { type: 'string', format: 'date' },
+                    'Dose': { type: 'string' , default: ''},
+                    'Start Date': { type: 'string', format: 'date' , default: ''},
+                    'End Date': { type: 'string', format: 'date' , default: ''},
                 },
                 required: ['Name']
             },
@@ -69,9 +69,9 @@ export default {
                 type: 'object',
                 properties: {
                     'Name': { type: 'string' },
-                    'Details': { type: 'string' },
-                    'Start Date': { type: 'string', format: 'date' },
-                    'End Date': { type: 'string', format: 'date' },
+                    'Details': { type: 'string' , default: ''},
+                    'Start Date': { type: 'string', format: 'date' , default: ''},
+                    'End Date': { type: 'string', format: 'date' , default: ''},
                 },
                 required: ['Name']
             },
@@ -79,18 +79,18 @@ export default {
                 type: 'object',
                 properties: {
                     'Name': { type: 'string' },
-                    'Family member': { type: 'string' },
-                    'Start Date': { type: 'string', format: 'date' },
-                    'End Date': { type: 'string', format: 'date' },
+                    'Family member': { type: 'string', default: '' },
+                    'Start Date': { type: 'string', format: 'date', default: '' },
+                    'End Date': { type: 'string', format: 'date', default: '' },
                 },
                 required: ['Name']
             },
             'Immunizations': {
                 type: 'object',
                 properties: {
-                    'Name': { type: 'string' },
-                    'Details': { type: 'string' },
-                    'Date': { type: 'string', format: 'date' },
+                    'Name': { type: 'string', default: '' },
+                    'Details': { type: 'string', default: '' },
+                    'Date': { type: 'string', format: 'date', default: '' },
                 },
                 required: ['Name']
             },
@@ -98,9 +98,9 @@ export default {
                 type: 'object',
                 properties: {
                     'Name': { type: 'string' },
-                    'Details': { type: 'string' },
-                    'Start Date': { type: 'string', format: 'date' },
-                    'End Date': { type: 'string', format: 'date' },
+                    'Details': { type: 'string', default: '' },
+                    'Start Date': { type: 'string', format: 'date', default: '' },
+                    'End Date': { type: 'string', format: 'date', default: '' },
                 },
                 required: ['Name']
             },
@@ -109,10 +109,13 @@ export default {
                 properties: {
                     'Image': {
                         type: 'string', "contentMediaType": "image/*",
-                        "writeOnly": true
+                        "x-options": {
+                            "filesAsDataUrl": true
+                        },
+                        "writeOnly": true, default: ''
                     },
                     'Details': { type: 'string' },
-                    'Date': { type: 'string', format: 'date' },
+                    'Date': { type: 'string', format: 'date', default: '' },
                 },
                 required: ['Details']
             },
@@ -121,10 +124,13 @@ export default {
                 properties: {
                     'Image': {
                         type: 'string', "contentMediaType": "image/*",
-                        "writeOnly": true
+                        "writeOnly": true,
+                        "x-options": {
+                            "filesAsDataUrl": true
+                        }, default: ''
                     },
                     'Details': { type: 'string' },
-                    'Date': { type: 'string', format: 'date' },
+                    'Date': { type: 'string', format: 'date' , default: ''},
                 },
                 required: ['Details']
             },
@@ -133,10 +139,14 @@ export default {
                 properties: {
                     'Image': {
                         type: 'string', "contentMediaType": "image/*",
-                        "writeOnly": true
+                        "writeOnly": true,
+                        "x-options": {
+                            "filesAsDataUrl": true
+                        }
+                        , default: ''
                     },
                     'Details': { type: 'string' },
-                    'Date': { type: 'string', format: 'date' },
+                    'Date': { type: 'string', format: 'date' , default: ''},
                 },
                 required: ['Details']
             },

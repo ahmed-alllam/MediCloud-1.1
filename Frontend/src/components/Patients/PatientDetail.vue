@@ -126,20 +126,9 @@
             <br />
             <br />
             <label class="errorLabel">
-                {{errorLabel}}
+                {{ errorLabel }}
             </label>
         </div>
-
-        <v-dialog v-model="add_dialog" width="500" v-if="loaded && can_edit">
-            <template v-slot:activator="{ on, attrs }">
-                <v-btn v-bind="attrs" v-on="on" text large class="font-weight-bold add-record-button">
-                    Add New Records
-                    <v-icon>mdi-plus-circle</v-icon>
-                </v-btn>
-            </template>
-
-            <AddRecord @update="add_dialog = false" :patient_data="patient_data" />
-        </v-dialog>
 
         <div id="medical-details" v-if="loaded">
             <div v-for="(value, key, index) in this.patient_data.details_sections" :key="`${key}-${index}`">
@@ -151,7 +140,7 @@
                     <div v-for="(item, index2) in value" v-bind:key="index2" class="col-md-6 col-xs-12">
                         <div class="record-item row no-gutters">
 
-                            <img class="record-image" v-if="item.Image" :src="item.Image" />
+                            <img class="record-image" v-if="item.Image" :src="'/' + item.Image" />
 
                             <v-menu top v-if="can_edit">
                                 <template v-slot:activator="{ on, attrs }">
@@ -262,6 +251,17 @@ current_dialog_data = patient_data.details_sections[current_dialog_item[0]][curr
                 </div>
             </div>
         </div>
+
+        <v-dialog v-model="add_dialog" width="500" v-if="loaded && can_edit">
+            <template v-slot:activator="{ on, attrs }">
+                <v-btn v-bind="attrs" v-on="on" text large class="font-weight-bold add-record-button">
+                    Add New Records
+                    <v-icon>mdi-plus-circle</v-icon>
+                </v-btn>
+            </template>
+
+            <AddRecord @update="add_dialog = false" :patient_data="patient_data" />
+        </v-dialog>
     </div>
 
 </template>
@@ -309,7 +309,7 @@ export default {
             else
                 linkID = 'medicard/' + paramID;
 
-            axios.get("https://medicloudeg.herokuapp.com/api/patients/" + linkID, {timeout: 30000})
+            axios.get("https://medicloudeg.herokuapp.com/api/patients/" + linkID, { timeout: 30000 })
                 .then(response => {
                     const patient = response.data;
                     this.patient_data = patient;
@@ -333,10 +333,10 @@ export default {
                         this.addMediCard = true;
 
                     this.loaded = true;
-                    this.$emit('loaded');
+                    this.$emit('loaded', this.patient_data._id);
                 })
                 .catch(error => {
-                    if(error && error.response && error.response.status === 404) {
+                    if (error && error.response && error.response.status === 404) {
                         this.errorLabel = "Wrong Patient ID";
                     } else {
                         this.errorLabel = "An error occured, please check your connection and try again";
@@ -522,7 +522,7 @@ body {
 }
 
 #medical-details {
-    margin: 50px 4%;
+    margin: 10px 4%;
 }
 
 #medical-details>div {
