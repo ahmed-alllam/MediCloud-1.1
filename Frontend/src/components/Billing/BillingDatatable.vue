@@ -1,70 +1,66 @@
 <template>
-  <v-container>
-      <v-card flat>
-          <v-card-title>Billing List
-              <v-spacer></v-spacer>
-              <v-text-field label="Search" append-icon="mdi-magnify" v-model="billingSearch" class="mr-10"></v-text-field>
-              <v-btn outlined>
-                  <v-icon left @click="getBillings">mdi-refresh</v-icon>
-                  Refresh
-              </v-btn>
-          </v-card-title>
-          <v-card-text>
-              <v-data-table
-                :items="billings"
-                :headers="billingHeader"
-                :search="billingSearch"
-              >
-                <template v-slot:item="props">
-                    <tr>
-                        <td>{{ props.item.billingPatientName }}</td>
-                        <td>{{ props.item.billingGrandTotal }}</td>
-                        <td>{{ props.item.billingDate }}</td>
-                        <td>
-                            <v-btn outlined small @click="deleteBilling(props.item._id)">
-                                <v-icon left>mdi-close</v-icon>
-                                Delete
-                            </v-btn>
-                        </td>
-                    </tr>
-                </template>  
-            </v-data-table>
-                
-          </v-card-text>
-      </v-card>
-  </v-container>
+    <v-container>
+        <v-card flat>
+            <v-card-title>
+                <v-text class="mr-6">
+                    Billing List
+                </v-text>
+                <v-spacer></v-spacer>
+                <v-text-field label="Search" append-icon="mdi-magnify" v-model="billingSearch" class="mr-10">
+                </v-text-field>
+                <v-btn text class="refresh-button" @click="loading = true; getBillings()">
+                    <v-icon left>mdi-refresh</v-icon>
+                    Refresh
+                </v-btn>
+            </v-card-title>
+            <v-card-text>
+                <v-data-table v-if="!loading" :items="billings" :headers="billingHeader" :search="billingSearch"
+                    :sort-by="['created']" :sort-desc="true">
+                    <template v-slot:item="props">
+                        <tr>
+                            <td>{{ props.item.created | formatDate}}</td>
+                            <td>{{ props.item.patientName }}</td>
+                            <td>{{ props.item.visitCost }}</td>
+                        </tr>
+                    </template>
+                </v-data-table>
+
+                <div v-else class="loadingBar">
+                    <v-progress-circular indeterminate color="primary" v-if="loading"></v-progress-circular>
+                </div>
+
+            </v-card-text>
+        </v-card>
+    </v-container>
 </template>
 
 <script>
-import { mapState } from "vuex"
 import axios from "axios"
 
 export default {
     data: () => ({
+        loading: true,
         billingSearch: "",
         billingHeader: [
-            {text: "Patient", value: "billingPatientName"},
-            {text: "Grand Total (KHR)", value: "billingGrandTotal"},
-            {text: "Billing Date", value: "billingDate"},
-            {text: "Settings"}
-        ]
+            {text: "Date", value: "created"},
+            {text: "Patient Name", value: "patientName"},
+            {text: "Amount (EGP)", value: "visitCost"},
+        ],
+        billings: []
     }),
     methods: {
-        // Get all billings
         async getBillings() {
-            axios.get("http://localhost:5000/api/billing/").then(res => this.$store.commit("getBillings", res.data))
-            .catch(err => console.log(err))
+            axios.get("https://medicloudeg.herokuapp.com/api/billing/").then(res => {
+                this.$toast.success("Loaded");
+                this.billings = res.data
+                this.loading = false
+            })
+            .catch(err => {
+                this.$toast.error('Error loading data');
+                console.log(err)
+                this.loading = false
+            })
         },
-
-        async deleteBilling(id) {
-            axios.delete(`http://localhost:5000/api/billing/${id}`).then(res => {
-                console.log(res)
-                this.$store.commit("deleteBilling", id)
-            }).catch(err => console.log(err))
-        }
-    },
-    computed: {
-        ...mapState(["billings"])
     },
     created() {
         this.getBillings()
@@ -72,6 +68,23 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
+
+.loadingBar {
+    text-align: center;
+    margin: 150px 0;
+}
+
+.refresh-button {
+    background-color: white !important;
+    color: #26b3ff !important;
+    border-radius: 25px;
+    text-decoration: none;
+
+    &:hover {
+        opacity: 0.6;
+    }
+}
+
 
 </style>

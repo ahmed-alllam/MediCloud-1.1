@@ -106,15 +106,19 @@ export default {
                 return false;
             }
 
+            this.$toast.info('Adding Appointment...');
+
             axios.post("https://medicloudeg.herokuapp.com/api/visits/", {
                 patientId: this.patient_id,
                 ...this.model,
             })
                 .then(() => {
+                    this.$toast.clear();
                     this.$toast.success('Appointment added successfully');
                     this.$router.push("/appointments")
                 })
                 .catch(err => {
+                    this.$toast.clear();
                     this.$toast.error('Error adding appointment');
                     console.log(err);
                 })
@@ -127,15 +131,19 @@ export default {
                 return false;
             }
 
+            this.$toast.info('Editing Appointment...');
+
             axios.patch(`https://medicloudeg.herokuapp.com/api/visits/${this.$route.params.id}`, {
                 patientId: this.patient_id,
                 ...this.model,
             })
                 .then(() => {
+                    this.$toast.clear();
                     this.$toast.success('Appointment updated successfully');
                     this.$router.push("/appointments")
                 })
                 .catch(err => {
+                    this.$toast.clear();
                     this.$toast.error('Error updating appointment');
                     console.log(err);
                 })

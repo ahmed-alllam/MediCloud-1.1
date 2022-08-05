@@ -12,7 +12,7 @@ router.get("/api/billing/", async (req, res) => {
       return res.status(401).json({ message: 'Invalid token' });
     }
   } catch (err) {
-    res.json({
+    res.status(401).json({
       msg: err
     });
   }

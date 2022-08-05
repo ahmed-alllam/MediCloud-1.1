@@ -1,18 +1,24 @@
 <template>
     <v-container>
         <v-card flat>
-            <v-card-title>Appointments List
+            <v-card-title>
+                <v-text class="mr-6">
+                    Appointments List
+                </v-text>
+
                 <v-spacer></v-spacer>
                 <v-text-field v-model="patientSearch" append-icon="mdi-magnify" label="Search for a patient" single-line
                     class="mr-6">
                 </v-text-field>
-                <v-btn text router to="/appointments/new" class="add-appointment-button mr-10">Add Appointment</v-btn>
-                <v-btn @click="loading = true; getVisits()" outlined class="mt-4 mb-4">
+                <v-btn text router to="/appointments/new" class="add-appointment-button mr-4">Add Appointment</v-btn>
+                <v-btn text @click="loading = true; getVisits()" class="refresh-button mt-4 mb-4">
                     <v-icon left>mdi-refresh</v-icon>
                     Refresh
                 </v-btn>
             </v-card-title>
-            <v-data-table v-if="!loading" :headers="appointmentHeaders" :items="visits" :search="patientSearch">
+            <v-data-table v-if="!loading" :headers="appointmentHeaders" :items="visits" :search="patientSearch"
+                :sort-by="['created']" :sort-desc="true">
+
                 <template v-slot:item="props">
                     <tr>
                         <td>{{ props.item.patientName }}</td>
@@ -20,11 +26,11 @@
                         <td>{{ props.item.patientDiagnosis }}</td>
                         <td>{{ props.item.created | formatDate }}</td>
                         <td>
-                            <v-btn outlined small class="mr-2" @click="getAppointment(props.item)">
+                            <v-btn text small class="mt-2 mr-2 item-button" @click="getAppointment(props.item)">
                                 <v-icon left>mdi-account-edit-outline</v-icon>
                                 Edit
                             </v-btn>
-                            <v-btn outlined small @click="deleteVisit(props.item._id)">
+                            <v-btn text small class="mt-2 mb-2 item-button" @click="deleteVisit(props.item._id)">
                                 <v-icon left>mdi-close</v-icon>
                                 Delete
                             </v-btn>
@@ -60,6 +66,7 @@ export default {
         async getVisits() {
             axios.get("https://medicloudeg.herokuapp.com/api/visits/")
                 .then(res => {
+                    this.$toast.success("Loaded"); 
                     this.loading = false;
                     this.visits = res.data;
                 })
@@ -77,7 +84,7 @@ export default {
         },
 
         // Get an appointment
-        getAppointment(appointment){
+        getAppointment(appointment) {
             this.$router.push(`/appointments/edit/${appointment._id}`)
         }
     },
@@ -103,4 +110,28 @@ export default {
         opacity: 0.6;
     }
 }
+
+.refresh-button {
+    background-color: white !important;
+    color: #26b3ff !important;
+    border-radius: 25px;
+    text-decoration: none;
+
+    &:hover {
+        opacity: 0.6;
+    }
+}
+
+.item-button {
+    background-color: white !important;
+    color: #26b3ff !important;
+    border-radius: 25px;
+    text-decoration: none;
+
+    &:hover {
+        opacity: 0.6;
+    }
+}
+
+
 </style>
