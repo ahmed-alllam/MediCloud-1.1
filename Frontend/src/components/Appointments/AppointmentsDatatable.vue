@@ -16,8 +16,8 @@
                 <template v-slot:item="props">
                     <tr>
                         <td>{{ props.item.patientName }}</td>
-                        <td>{{ props.item.patientDiagnosis }}</td>
                         <td>{{ props.item.patientComplaint }}</td>
+                        <td>{{ props.item.patientDiagnosis }}</td>
                         <td>{{ props.item.created | formatDate }}</td>
                         <td>
                             <v-btn outlined small class="mr-2" @click="getAppointment(props.item)">

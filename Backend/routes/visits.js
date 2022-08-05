@@ -55,12 +55,17 @@ router.get("/api/visits/:visitId", async (req, res) => {
         _id: req.params.visitId,
         doctorId: req.user._id
       });
+
+      if (visit.length === 0) {
+        return res.status(404).send("Visit not found");
+      }
+
       res.json(visit);
     } else {
       return res.status(401).json({ message: 'Invalid token' });
     }
   } catch (err) {
-    res.json({
+    res.status(401).json({
       msg: err
     })
   };
@@ -73,7 +78,12 @@ router.patch("/api/visits/:visitId", async (req, res) => {
       const updatedVisit = await Visits.find({
         _id: req.params.visitId,
         doctorId: req.user._id
-      });
+      })[0];
+
+      if(!updatedVisit) {
+        return res.status(404).send("Visit not found");
+      }
+
       updatedVisit.patientComplaint = req.body.patientComplaint
       updatedVisit.patientDiagnosis = req.body.patientDiagnosis
       updatedVisit.notes = req.body.notes
@@ -86,7 +96,7 @@ router.patch("/api/visits/:visitId", async (req, res) => {
       return res.status(401).json({ message: 'Invalid token' });
     }
   } catch (err) {
-    res.json({ msg: err });
+    res.status(401).json({ msg: err });
   }
 });
 
