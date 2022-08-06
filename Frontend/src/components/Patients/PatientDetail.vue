@@ -413,7 +413,8 @@ body {
 
 .loadingBar {
     text-align: center;
-    margin: 150px 0;
+    margin: 50px 0;
+    padding-bottom: 150px !important;
 }
 
 .errorLabel {

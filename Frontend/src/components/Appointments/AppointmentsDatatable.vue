@@ -2,9 +2,9 @@
     <v-container>
         <v-card flat>
             <v-card-title>
-                <v-text class="mr-6">
+                <h3 class="mr-6">
                     Appointments List
-                </v-text>
+                </h3>
 
                 <v-spacer></v-spacer>
                 <v-text-field v-model="patientSearch" append-icon="mdi-magnify" label="Search for a patient" single-line
@@ -26,13 +26,12 @@
                         <td>{{ props.item.patientDiagnosis }}</td>
                         <td>{{ props.item.created | formatDate }}</td>
                         <td>
-                            <v-btn text small class="mt-2 mr-2 item-button" @click="getAppointment(props.item)">
-                                <v-icon left>mdi-account-edit-outline</v-icon>
-                                Edit
+                            <v-btn text small class="mt-2 mb-2 mr-2 item-button" @click="getAppointment(props.item)">
+                                <v-icon center>mdi-pencil
+                                </v-icon>
                             </v-btn>
                             <v-btn text small class="mt-2 mb-2 item-button" @click="deleteVisit(props.item._id)">
-                                <v-icon left>mdi-close</v-icon>
-                                Delete
+                                <v-icon center>mdi-delete</v-icon>
                             </v-btn>
                         </td>
                     </tr>
@@ -97,7 +96,8 @@ export default {
 <style lang="scss" scoped>
 .loadingBar {
     text-align: center;
-    margin: 150px 0;
+    margin: 50px 0;
+    padding-bottom: 150px !important;
 }
 
 .add-appointment-button {
@@ -123,7 +123,7 @@ export default {
 }
 
 .item-button {
-    background-color: white !important;
+    background-color: transparent !important;
     color: #26b3ff !important;
     border-radius: 25px;
     text-decoration: none;

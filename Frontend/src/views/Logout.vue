@@ -1,6 +1,6 @@
 <template>
 
-    <div class="ml-10 mr-10">
+    <v-card class="ml-10 mr-10 pt-10 pb-10">
 
         <v-icon color="#26b3ff">mdi-exit-to-app</v-icon>
         <h3>
@@ -8,7 +8,7 @@
         </h3>
 
         <v-btn text large class="font-weight-bold logout-button" @click="logout">Logout</v-btn>
-    </div>
+    </v-card>
 
 </template>
 

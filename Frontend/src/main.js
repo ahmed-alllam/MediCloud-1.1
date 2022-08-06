@@ -3,8 +3,6 @@ import App from './App.vue'
 import store from './store'
 import router from './router'
 import vuetify from './plugins/vuetify';
-import Chartkick from "vue-chartkick"
-import Chart from "chart.js"
 
 import PrimeVue from 'primevue/config';
 
@@ -13,7 +11,6 @@ import InputText from 'primevue/inputtext';
 import Carousel from 'primevue/carousel';
 
 Vue.config.productionTip = false
-Vue.use(Chartkick.use(Chart))
 Vue.use(PrimeVue);
 
 

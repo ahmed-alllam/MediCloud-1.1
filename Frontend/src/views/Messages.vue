@@ -1,6 +1,6 @@
 <template>
 
-    <div class="ml-10 mr-10">
+    <v-card class="ml-10 mr-10 pb-10 pt-10">
 
         <v-icon color="#26b3ff">mdi-message</v-icon>
         <h3>
@@ -15,7 +15,7 @@
             Coming Soon...
         </h5>
 
-    </div>
+    </v-card>
 
 </template>
 

@@ -23,7 +23,8 @@
 
                 <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn v-if="edit" text large class="font-weight-bold add-appointment-button" @click="editAppointment">Edit
+                    <v-btn v-if="edit" text large class="font-weight-bold add-appointment-button"
+                        @click="editAppointment">Edit
                         Appointment</v-btn>
                     <v-btn v-else text large class="font-weight-bold add-appointment-button" @click="addAppointment">Add
                         Appointment</v-btn>
@@ -150,7 +151,7 @@ export default {
         },
     },
     created() {
-        if(this.edit)
+        if (this.edit)
             this.getVisit();
         else {
             this.visit_loaded = true;
@@ -161,12 +162,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
-
 .loadingBar {
     text-align: center;
-    margin: 150px 0;
+    margin: 50px 0;
+    padding-bottom: 150px !important;
 }
+
 .appointment-details {
     margin: 30px 4%;
     padding: 10px;

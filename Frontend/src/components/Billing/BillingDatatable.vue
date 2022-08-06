@@ -2,9 +2,9 @@
     <v-container>
         <v-card flat>
             <v-card-title>
-                <v-text class="mr-6">
+                <h3 class="mr-6">
                     Billing List
-                </v-text>
+                </h3>
                 <v-spacer></v-spacer>
                 <v-text-field label="Search" append-icon="mdi-magnify" v-model="billingSearch" class="mr-10">
                 </v-text-field>
@@ -18,7 +18,7 @@
                     :sort-by="['created']" :sort-desc="true">
                     <template v-slot:item="props">
                         <tr>
-                            <td>{{ props.item.created | formatDate}}</td>
+                            <td>{{ props.item.created | formatDate }}</td>
                             <td>{{ props.item.patientName }}</td>
                             <td>{{ props.item.visitCost }}</td>
                         </tr>
@@ -42,9 +42,9 @@ export default {
         loading: true,
         billingSearch: "",
         billingHeader: [
-            {text: "Date", value: "created"},
-            {text: "Patient Name", value: "patientName"},
-            {text: "Amount (EGP)", value: "visitCost"},
+            { text: "Date", value: "created" },
+            { text: "Patient Name", value: "patientName" },
+            { text: "Amount (EGP)", value: "visitCost" },
         ],
         billings: []
     }),
@@ -55,11 +55,11 @@ export default {
                 this.billings = res.data
                 this.loading = false
             })
-            .catch(err => {
-                this.$toast.error('Error loading data');
-                console.log(err)
-                this.loading = false
-            })
+                .catch(err => {
+                    this.$toast.error('Error loading data');
+                    console.log(err)
+                    this.loading = false
+                })
         },
     },
     created() {
@@ -69,10 +69,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 .loadingBar {
     text-align: center;
-    margin: 150px 0;
+    margin: 50px 0;
+    padding-bottom: 150px !important;
 }
 
 .refresh-button {
@@ -85,6 +85,4 @@ export default {
         opacity: 0.6;
     }
 }
-
-
 </style>
