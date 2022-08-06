@@ -1,7 +1,7 @@
 <template>
 
-    <v-card>
-        <v-card-title class="text-h5 grey lighten-2">
+    <v-card color="#fff">
+        <v-card-title class="text-h5 lighten-2">
             Edit this record
         </v-card-title>
 
@@ -116,3 +116,11 @@ export default {
 }
 
 </script>
+
+<style lang="scss" scoped>
+
+.v-card {
+    box-shadow: none !important;
+}
+
+</style>

@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <v-card class="mb-10 mt-10 mr-10 ml-10 pt-10 pb-10">
         <div class="patient-form">
             <v-form v-model="valid" ref="form">
                 <v-jsf v-model="model" :schema="schema" />
@@ -9,7 +9,7 @@
             <v-btn text class="font-weight-bold add-button" @click="addPatient">Add Patient</v-btn>
             <v-btn text class="cancel-button" router to="/appointments/new">Cancel</v-btn>
         </div>
-    </div>
+    </v-card>
 </template>
 
 <script>

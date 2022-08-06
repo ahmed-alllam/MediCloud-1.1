@@ -1,9 +1,9 @@
 <template>
 
-    <v-container>
+    <v-container class="pt-10 pr-10 pl-10 pb-10">
         <PatientDetail @loaded="onLoaded" :patient_id="patient_id" v-if="visit_loaded" />
-        <hr v-if="loaded" />
-        <div class="appointment-details" v-if="loaded">
+        <hr v-if="visit_loaded" />
+        <div class="appointment-details" v-if="visit_loaded">
             <v-card class="appointment-card">
                 <v-list-item two-line>
                     <v-list-item-content>
@@ -32,9 +32,18 @@
                 </v-card-actions>
             </v-card>
         </div>
-        <div v-if="!visit_loaded" class="loadingBar">
-            <v-progress-circular indeterminate color="primary" />
-        </div>
+
+
+        <v-card v-if="!visit_loaded" class="pb-10 pt-10 mr-10 mb-10 ml-10 mt-10">
+            <div class="loadingBar">
+                <v-progress-circular indeterminate color="primary" v-if="!errorLabel"></v-progress-circular>
+                <label class="errorLabel">
+                    {{ errorLabel }}
+                </label>
+            </div>
+        </v-card>
+
+
     </v-container>
 
 </template>
@@ -62,6 +71,7 @@ export default {
 
     data: () => ({
         visit_loaded: false,
+        errorLabel: '',
         loaded: false,
         patient_id: '',
         valid: null,
@@ -96,6 +106,8 @@ export default {
                 })
                 .catch(error => {
                     this.valid = false;
+                    this.errorLabel = 'Error loading appointment';
+                    this.visit_loaded = false;
                     console.log(error);
                 })
         },
@@ -155,7 +167,7 @@ export default {
             this.getVisit();
         else {
             this.visit_loaded = true;
-            this.patient_id = this.params.id;
+            // this.patient_id = this.$route.params.id;
         }
     }
 }
@@ -165,7 +177,11 @@ export default {
 .loadingBar {
     text-align: center;
     margin: 50px 0;
-    padding-bottom: 150px !important;
+    // padding-bottom: 150px !important;
+}
+
+.errorLabel {
+    color: red;
 }
 
 .appointment-details {
@@ -175,9 +191,9 @@ export default {
 
 .appointment-card {
     padding: 20px;
-    border: rgba(0, 0, 0, 0.1) 1px solid;
-    border-radius: 10px !important;
-    box-shadow: none;
+    // border: rgba(0, 0, 0, 0.1) 1px solid;
+    // border-radius: 10px !important;
+    // box-shadow: none;
 }
 
 .add-appointment-button {

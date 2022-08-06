@@ -1,6 +1,6 @@
 <template>
     <v-container class="pt-10 pr-10 pl-10 pb-10">
-        <v-card>
+        <v-card class="pb-5">
             <v-row class="question-row">
                 <h3>
                     Is your Patient a <span class="brand-name">MediCloud</span> Client?

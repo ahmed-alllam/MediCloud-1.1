@@ -1,268 +1,268 @@
 <template>
-    <div>
-        <div id="top-content" v-if="loaded">
-            <div id="row">
-                <div v-if="patient_data.patientPhoto" id="image" class="col-xs-12 col-md-5 col-xl-2">
-                    <img id="profile-photo" :src="patient_data.patientPhoto" />
-                </div>
-
-                <div v-else-if="loaded" id="image" class="col-xs-12 col-md-5 col-xl-2">
-                    <img id="profile-photo" :src="require('@/assets/images/Profile.jpg')" />
-                </div>
-
-                <div id="name-container" class="col-xs-12 col-md-7 col-xl-3">
-                    <h3 id="name">
-                        {{ patient_data.patientFirstName }} {{ patient_data.patientLastName }}
-                    </h3>
-                    <h3 id="email">
-                        {{ patient_data.patientEmail }}
-                    </h3>
-                </div>
-
-                <div id="basic-info" class="col-sm-11 offset-xl-1 col-xl-6 float-right">
-                    <div id="id" v-if="patient_data.patientMediCardID">
-                        <span class="name">
-                            ID
-                        </span>
-
-                        <span class="value">
-                            {{ patient_data.patientMediCardID }}
-                        </span>
-
+        <v-card class="pb-10 pt-10 mr-10 mb-10 ml-10 mt-10">
+            <div id="top-content" v-if="loaded">
+                <div id="row">
+                    <div v-if="patient_data.patientPhoto" id="image" class="col-xs-12 col-md-5 col-xl-2">
+                        <img id="profile-photo" :src="patient_data.patientPhoto" />
                     </div>
 
-                    <div id="birthdate" v-if="patient_data.patientBirthDate">
-                        <span class="name">
-                            Birthdate
-                        </span>
-
-                        <span class="value">
-                            {{ patient_data.patientBirthDate | formatDate }}
-                        </span>
+                    <div v-else-if="loaded" id="image" class="col-xs-12 col-md-5 col-xl-2">
+                        <img id="profile-photo" :src="require('@/assets/images/Profile.jpg')" />
                     </div>
 
-                    <div id="city" v-if="patient_data.patientCity">
-                        <span class="name">
-                            City
-                        </span>
-
-                        <span class="value">
-                            {{ patient_data.patientCity }}
-                        </span>
-
+                    <div id="name-container" class="col-xs-12 col-md-7 col-xl-3">
+                        <h3 id="name">
+                            {{ patient_data.patientFirstName }} {{ patient_data.patientLastName }}
+                        </h3>
+                        <h3 id="email">
+                            {{ patient_data.patientEmail }}
+                        </h3>
                     </div>
 
-                    <div id="blood-type" v-if="patient_data.patientBloodType">
-                        <span class="name">
-                            Blood Type
-                        </span>
+                    <div id="basic-info" class="col-sm-11 offset-xl-1 col-xl-6 float-right">
+                        <div id="id" v-if="patient_data.patientMediCardID">
+                            <span class="name">
+                                ID
+                            </span>
 
-                        <span class="value">
-                            {{ patient_data.patientBloodType }}
-                        </span>
+                            <span class="value">
+                                {{ patient_data.patientMediCardID }}
+                            </span>
 
-                    </div>
+                        </div>
 
-                    <div id="phone" v-if="patient_data.patientPhone">
-                        <span class="name">
-                            Phone
-                        </span>
+                        <div id="birthdate" v-if="patient_data.patientBirthDate">
+                            <span class="name">
+                                Birthdate
+                            </span>
 
-                        <span class="value">
-                            {{ patient_data.patientPhone }}
-                        </span>
+                            <span class="value">
+                                {{ patient_data.patientBirthDate | formatDate }}
+                            </span>
+                        </div>
 
-                    </div>
+                        <div id="city" v-if="patient_data.patientCity">
+                            <span class="name">
+                                City
+                            </span>
 
-                    <div id="height" v-if="patient_data.patientHeight">
-                        <span class="name">
-                            Height
-                        </span>
+                            <span class="value">
+                                {{ patient_data.patientCity }}
+                            </span>
 
-                        <span class="value">
-                            {{ patient_data.patientHeight }}
-                        </span>
+                        </div>
 
-                    </div>
+                        <div id="blood-type" v-if="patient_data.patientBloodType">
+                            <span class="name">
+                                Blood Type
+                            </span>
 
-                    <div id="weight" v-if="patient_data.patientWeight">
-                        <span class="name">
-                            Weight
-                        </span>
+                            <span class="value">
+                                {{ patient_data.patientBloodType }}
+                            </span>
 
-                        <span class="value">
-                            {{ patient_data.patientWeight }}
-                        </span>
+                        </div>
 
-                    </div>
+                        <div id="phone" v-if="patient_data.patientPhone">
+                            <span class="name">
+                                Phone
+                            </span>
 
-                    <div id="martial-status" v-if="patient_data.patientMartialStatus">
-                        <span class="name">
-                            Martial Status
-                        </span>
+                            <span class="value">
+                                {{ patient_data.patientPhone }}
+                            </span>
 
-                        <span class="value">
-                            {{ patient_data.patientMartialStatus }}
-                        </span>
+                        </div>
 
-                    </div>
+                        <div id="height" v-if="patient_data.patientHeight">
+                            <span class="name">
+                                Height
+                            </span>
 
-                    <div id="gender" v-if="patient_data.patientGender">
-                        <span class="name">
-                            Gender
-                        </span>
+                            <span class="value">
+                                {{ patient_data.patientHeight }}
+                            </span>
 
-                        <span class="value">
-                            {{ patient_data.patientGender }}
-                        </span>
+                        </div>
 
+                        <div id="weight" v-if="patient_data.patientWeight">
+                            <span class="name">
+                                Weight
+                            </span>
+
+                            <span class="value">
+                                {{ patient_data.patientWeight }}
+                            </span>
+
+                        </div>
+
+                        <div id="martial-status" v-if="patient_data.patientMartialStatus">
+                            <span class="name">
+                                Martial Status
+                            </span>
+
+                            <span class="value">
+                                {{ patient_data.patientMartialStatus }}
+                            </span>
+
+                        </div>
+
+                        <div id="gender" v-if="patient_data.patientGender">
+                            <span class="name">
+                                Gender
+                            </span>
+
+                            <span class="value">
+                                {{ patient_data.patientGender }}
+                            </span>
+
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div v-if="!loaded" class="loadingBar">
-            <v-progress-circular indeterminate color="primary" v-if="!errorLabel"></v-progress-circular>
-            <br />
-            <br />
-            <label class="errorLabel">
-                {{ errorLabel }}
-            </label>
-        </div>
+            <div v-if="!loaded" class="loadingBar">
+                <v-progress-circular indeterminate color="primary" v-if="!errorLabel"></v-progress-circular>
+                <label class="errorLabel">
+                    {{ errorLabel }}
+                </label>
+            </div>
 
-        <div id="medical-details" v-if="loaded">
-            <div v-for="(value, key, index) in this.patient_data.details_sections" :key="`${key}-${index}`">
+            <div id="medical-details" v-if="loaded">
+                <div v-for="(value, key, index) in this.patient_data.details_sections" :key="`${key}-${index}`">
 
-                <h2>{{ key }}</h2>
+                    <h2>{{ key }}</h2>
 
-                <div class="row no-gutters">
+                    <div class="row no-gutters">
 
-                    <div v-for="(item, index2) in value" v-bind:key="index2" class="col-md-6 col-xs-12">
-                        <div class="record-item row no-gutters">
+                        <div v-for="(item, index2) in value" v-bind:key="index2" class="col-md-6 col-xs-12">
+                            <div class="record-item row no-gutters">
 
-                            <img class="record-image" v-if="item.Image" :src="'/' + item.Image" />
+                                <img class="record-image" v-if="item.Image" :src="'/' + item.Image" />
 
-                            <v-menu top v-if="can_edit">
-                                <template v-slot:activator="{ on, attrs }">
-                                    <v-btn icon v-bind="attrs" v-on="on" class="edit-button">
-                                        <v-icon>mdi-dots-vertical</v-icon>
-                                    </v-btn>
-                                </template>
+                                <v-menu top v-if="can_edit">
+                                    <template v-slot:activator="{ on, attrs }">
+                                        <v-btn icon v-bind="attrs" v-on="on" class="edit-button">
+                                            <v-icon>mdi-dots-vertical</v-icon>
+                                        </v-btn>
+                                    </template>
 
-                                <v-list>
-                                    <v-list-item link @click="edit_dialog = true; current_dialog_item = [key, index2];
+                                    <v-list>
+                                        <v-list-item link @click="edit_dialog = true; current_dialog_item = [key, index2];
 current_dialog_data = patient_data.details_sections[current_dialog_item[0]][current_dialog_item[1]]
-                                    ">
-                                        <v-list-item-title>Edit</v-list-item-title>
-                                    </v-list-item>
+                                        ">
+                                            <v-list-item-title>Edit</v-list-item-title>
+                                        </v-list-item>
 
-                                    <v-list-item link
-                                        @click="delete_dialog = true; current_dialog_item = [key, index2];">
-                                        <v-list-item-title>Delete</v-list-item-title>
-                                    </v-list-item>
-                                </v-list>
-                            </v-menu>
+                                        <v-list-item link
+                                            @click="delete_dialog = true; current_dialog_item = [key, index2];">
+                                            <v-list-item-title>Delete</v-list-item-title>
+                                        </v-list-item>
+                                    </v-list>
+                                </v-menu>
 
-                            <div>
-                                <div class="record-title" v-if="item.Name">
-                                    <span>{{ item.Name }}</span>
-                                </div>
+                                <div>
+                                    <div class="record-title" v-if="item.Name">
+                                        <span>{{ item.Name }}</span>
+                                    </div>
 
-                                <div class="record-date" v-if="item.Date">
-                                    <span>Date: {{ item.Date | formatDate }}</span>
-                                </div>
+                                    <div class="record-date" v-if="item.Date">
+                                        <span>Date: {{ item.Date | formatDate }}</span>
+                                    </div>
 
-                                <div class="record-date" v-if="item['Start Date']">
-                                    <span>Start Date: {{ item['Start Date'] | formatDate }}</span>
-                                </div>
+                                    <div class="record-date" v-if="item['Start Date']">
+                                        <span>Start Date: {{ item['Start Date'] | formatDate }}</span>
+                                    </div>
 
-                                <div class="record-date" v-if="item['End Date']">
-                                    <span>End Date: {{ item['End Date'] | formatDate }}</span>
-                                </div>
+                                    <div class="record-date" v-if="item['End Date']">
+                                        <span>End Date: {{ item['End Date'] | formatDate }}</span>
+                                    </div>
 
-                                <div class="record-details" v-if="item.Phone">
-                                    <span>Phone: {{ item.Phone }} </span>
-                                </div>
-                                <div class="record-details" v-if="item['Family Member']">
-                                    <span>Family Member: {{ item['Family Member'] }} </span>
-                                </div>
-                                <div class="record-details" v-if="item.Details">
-                                    <span>Details: {{ item.Details }} </span>
-                                </div>
-                                <div class="record-details" v-if="item.Dose">
-                                    <span>Dose: {{ item.Dose }} </span>
+                                    <div class="record-details" v-if="item.Phone">
+                                        <span>Phone: {{ item.Phone }} </span>
+                                    </div>
+                                    <div class="record-details" v-if="item['Family Member']">
+                                        <span>Family Member: {{ item['Family Member'] }} </span>
+                                    </div>
+                                    <div class="record-details" v-if="item.Details">
+                                        <span>Details: {{ item.Details }} </span>
+                                    </div>
+                                    <div class="record-details" v-if="item.Dose">
+                                        <span>Dose: {{ item.Dose }} </span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
+                        </div>
                     </div>
                 </div>
-            </div>
 
 
-            <v-dialog v-model="edit_dialog" width="500">
-                <EditRecord @update="edit_dialog = false" :section="current_dialog_item[0]"
-                    :index="current_dialog_item[1]" :patient_data="patient_data" :section_data="current_dialog_data" />
-            </v-dialog>
+                <v-dialog v-model="edit_dialog" width="500">
+                    <EditRecord @update="edit_dialog = false" :section="current_dialog_item[0]"
+                        :index="current_dialog_item[1]" :patient_data="patient_data"
+                        :section_data="current_dialog_data" />
+                </v-dialog>
 
-            <v-dialog v-model="delete_dialog" width="500">
-                <v-card>
-                    <v-card-title class="text-h5 grey lighten-2">
-                        Delete
-                    </v-card-title>
-
-                    <v-card-text>
-                        Are you sure you want to delete this record?
-                    </v-card-text>
-
-                    <v-divider></v-divider>
-
-                    <v-card-actions>
-                        <v-spacer></v-spacer>
-                        <v-btn color="red" text @click="deleteItem">
+                <v-dialog v-model="delete_dialog" width="500">
+                    <v-card>
+                        <v-card-title class="text-h5 grey lighten-2">
                             Delete
-                        </v-btn>
-                    </v-card-actions>
-                </v-card>
-            </v-dialog>
+                        </v-card-title>
 
-            <div v-if="addMediCard">
-                <h2>MediCard</h2>
+                        <v-card-text>
+                            Are you sure you want to delete this record?
+                        </v-card-text>
 
-                <div class="row no-gutters">
+                        <v-divider></v-divider>
 
-                    <div class="col-md-6 col-xs-12">
-                        <div class="record-item row no-gutters">
+                        <v-card-actions>
+                            <v-spacer></v-spacer>
+                            <v-btn color="red" text @click="deleteItem">
+                                Delete
+                            </v-btn>
+                        </v-card-actions>
+                    </v-card>
+                </v-dialog>
 
-                            <div>
-                                <div class="record-details">
-                                    <span>Link a MediCard to this patient</span>
+                <div v-if="addMediCard">
+                    <h2>MediCard</h2>
+
+                    <div class="row no-gutters">
+
+                        <div class="col-md-6 col-xs-12">
+                            <div class="record-item row no-gutters">
+
+                                <div>
+                                    <div class="record-details">
+                                        <span>Link a MediCard to this patient</span>
+                                    </div>
+
+                                    <v-form ref="medicardIDForm" v-model="valid" class="mb-5">
+                                        <v-jsf v-model="inputMedicardID" :schema="medicardIDSchema" />
+                                    </v-form>
+
+                                    <v-btn text large @click="addMediCardID"
+                                        class="font-weight-bold add-medicard-button">
+                                        SAVE</v-btn>
                                 </div>
-
-                                <v-form ref="medicardIDForm" v-model="valid" class="mb-5">
-                                    <v-jsf v-model="inputMedicardID" :schema="medicardIDSchema" />
-                                </v-form>
-
-                                <v-btn text large @click="addMediCardID" class="font-weight-bold add-medicard-button">
-                                    SAVE</v-btn>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <v-dialog v-model="add_dialog" width="500" v-if="loaded && can_edit">
-            <template v-slot:activator="{ on, attrs }">
-                <v-btn v-bind="attrs" v-on="on" text large class="font-weight-bold add-record-button">
-                    Add New Records
-                    <v-icon>mdi-plus-circle</v-icon>
-                </v-btn>
-            </template>
+            <v-dialog v-model="add_dialog" width="500" v-if="loaded && can_edit">
+                <template v-slot:activator="{ on, attrs }">
+                    <v-btn v-bind="attrs" v-on="on" text large class="font-weight-bold add-record-button">
+                        Add New Records
+                        <v-icon>mdi-plus-circle</v-icon>
+                    </v-btn>
+                </template>
 
-            <AddRecord @update="add_dialog = false" :patient_data="patient_data" />
-        </v-dialog>
-    </div>
+                <AddRecord @update="add_dialog = false" :patient_data="patient_data" />
+            </v-dialog>
+        </v-card>
 
 </template>
 
@@ -400,21 +400,10 @@ export default {
 </script>
 
 <style scoped lang="scss">
-body {
-    background-color: #F0F2F5;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 14px;
-    line-height: 20px;
-    color: #333333;
-    margin: 0;
-    padding: 0;
-    font-family: 'Quicksand';
-}
-
 .loadingBar {
     text-align: center;
     margin: 50px 0;
-    padding-bottom: 150px !important;
+    // padding: 150px 0 !important;
 }
 
 .errorLabel {
