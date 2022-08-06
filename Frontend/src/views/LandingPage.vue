@@ -1,7 +1,7 @@
 
 <template>
 
-    <div>
+    <div class="mainDiv">
         <!-- Navigation -->
         <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
             <div class="container">
@@ -912,6 +912,9 @@ html {
     height: 100%;
 }
 
+.mainDiv {
+    background-color: #fff;
+}
 
 body,
 p {
