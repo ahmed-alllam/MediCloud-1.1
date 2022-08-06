@@ -1,6 +1,6 @@
 <template>
 
-    <v-container class="pt-10 pr-10 pl-10 pb-10">
+    <v-container class="pt-5 pr-5 pl-5 pb-5">
         <PatientDetail @loaded="onLoaded" :patient_id="patient_id" v-if="visit_loaded" />
         <hr v-if="visit_loaded" />
         <div class="appointment-details" v-if="visit_loaded">
@@ -34,7 +34,7 @@
         </div>
 
 
-        <v-card v-if="!visit_loaded" class="pb-10 pt-10 mr-10 mb-10 ml-10 mt-10">
+        <v-card v-if="!visit_loaded" class="pb-10 pt-10 mr-7 mb-7 ml-7 mt-7">
             <div class="loadingBar">
                 <v-progress-circular indeterminate color="primary" v-if="!errorLabel"></v-progress-circular>
                 <label class="errorLabel">

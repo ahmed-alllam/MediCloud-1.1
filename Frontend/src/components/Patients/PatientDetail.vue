@@ -1,5 +1,5 @@
 <template>
-        <v-card class="pb-10 pt-10 mr-10 mb-10 ml-10 mt-10">
+        <v-card class="pb-10 pt-10 mr-7 mb-7 ml-7 mt-7">
             <div id="top-content" v-if="loaded">
                 <div id="row">
                     <div v-if="patient_data.patientPhoto" id="image" class="col-xs-12 col-md-5 col-xl-2">
