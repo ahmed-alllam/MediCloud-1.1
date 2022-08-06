@@ -252,6 +252,10 @@ export default {
 
 .searchField {
   border-radius: 20px;
+  
+  ::v-deep label {
+    color: #fff !important;
+  }
 }
 
 a {
