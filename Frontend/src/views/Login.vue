@@ -76,6 +76,7 @@ export default {
 <style scoped lang="scss">
 .row {
     height: 100vh;
+    background-color: #fff;
 
     @media (max-width: 768px) {
         margin-top: 50px;
