@@ -1,42 +1,44 @@
 <template>
-    <v-container>
-        <v-row class="question-row">
-            <h3>
-                Is your Patient a <span class="brand-name">MediCloud</span> Client?
-            </h3>
-        </v-row>
-        <v-row class="question-row options">
-            <v-col cols="12" md="6">
-                <div class="option-col yes-option">
-                    <h4>
-                        Yes,
-                        Enter their MediCloud ID:
-                    </h4>
-                    <v-form v-model="valid" ref="form" @submit.prevent="onSubmit">
-                        <v-jsf v-model="model" :schema="schema" />
-                    </v-form>
-                    <v-btn text @click="onSubmit" class="submit-button">Continue</v-btn>
-                </div>
+    <v-container class="pt-10 pr-10 pl-10 pb-10">
+        <v-card>
+            <v-row class="question-row">
+                <h3>
+                    Is your Patient a <span class="brand-name">MediCloud</span> Client?
+                </h3>
+            </v-row>
+            <v-row class="question-row options">
+                <v-col cols="12" md="6">
+                    <div class="option-col yes-option">
+                        <h4>
+                            Yes,
+                            Enter their MediCloud ID:
+                        </h4>
+                        <v-form v-model="valid" ref="form" @submit.prevent="onSubmit">
+                            <v-jsf v-model="model" :schema="schema" />
+                        </v-form>
+                        <v-btn text @click="onSubmit" class="submit-button">Continue</v-btn>
+                    </div>
 
-            </v-col>
-            <v-col cols="12" md="6">
-                <router-link tag="div" to="/appointments/new/patient" class="option-col no-option" v-ripple>
-                    <h4>
-                        No,
-                        <br />
-                        Add Manually
-                    </h4>
-                </router-link>
-            </v-col>
-        </v-row>
-        <v-row class="question-row">
-            <br />
-            <br />
-            <h5>
-                By entering your patient's <span class="brand-name">MediCloud</span> ID, you can easily <br />
-                see all their medical history and update it, to show automatically in their app.
-            </h5>
-        </v-row>
+                </v-col>
+                <v-col cols="12" md="6">
+                    <router-link tag="div" to="/appointments/new/patient" class="option-col no-option" v-ripple>
+                        <h4>
+                            No,
+                            <br />
+                            Add Manually
+                        </h4>
+                    </router-link>
+                </v-col>
+            </v-row>
+            <v-row class="question-row">
+                <br />
+                <br />
+                <h5>
+                    By entering your patient's <span class="brand-name">MediCloud</span> ID, you can easily <br />
+                    see all their medical history and update it, to show automatically in their app.
+                </h5>
+            </v-row>
+        </v-card>
     </v-container>
 </template>
 

@@ -4,8 +4,8 @@
       <v-app-bar dark app flat clipped-left class="px-3" color="white">
         <v-app-bar-nav-icon @click.stop="drawer = !drawer" v-if="$vuetify.breakpoint.smAndDown" color="primary" />
         <v-toolbar-title class="brand-name">
-          <!-- <img class="img-fluid mb-1" width="40px" height="40px" -->
-          <!-- :src="require('@/assets/images/header-software-app.png')" alt="alternative"> -->
+          <img class="img-fluid mb-1" width="40px" height="40px"
+          :src="require('@/assets/images/brand-logo.png')" alt="alternative">
           <span :style="{ color: $vuetify.theme.themes['light'].primary }" class="font-weight-bold">MediCloud</span>
         </v-toolbar-title>
         <v-spacer></v-spacer>
