@@ -118,7 +118,7 @@ export default {
     }
   },
   methods: {
-    addAppointment () {
+    addAppointment() {
       this.$router.push({ name: 'New Appointment' });
     },
     checkLoggedIn() {
@@ -256,6 +256,10 @@ export default {
   ::v-deep label {
     color: #fff !important;
   }
+
+  ::v-deep .v-icon {
+    color: #fff !important;
+  }
 }
 
 a {
@@ -278,8 +282,8 @@ a {
 </style>
 
 <style>
-  .v-card {
-    box-shadow: 0px 0px 50px 1px rgba(0, 0, 0, 0.05) !important;
-    border-radius: 20px !important;
-  }
+.v-card {
+  box-shadow: 0px 0px 50px 1px rgba(0, 0, 0, 0.05) !important;
+  border-radius: 20px !important;
+}
 </style>
