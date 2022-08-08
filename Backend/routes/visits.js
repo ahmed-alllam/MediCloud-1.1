@@ -12,9 +12,21 @@ router.post("/api/visits/", async (req, res) => {
         return res.status(404).send("Patient not found");
       }
 
+      // check if this patient has any previous visits with the same doctor
+      var isReturnVisit = false;
+
+      const previousVisits = await Visits.find({
+        patientId: req.body.patientId,
+        doctorId: req.user._id
+      });
+
+      if(previousVisits.length > 0)
+        isReturnVisit = true;
+
       const visit = new Visits({
         doctorId: req.user._id,
         patientName: patient.patientFirstName + " " + patient.patientLastName,
+        isReturnVisit: isReturnVisit,
         ...req.body
       });
 
@@ -25,7 +37,7 @@ router.post("/api/visits/", async (req, res) => {
       return res.status(401).json({ message: 'Invalid token' });
     }
   } catch (err) {
-    res.json({
+    res.status(401).json({
       msg: err
     });
   }
@@ -41,7 +53,7 @@ router.get("/api/visits/", async (req, res) => {
       return res.status(401).json({ message: 'Invalid token' });
     }
   } catch (err) {
-    res.json({
+    res.status(401).json({
       msg: err
     });
   }
@@ -113,7 +125,7 @@ router.delete("/api/visits/:visitId", async (req, res) => {
       return res.status(401).json({ message: 'Invalid token' });
     }
   } catch (err) {
-    res.json({ msg: err });
+    res.status(401).json({ msg: err });
   }
 });
 

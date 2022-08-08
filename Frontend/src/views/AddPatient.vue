@@ -34,7 +34,7 @@ export default {
             'Status': '',
             'Height': '',
             'Weight': '',
-            'Birthdate': '',
+            'Birth Date': '',
             'Gender': null,
             'City': '',
 
@@ -56,7 +56,7 @@ export default {
                 'Last Name': { type: 'string', 'x-col': '12', "x-class": "col-sm-5" },
                 'Phone': { type: 'number', 'x-col': '12', "x-class": "mr-10 col-sm-5" },
                 'Email': { type: 'string', 'x-col': '12', 'x-class': 'col-sm-5' },
-                'Birthdate': { type: 'string', format: 'date', 'x-col': '12' , "x-class": "mr-10 col-sm-5"},
+                'Birth Date': { type: 'string', format: 'date', 'x-col': '12' , "x-class": "mr-10 col-sm-5"},
                 'Blood Type': {
                     type: 'string',
                     'enum': ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'],

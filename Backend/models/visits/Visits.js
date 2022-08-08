@@ -5,6 +5,10 @@ const VisitSchema = mongoose.Schema({
     type: Date,
     default: Date.now
   },
+  isReturnVisit: {
+    type: Boolean,
+    default: false
+  },
   patientId: {
     type: mongoose.Schema.Types.ObjectId,
     required: true

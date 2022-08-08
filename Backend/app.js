@@ -122,6 +122,10 @@ app.use('/', doctorsRoutes)
 const formsRoutes = require("./routes/Forms")
 app.use('/', formsRoutes)
 
+const dashboardRoutes = require("./routes/dashboard")
+app.use('/', dashboardRoutes)
+
+
 app.get("/", (req, res) => {
   res.send("Ok");
 });

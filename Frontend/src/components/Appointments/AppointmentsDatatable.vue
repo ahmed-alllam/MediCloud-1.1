@@ -1,7 +1,7 @@
 <template>
     <v-container>
         <v-card flat>
-            <v-card-title>
+            <v-card-title v-if="!latestAppointments">
                 <h3 class="mr-6">
                     Appointments List
                 </h3>
@@ -17,7 +17,7 @@
                 </v-btn>
             </v-card-title>
             <v-data-table v-if="!loading" :headers="appointmentHeaders" :items="visits" :search="patientSearch"
-                :sort-by="['created']" :sort-desc="true">
+                :sort-by="['created']" :sort-desc="true" :items-per-page="latestAppointments ? 5 : 10" :hide-default-footer="latestAppointments">
 
                 <template v-slot:item="props">
                     <tr>
@@ -61,6 +61,12 @@ export default {
             { text: "Settings" }
         ]
     }),
+    props: {
+        latestAppointments: {
+            type: Boolean,
+            default: false
+        }
+    },
     methods: {
         async getVisits() {
             axios.get("https://medicloudeg.herokuapp.com/api/visits/")
