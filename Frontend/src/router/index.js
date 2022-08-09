@@ -10,7 +10,8 @@ const routes = [
     name: 'Overview',
     component: () => import("../views/Home.vue"),
     meta: {
-      requireAuth: true
+      requireAuth: true,
+      title: 'Overview'
     }
   },
   {
@@ -22,18 +23,25 @@ const routes = [
     path: '/login',
     name: 'Login',
     component: () => import("../views/Login.vue"),
+    meta: {
+      title: 'Login'
+    }
   },
   {
     path: '/patient/:id',
     name: 'Patient Detail',
     component: () => import("../components/Patients/PatientDetail.vue"),
+    meta: {
+      title: 'Patient Details'
+    }
   },
   {
     path: '/appointments',
     name: 'Appointments',
     component: () => import("../views/Appointments.vue"),
     meta: {
-      requireAuth: true
+      requireAuth: true,
+      title: 'Appointments'
     }
   },
   {
@@ -44,7 +52,8 @@ const routes = [
     },
     component: () => import("../views/PatientAppointment.vue"),
     meta: {
-      requireAuth: true
+      requireAuth: true,
+      title: 'Edit Appointment'
     }
   },
   {
@@ -52,7 +61,8 @@ const routes = [
     name: "New Appointment",
     component: () => import("../views/AddAppointment.vue"),
     meta: {
-      requireAuth: true
+      requireAuth: true,
+      title: 'New Appointment'
     }
   },
   {
@@ -60,7 +70,8 @@ const routes = [
     name: "New Patient",
     component: () => import("../views/AddPatient.vue"),
     meta: {
-      requireAuth: true
+      requireAuth: true,
+      title: 'New Patient'
     }
   },
   {
@@ -68,7 +79,8 @@ const routes = [
     name: "New Patient Appointment",
     component: () => import("../views/PatientAppointment.vue"),
     meta: {
-      requireAuth: true
+      requireAuth: true,
+      title: 'New Appointment'
     }
   },
   {
@@ -76,7 +88,8 @@ const routes = [
     name: "Finances",
     component: () => import("../views/Billing.vue"),
     meta: {
-      requireAuth: true
+      requireAuth: true,
+      title: 'Finances'
     }
   },
   {
@@ -84,7 +97,8 @@ const routes = [
     name: "Messages",
     component: () => import("../views/Messages.vue"),
     meta: {
-      requireAuth: true
+      requireAuth: true,
+      title: 'Messages'
     }
   },
   {
@@ -92,7 +106,8 @@ const routes = [
     name: "Connect",
     component: () => import("../views/Connect.vue"),
     meta: {
-      requireAuth: true
+      requireAuth: true,
+      title: 'Connect'
     }
   },
   {
@@ -100,7 +115,8 @@ const routes = [
     name: "Manage Clinic",
     component: () => import("../views/ManageClinic.vue"),
     meta: {
-      requireAuth: true
+      requireAuth: true,
+      title: 'Manage Clinic'
     }
   },
   {
@@ -108,7 +124,8 @@ const routes = [
     name: "Logout",
     component: () => import("../views/Logout.vue"),
     meta: {
-      requireAuth: true
+      requireAuth: true,
+      title: 'Logout'
     }
   },
 
@@ -143,5 +160,13 @@ router.beforeEach(async (to, from, next) => {
     next({ name: 'Overview' })
   }
 });
+
+router.afterEach((to, ) => {
+  if (to.meta.title) {
+    document.title = `MediCloud | ${to.meta.title}`;
+  } 
+  window.scrollTo(0, 0);
+}
+)
 
 export default router

@@ -13,7 +13,7 @@
                         <v-card-text>
                             <div class="row datepicker-row">
                                 <div>
-                                    <datepicker v-model="selectedDate" :inline="true" class="datepicker" />
+                                    <datepicker :disabled-dates="{from: new Date()}" v-model="selectedDate" :inline="true" class="datepicker" />
                                 </div>
 
                                 <div v-if="!loaded" class="loadingBar">

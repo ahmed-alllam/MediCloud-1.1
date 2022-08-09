@@ -23,10 +23,10 @@
 
                 <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn v-if="edit" text large class="font-weight-bold add-appointment-button"
+                    <v-btn v-if="edit && loaded" text large class="font-weight-bold add-appointment-button"
                         @click="editAppointment">Edit
                         Appointment</v-btn>
-                    <v-btn v-else text large class="font-weight-bold add-appointment-button" @click="addAppointment">Add
+                    <v-btn v-else-if="loaded"  text large class="font-weight-bold add-appointment-button" @click="addAppointment">Add
                         Appointment</v-btn>
                     <v-spacer></v-spacer>
                 </v-card-actions>
