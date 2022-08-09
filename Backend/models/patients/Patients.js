@@ -23,7 +23,7 @@ const PatientSchema = mongoose.Schema({
   },
   patientBirthDate: {
     type: Date
-  }, 
+  },
   patientCity: {
     type: String
   },
@@ -99,23 +99,34 @@ const PatientSchema = mongoose.Schema({
   ],
   patientPrescriptions: [
     {
+      Name: String,
+      Dose: String,
       Details: String,
       Image: String,
-      Date: Date,
+      Date: {
+        type: Date,
+        default: Date.now
+      },
     }
   ],
-  patientScans:  [
+  patientScans: [
     {
       Details: String,
       Image: String,
-      Date: Date,
+      Date: {
+        type: Date,
+        default: Date.now
+      },
     }
   ],
-  patientLabTests:  [
+  patientLabTests: [
     {
       Details: String,
       Image: String,
-      Date: Date,
+      Date: {
+        type: Date,
+        default: Date.now
+      },
     }
   ],
 });

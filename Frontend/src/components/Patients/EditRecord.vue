@@ -41,14 +41,111 @@ export default {
             properties: {}
         },
         schema2: {
-            'Name': { type: 'string' },
-            'Phone': { type: 'number' },
-            'Date': { type: 'string', format: 'date' },
-            'Start Date': { type: 'string', format: 'date' },
-            'End Date': { type: 'string', format: 'date' },
-            'Family Member': { type: 'string' },
-            'Details': { type: 'string' },
-            'Dose': { type: 'string' },
+            'Emergency Contacts': {
+                type: 'object',
+                properties: {
+                    'Name': { type: 'string', default: '', 'x-props': { 'hint': 'Ex: Father' } },
+                    'Phone': { type: 'number', 'x-props': { 'hint': 'Ex: 01123456789' } }
+                },
+                required: ['Phone']
+            },
+            'Medications': {
+                type: 'object',
+                properties: {
+                    'Name': { type: 'string', 'x-props': { 'hint': 'Ex: Panadol' } },
+                    'Dose': { type: 'string', default: '', 'x-props': { 'hint': 'Ex: Twice a day' } },
+                    'Start Date': { type: 'string', format: 'date', default: '' },
+                    'End Date': { type: 'string', format: 'date', default: '' },
+                },
+                required: ['Name']
+            },
+            'Diseases': {
+                type: 'object',
+                properties: {
+                    'Name': { type: 'string', 'x-props': { 'hint': 'Ex: Diabetes' } },
+                    'Details': { type: 'string', default: '', 'x-props': { 'hint': 'Ex: type 2' } },
+                    'Start Date': { type: 'string', format: 'date', default: '', },
+                    'End Date': { type: 'string', format: 'date', default: '' },
+                },
+                required: ['Name']
+            },
+            'Family History': {
+                type: 'object',
+                properties: {
+                    'Name': { type: 'string', 'x-props': { 'hint': 'Ex: High Blood Pressure' } },
+                    'Family member': { type: 'string', default: '', 'x-props': { 'hint': 'Ex: Mother' } },
+                    'Start Date': { type: 'string', format: 'date', default: '' },
+                    'End Date': { type: 'string', format: 'date', default: '' },
+                },
+                required: ['Name']
+            },
+            'Immunizations': {
+                type: 'object',
+                properties: {
+                    'Name': { type: 'string', default: '', 'x-props': { 'hint': 'Ex: Pfizer Covid-19' } },
+                    'Details': { type: 'string', default: '' },
+                    'Date': { type: 'string', format: 'date', default: '' },
+                },
+                required: ['Name']
+            },
+            'Allergies': {
+                type: 'object',
+                properties: {
+                    'Name': { type: 'string', 'x-props': { 'hint': 'Ex: Lactose Intolerance' } },
+                    'Details': { type: 'string', default: '' },
+                    'Start Date': { type: 'string', format: 'date', default: '' },
+                    'End Date': { type: 'string', format: 'date', default: '' },
+                },
+                required: ['Name']
+            },
+            'Prescriptions': {
+                type: 'object',
+                properties: {
+                    'Image': {
+                        type: 'string', "contentMediaType": "image/*",
+                        "x-options": {
+                            "filesAsDataUrl": true
+                        },
+                        "writeOnly": true,
+                        //  default: ''
+                    },
+                    'Details': { type: 'string', 'x-props': { 'hint': 'Ex: Prescription for Covid-19' } },
+                    'Date': { type: 'string', format: 'date', default: '' },
+                },
+                required: ['Details']
+            },
+            'Scans': {
+                type: 'object',
+                properties: {
+                    'Image': {
+                        type: 'string', "contentMediaType": "image/*",
+                        "writeOnly": true,
+                        "x-options": {
+                            "filesAsDataUrl": true
+                        }, 
+                        // default: ''
+                    },
+                    'Details': { type: 'string', 'x-props': { 'hint': 'Ex: X-Ray for Chest' } },
+                    'Date': { type: 'string', format: 'date', default: '' },
+                },
+                required: ['Details']
+            },
+            'Lab Tests': {
+                type: 'object',
+                properties: {
+                    'Image': {
+                        type: 'string', "contentMediaType": "image/*",
+                        "writeOnly": true,
+                        "x-options": {
+                            "filesAsDataUrl": true
+                        },
+                        // default: ''
+                    },
+                    'Details': { type: 'string', 'x-props': { 'hint': 'Ex: Blood Sugar test' } },
+                    'Date': { type: 'string', format: 'date', default: '' },
+                },
+                required: ['Details']
+            },
         }
     }),
     props: {
@@ -79,19 +176,9 @@ export default {
     },
     methods: {
         update_schema() {
-            var schema = {
-                type: 'object',
-                properties: {}
-            };
-
             this.model = this.section_data;
-            for (let field in this.schema2) {
-                if (this.model[field] !== undefined) {
-                    schema.properties[field] = this.schema2[field]
-                }
-            }
-
-            this.schema = schema;
+            this.schema.properties = this.schema2[this.section].properties
+            this.schema.required = this.schema2[this.section].required
         },
         editPatient() {
             this.$refs.form.validate();
@@ -118,9 +205,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 .v-card {
     box-shadow: none !important;
 }
-
 </style>

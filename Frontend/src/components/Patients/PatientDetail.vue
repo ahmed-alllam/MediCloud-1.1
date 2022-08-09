@@ -138,7 +138,7 @@
                         <div v-for="(item, index2) in value" v-bind:key="index2" class="col-md-6 col-xs-12">
                             <div class="record-item row no-gutters">
 
-                                <img class="record-image" v-if="item.Image" :src="'/' + item.Image" />
+                                <img class="record-image" v-if="item.Image" :src="item.Image" />
 
                                 <v-menu top v-if="can_edit">
                                     <template v-slot:activator="{ on, attrs }">

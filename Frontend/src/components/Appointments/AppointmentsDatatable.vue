@@ -21,9 +21,9 @@
 
                 <template v-slot:item="props">
                     <tr>
-                        <td>{{ props.item.patientName }}</td>
-                        <td>{{ props.item.patientComplaint }}</td>
-                        <td>{{ props.item.patientDiagnosis }}</td>
+                        <td class="truncate">{{ props.item.patientName }}</td>
+                        <td class="truncate">{{ props.item.patientComplaint }}</td>
+                        <td class="truncate">{{ props.item.patientDiagnosis }}</td>
                         <td>{{ props.item.created | formatDate }}</td>
                         <td>
                             <v-btn text small class="mt-2 mb-2 mr-2 item-button" @click="getAppointment(props.item)">
@@ -102,6 +102,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+.truncate {
+      max-width: 1px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
 .loadingBar {
     text-align: center;
     margin: 50px 0;

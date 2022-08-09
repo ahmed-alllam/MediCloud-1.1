@@ -18,7 +18,7 @@
                 </div>
                 <div>
                     <v-btn text color="primary" class="font-weight-bold" @click="editPatient">Edit Patient</v-btn>
-                    <v-btn text color="red" @click="$emit('update')">Cancel</v-btn>
+                    <v-btn text color="red" @click="$emit('update'); reset()">Cancel</v-btn>
                     <label>
                         {{ errorLabel }}
                     </label>
@@ -50,16 +50,16 @@ export default {
             'Emergency Contacts': {
                 type: 'object',
                 properties: {
-                    'Name': { type: 'string', default: '' },
-                    'Phone': { type: 'number' }
+                    'Name': { type: 'string', default: '',  'x-props': { 'hint': 'Ex: Father' } },
+                    'Phone': { type: 'number', 'x-props': { 'hint': 'Ex: 01123456789' }  }
                 },
                 required: ['Phone']
             },
             'Medications': {
                 type: 'object',
                 properties: {
-                    'Name': { type: 'string' },
-                    'Dose': { type: 'string' , default: ''},
+                    'Name': { type: 'string', 'x-props': { 'hint': 'Ex: Panadol' }  },
+                    'Dose': { type: 'string' , default: '', 'x-props': { 'hint': 'Ex: Twice a day' } },
                     'Start Date': { type: 'string', format: 'date' , default: ''},
                     'End Date': { type: 'string', format: 'date' , default: ''},
                 },
@@ -68,9 +68,9 @@ export default {
             'Diseases': {
                 type: 'object',
                 properties: {
-                    'Name': { type: 'string' },
-                    'Details': { type: 'string' , default: ''},
-                    'Start Date': { type: 'string', format: 'date' , default: ''},
+                    'Name': { type: 'string', 'x-props': { 'hint': 'Ex: Diabetes' }  },
+                    'Details': { type: 'string' , default: '', 'x-props': { 'hint': 'Ex: type 2' } },
+                    'Start Date': { type: 'string', format: 'date' , default: '', },
                     'End Date': { type: 'string', format: 'date' , default: ''},
                 },
                 required: ['Name']
@@ -78,8 +78,8 @@ export default {
             'Family History': {
                 type: 'object',
                 properties: {
-                    'Name': { type: 'string' },
-                    'Family member': { type: 'string', default: '' },
+                    'Name': { type: 'string', 'x-props': { 'hint': 'Ex: High Blood Pressure' } },
+                    'Family member': { type: 'string', default: '', 'x-props': { 'hint': 'Ex: Mother' } },
                     'Start Date': { type: 'string', format: 'date', default: '' },
                     'End Date': { type: 'string', format: 'date', default: '' },
                 },
@@ -88,7 +88,7 @@ export default {
             'Immunizations': {
                 type: 'object',
                 properties: {
-                    'Name': { type: 'string', default: '' },
+                    'Name': { type: 'string', default: '', 'x-props': { 'hint': 'Ex: Pfizer Covid-19' }  },
                     'Details': { type: 'string', default: '' },
                     'Date': { type: 'string', format: 'date', default: '' },
                 },
@@ -97,7 +97,7 @@ export default {
             'Allergies': {
                 type: 'object',
                 properties: {
-                    'Name': { type: 'string' },
+                    'Name': { type: 'string', 'x-props': { 'hint': 'Ex: Lactose Intolerance' }  },
                     'Details': { type: 'string', default: '' },
                     'Start Date': { type: 'string', format: 'date', default: '' },
                     'End Date': { type: 'string', format: 'date', default: '' },
@@ -112,9 +112,10 @@ export default {
                         "x-options": {
                             "filesAsDataUrl": true
                         },
-                        "writeOnly": true, default: ''
+                        "writeOnly": true,
+                        // default: ''
                     },
-                    'Details': { type: 'string' },
+                    'Details': { type: 'string', 'x-props': { 'hint': 'Ex: Prescription for Covid-19' } },
                     'Date': { type: 'string', format: 'date', default: '' },
                 },
                 required: ['Details']
@@ -127,14 +128,15 @@ export default {
                         "writeOnly": true,
                         "x-options": {
                             "filesAsDataUrl": true
-                        }, default: ''
+                        }, 
+                        // default: ''
                     },
-                    'Details': { type: 'string' },
+                    'Details': { type: 'string','x-props': { 'hint': 'Ex: X-Ray for Chest' }  },
                     'Date': { type: 'string', format: 'date' , default: ''},
                 },
                 required: ['Details']
             },
-            'Lab tests': {
+            'Lab Tests': {
                 type: 'object',
                 properties: {
                     'Image': {
@@ -142,10 +144,10 @@ export default {
                         "writeOnly": true,
                         "x-options": {
                             "filesAsDataUrl": true
-                        }
-                        , default: ''
+                        },
+                        //  default: ''
                     },
-                    'Details': { type: 'string' },
+                    'Details': { type: 'string', 'x-props': { 'hint': 'Ex: Blood Sugar test' }  },
                     'Date': { type: 'string', format: 'date' , default: ''},
                 },
                 required: ['Details']
@@ -159,9 +161,15 @@ export default {
         }
     },
     methods: {
+        reset() {
+            this.model = {}
+            this.errorLabel = ''
+            this.valid = null
+        },
         typeSelected: function () {
             this.schema.properties = this.schema2[this.section].properties
             this.schema.required = this.schema2[this.section].required
+            this.reset()
         },
         editPatient() {
             this.$refs.form.validate();
@@ -185,6 +193,7 @@ export default {
                     });
                 // update local data
                 this.$emit('update')
+            this.reset()
             } else {
                 this.errorLabel = 'Please fill in all required fields';
             }

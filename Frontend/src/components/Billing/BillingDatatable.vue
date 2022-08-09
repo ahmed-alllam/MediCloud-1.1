@@ -18,9 +18,9 @@
                     :sort-by="['created']" :sort-desc="true">
                     <template v-slot:item="props">
                         <tr>
-                            <td>{{ props.item.patientName }}</td>
-                            <td>{{ props.item.visitCost }}</td>
-                            <td>{{ props.item.created | formatDate }}</td>
+                            <td class="truncate">{{ props.item.patientName }}</td>
+                            <td class="truncate">{{ props.item.visitCost }}</td>
+                            <td class="truncate">{{ props.item.created | formatDate }}</td>
                         </tr>
                     </template>
                 </v-data-table>
@@ -69,6 +69,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.truncate {
+    max-width: 1px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .loadingBar {
     text-align: center;
     margin: 50px 0;

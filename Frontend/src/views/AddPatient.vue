@@ -56,22 +56,22 @@ export default {
                 'Last Name': { type: 'string', 'x-col': '12', "x-class": "col-sm-5" },
                 'Phone': { type: 'number', 'x-col': '12', "x-class": "mr-10 col-sm-5" },
                 'Email': { type: 'string', 'x-col': '12', 'x-class': 'col-sm-5' },
-                'Birth Date': { type: 'string', format: 'date', 'x-col': '12' , "x-class": "mr-10 col-sm-5"},
+                'Birth Date': { type: 'string', format: 'date', 'x-col': '12', "x-class": "mr-10 col-sm-5" },
                 'Blood Type': {
                     type: 'string',
                     'enum': ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'],
                     'x-col': '12',
                     'x-class': 'col-sm-5'
                 },
-                'Gender': { type: 'string', 'enum': ['Male', 'Female'], 'x-col': '12' , "x-class": "mr-10 col-sm-5"},
+                'Gender': { type: 'string', 'enum': ['Male', 'Female'], 'x-col': '12', "x-class": "mr-10 col-sm-5" },
 
                 'Emergency Contacts': {
                     type: 'array', 'x-col': '12', 'x-class': 'col-sm-5',
                     items: {
                         type: 'object',
                         properties: {
-                            'Name': { type: 'string' },
-                            'Phone': { type: 'number' }
+                            'Name': { type: 'string', 'x-props': { 'hint': 'Ex: Father' } },
+                            'Phone': { type: 'number', 'x-props': { 'hint': 'Ex: 01123456789' } }
                         },
                         required: ['Phone']
                     },
@@ -81,8 +81,8 @@ export default {
                     items: {
                         type: 'object',
                         properties: {
-                            'Name': { type: 'string' },
-                            'Dose': { type: 'string' },
+                            'Name': { type: 'string', 'x-props': { 'hint': 'Ex: Panadol' } },
+                            'Dose': { type: 'string', 'x-props': { 'hint': 'Ex: Twice a day' } },
                             'Start Date': { type: 'string', format: 'date' },
                             'End Date': { type: 'string', format: 'date' },
                         },
@@ -94,8 +94,8 @@ export default {
                     , items: {
                         type: 'object',
                         properties: {
-                            'Name': { type: 'string' },
-                            'Details': { type: 'string' },
+                            'Name': { type: 'string', 'x-props': { 'hint': 'Ex: Diabetes' } },
+                            'Details': { type: 'string', 'x-props': { 'hint': 'Ex: type 2' } },
                             'Start Date': { type: 'string', format: 'date' },
                             'End Date': { type: 'string', format: 'date' },
                         },
@@ -106,8 +106,8 @@ export default {
                     type: 'array', 'x-col': '12', "x-class": "mr-10 col-sm-5", items: {
                         type: 'object',
                         properties: {
-                            'Name': { type: 'string' },
-                            'Family member': { type: 'string' },
+                            'Name': { type: 'string', 'x-props': { 'hint': 'Ex: High Blood Pressure' } },
+                            'Family member': { type: 'string', 'x-props': { 'hint': 'Ex: Mother' } },
                             'Start Date': { type: 'string', format: 'date' },
                             'End Date': { type: 'string', format: 'date' },
                         },
@@ -118,7 +118,7 @@ export default {
                     type: 'array', 'x-col': '12', 'x-class': 'col-sm-5', items: {
                         type: 'object',
                         properties: {
-                            'Name': { type: 'string' },
+                            'Name': { type: 'string', 'x-props': { 'hint': 'Ex: Pfizer Covid-19' } },
                             'Details': { type: 'string' },
                             'Date': { type: 'string', format: 'date' },
                         },
@@ -129,7 +129,7 @@ export default {
                     type: 'array', 'x-col': '12', "x-class": "mr-10 col-sm-5", items: {
                         type: 'object',
                         properties: {
-                            'Name': { type: 'string' },
+                            'Name': { type: 'string', 'x-props': { 'hint': 'Ex: Lactose Intolerance' } },
                             'Details': { type: 'string' },
                             'Start Date': { type: 'string', format: 'date' },
                             'End Date': { type: 'string', format: 'date' },
@@ -142,10 +142,14 @@ export default {
                         type: 'object',
                         properties: {
                             'Image': {
-                                type: 'string', "contentMediaType": "image/*",
+                                type: 'string',
+                                "contentMediaType": "image/*",
+                                "x-options": {
+                                    "filesAsDataUrl": true
+                                },
                                 "writeOnly": true
                             },
-                            'Details': { type: 'string' },
+                            'Details': { type: 'string', 'x-props': { 'hint': 'Ex: Prescription for Covid-19' } },
                             'Date': { type: 'string', format: 'date' },
                         },
                         required: ['Details']
@@ -156,24 +160,32 @@ export default {
                         type: 'object',
                         properties: {
                             'Image': {
-                                type: 'string', "contentMediaType": "image/*",
+                                type: 'string',
+                                "contentMediaType": "image/*",
+                                "x-options": {
+                                    "filesAsDataUrl": true
+                                },
                                 "writeOnly": true
                             },
-                            'Details': { type: 'string' },
+                            'Details': { type: 'string', 'x-props': { 'hint': 'Ex: X-Ray for Chest' } },
                             'Date': { type: 'string', format: 'date' },
                         },
                         required: ['Details']
                     },
                 },
                 'Lab tests': {
-                    type: 'array', 'x-col': '12', 'x-class': 'col-sm-5',  items: {
+                    type: 'array', 'x-col': '12', 'x-class': 'col-sm-5', items: {
                         type: 'object',
                         properties: {
                             'Image': {
-                                type: 'string', "contentMediaType": "image/*",
+                                type: 'string',
+                                "contentMediaType": "image/*",
+                                "x-options": {
+                                    "filesAsDataUrl": true
+                                },
                                 "writeOnly": true
                             },
-                            'Details': { type: 'string' },
+                            'Details': { type: 'string', 'x-props': { 'hint': 'Ex: Blood Sugar test' } },
                             'Date': { type: 'string', format: 'date' },
                         },
                         required: ['Details']

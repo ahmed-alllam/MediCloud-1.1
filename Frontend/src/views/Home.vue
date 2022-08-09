@@ -3,7 +3,7 @@
     <v-container class="pl-5 pt-10 pr-5 pb-10">
         <div>
             <h3 class="goodMorningHeader">
-                Good Morning, Dr. {{ $store.state.user_name.split(' ')[0] }}
+                {{greeting}}, Dr. {{ $store.state.user_name.split(' ')[0] }}
             </h3>
 
 
@@ -262,6 +262,7 @@ import Datepicker from 'vuejs-datepicker';
 import VueApexCharts from 'vue-apexcharts'
 import AppointmentsDatatable from "../components/Appointments/AppointmentsDatatable"
 
+const greetingTime = require("greeting-time");
 
 export default {
     components: {
@@ -269,6 +270,7 @@ export default {
     },
     data() {
         return {
+            greeting: greetingTime(new Date()),
             errorLabel: '',
             ageFound: false,
             loaded: false,
@@ -359,6 +361,13 @@ export default {
                         x: new Date(this.visitsByDays[i].day).getTime(),
                         y: this.visitsByDays[i].numberOfAppointments
                     });
+                }
+
+                for (let i = 0; i < data.drugs.length; i++) {
+                    this.drugsPieSeries.push(
+                        data.drugs[i].count
+                    );
+                    this.drugsPieOptions.labels.push(data.drugs[i]._id);
                 }
 
                 for (let i = 0; i < data.diagnoses.length; i++) {

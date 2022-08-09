@@ -89,24 +89,24 @@ router.get("/api/dashboard/", async (req, res) => {
                 }
             ])
 
-            // const prescripedDrugs = await Visits.aggregate([
-            //     {
-            //         $match: {
-            //             doctorId: new mongoose.Types.ObjectId(req.user._id)
-            //         }
-            //     },
-            //     {
-            //         $unwind: "$prescribedDrugs"
-            //     },
-            //     {
-            //         $group: {
-            //             _id: "$prescribedDrugs.drugName",
-            //             total: {
-            //                 $sum: 1
-            //             }
-            //         }
-            //     }
-            // ])
+            const prescripedDrugs = await Visits.aggregate([
+                {
+                    $match: {
+                        doctorId: new mongoose.Types.ObjectId(req.user._id)
+                    }
+                },
+                {
+                    $unwind: "$prescription"
+                },
+                {
+                    $group: {
+                        _id: "$prescription.Name",
+                        total: {
+                            $sum: 1
+                        }
+                    }
+                }
+            ])
 
             const diagnoses = await Visits.aggregate([
                 {
@@ -214,7 +214,7 @@ router.get("/api/dashboard/", async (req, res) => {
 
             res.json({
                 visitsByDays: visitsByDays,
-                // drugs: prescripedDrugs,
+                drugs: prescripedDrugs,
                 diagnoses: diagnoses,
                 patientsAgeDistribution: patientsAgeDistribution,
                 patientsGenderDistribution: patientsGenderDistribution

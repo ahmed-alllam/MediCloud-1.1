@@ -29,6 +29,20 @@ const VisitSchema = mongoose.Schema({
     type: String,
     required: true
   },
+  prescription:
+    [
+      {
+        Name: String,
+        Dose: String,
+        Details: String,
+        Image: String,
+        Date: {
+          type: Date,
+          default: Date.now
+        },
+      }
+    ]
+  ,
   notes: {
     type: String,
   },

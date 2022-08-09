@@ -17,7 +17,7 @@
                 </v-list-item>
                 <v-card-text>
                     <v-form v-model="valid" ref="form">
-                        <v-jsf v-model="model" :schema="schema" />
+                        <v-jsf v-model="model" :schema="schema" :options="options"/>
                     </v-form>
                 </v-card-text>
 
@@ -26,7 +26,8 @@
                     <v-btn v-if="edit && loaded" text large class="font-weight-bold add-appointment-button"
                         @click="editAppointment">Edit
                         Appointment</v-btn>
-                    <v-btn v-else-if="loaded"  text large class="font-weight-bold add-appointment-button" @click="addAppointment">Add
+                    <v-btn v-else-if="loaded" text large class="font-weight-bold add-appointment-button"
+                        @click="addAppointment">Add
                         Appointment</v-btn>
                     <v-spacer></v-spacer>
                 </v-card-actions>
@@ -77,6 +78,9 @@ export default {
         valid: null,
         model: {
         },
+        options: {
+            "editMode": "inline"
+        },
         schema: {
             type: 'object',
             properties: {
@@ -85,6 +89,25 @@ export default {
                 'followUpDate': { title: 'Follow Up Date', type: 'string', format: 'date' },
                 'notes': { title: 'Notes', type: 'string' },
                 'visitCost': { title: 'Appointment Cost (EGP)', type: 'number', default: 0 },
+                'prescription': {
+                    title: 'Prescription', type: 'array', items: {
+                        type: 'object',
+                        properties: {
+                            'Image': {
+                                type: 'string',
+                                "contentMediaType": "image/*",
+                                "x-options": {
+                                    "filesAsDataUrl": true
+                                },
+                                "writeOnly": true
+                            },
+                            'Name': { type: 'string', title: 'Drug Name', 'x-props': { 'hint': 'Ex: Panadol' } },
+                            'Dose': { type: 'string', title: 'Dose', 'x-props': { 'hint': 'Ex: Twice a day' } },
+                            'Details': { type: 'string', title: 'Notes' ,'x-props': { 'hint': 'Ex: Prescription for Covid-19' } },
+                        },
+                        required: ['Name']
+                    },
+                },
             }, required: ['complaint', 'patientDiagnosis']
         },
     }),
