@@ -13,7 +13,7 @@
                         <v-card-text>
                             <div class="row datepicker-row">
                                 <div>
-                                    <datepicker :inline="true" class="datepicker" />
+                                    <datepicker v-model="selectedDate" :inline="true" class="datepicker" />
                                 </div>
 
                                 <div class="mt-5 ml-5 mr-5 pr-2">
@@ -25,7 +25,7 @@
                                                 </v-card-title>
                                                 <v-card-text class="justify-center">
                                                     <div class="font-weight-bold">
-                                                        120
+                                                        {{ selectedDayInfo.newPatients || 0 }}
                                                     </div>
                                                 </v-card-text>
                                             </v-card>
@@ -37,7 +37,7 @@
                                                 </v-card-title>
                                                 <v-card-text class="justify-center">
                                                     <div class="font-weight-bold">
-                                                        106
+                                                        {{ selectedDayInfo.oldPatients || 0 }}
                                                     </div>
                                                 </v-card-text>
                                             </v-card>
@@ -51,7 +51,7 @@
                                                 </v-card-title>
                                                 <v-card-text class="justify-center">
                                                     <div class="font-weight-bold">
-                                                        1,000 EGP
+                                                        {{ selectedDayInfo.totalRevenue || 0 }} EGP
                                                     </div>
                                                 </v-card-text>
                                             </v-card>
@@ -63,7 +63,7 @@
                                                 </v-card-title>
                                                 <v-card-text class="justify-center">
                                                     <div class="font-weight-bold">
-                                                        100 EGP
+                                                        {{ selectedDayInfo.revenuePerPatient || 0 }} EGP
                                                     </div>
                                                 </v-card-text>
                                             </v-card>
@@ -82,7 +82,8 @@
 
                         <v-card-text class="p-0">
                             <div>
-                                <VueApexCharts type="line" :options="options" :series="series" />
+                                <VueApexCharts v-if="series[0].data && series[0].data.length" type="line"
+                                    :options="options" :series="series" />
                             </div>
                         </v-card-text>
                     </v-card>
@@ -183,6 +184,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 import Datepicker from 'vuejs-datepicker';
 import VueApexCharts from 'vue-apexcharts'
 import AppointmentsDatatable from "../components/Appointments/AppointmentsDatatable"
@@ -194,6 +196,8 @@ export default {
     },
     data() {
         return {
+            selectedDate: new Date(),
+            visitsByDays: [],
             options: {
                 stroke: {
                     show: true,
@@ -203,24 +207,34 @@ export default {
                     type: 'gradient',
                 },
                 chart: {
-                    id: 'patients-flow-linechart',
-                    toolbar: {
-                        show: false
-                    },
+                    id: 'area-datetime',
+                    type: 'area',
                 },
                 xaxis: {
-                    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-                }
+                    type: 'datetime',
+                },
+                yaxis: {
+                    min: 0,
+                    title: {
+                        text: 'Appointments'
+                    }
+                },
+                tooltip: {
+                    x: {
+                        format: 'dd MMM yyyy'
+                    }
+                },
+
             },
             series: [{
                 name: 'Appointments',
-                data: [30, 40, 45, 50, 49, 60, 70, 91]
+                data: []
             }],
 
-            drugsPieSeries: [44, 55, 13, 34, 45, 56, 67, 78],
-            diseasesPieSeries: [44, 55, 13, 12, 23, 34],
-            agePieSeries: [44, 55, 13, 33],
-            genderPieSeries: [44, 55],
+            drugsPieSeries: [],
+            diseasesPieSeries: [],
+            agePieSeries: [0, 0, 0, 0, 0, 0],
+            genderPieSeries: [],
             drugsPieOptions: {
                 chart: {
                     type: 'pie',
@@ -228,7 +242,7 @@ export default {
                 legend: {
                     position: 'bottom'
                 },
-                labels: ['Team A', 'Team B', 'Team C'],
+                labels: [],
             },
             diseasesPieOptions: {
                 chart: {
@@ -237,7 +251,7 @@ export default {
                 legend: {
                     position: 'bottom'
                 },
-                labels: ['Team A', 'Team B', 'Team C'],
+                labels: [],
             },
             agePieOptions: {
                 chart: {
@@ -246,7 +260,7 @@ export default {
                 legend: {
                     position: 'bottom'
                 },
-                labels: ['Team A', 'Team B', 'Team C'],
+                labels: ['0-9', '9-18', '18-30', '30-45', '45-60', '60+'],
             },
             genderPieOptions: {
                 chart: {
@@ -255,13 +269,80 @@ export default {
                 legend: {
                     position: 'bottom'
                 },
-                labels: ['Male', 'Female'],
-                colors: ['#00aaff', '#ff00aa'],
-                fill: {
-                    colors: ['#00aaff', '#ff00aa']
-                },
+                labels: [],
+
             },
         }
+    },
+    methods: {
+        loadStatistics() {
+            axios.get('https://medicloudeg.herokuapp.com/api/dashboard').then(({ data }) => {
+                this.visitsByDays = data.visitsByDays;
+
+                for (let i = 0; i < this.visitsByDays.length; i++) {
+                    this.series[0].data.push({
+                        x: new Date(this.visitsByDays[i].day).getTime(),
+                        y: this.visitsByDays[i].numberOfAppointments
+                    });
+                }
+
+                for (let i = 0; i < data.diagnoses.length; i++) {
+                    this.diseasesPieSeries.push(
+                        data.diagnoses[i].count
+                    );
+                    this.diseasesPieOptions.labels.push(
+                        data.diagnoses[i]._id
+                    );
+                }
+
+                const ageSeries = [0, 0, 0, 0, 0, 0];
+                for (let i = 0; i < data.patientsAgeDistribution.length; i++) {
+                    for (let j = 0; j < this.agePieOptions.labels.length; j++) {
+                        if (data.patientsAgeDistribution[i]._id == this.agePieOptions.labels[j].split('-')[0]) {
+                            ageSeries[j] = data.patientsAgeDistribution[i].count;
+                        }
+                    }
+                }
+                this.agePieSeries = ageSeries;
+
+                for (let i = 0; i < data.patientsGenderDistribution.length; i++) {
+                    this.genderPieSeries.push(
+                        data.patientsGenderDistribution[i].count
+                    );
+                    this.genderPieOptions.labels.push(
+                        data.patientsGenderDistribution[i]._id
+                    );
+                }
+
+                this.genderPieOptions.colors = [
+                    function ({ seriesIndex }) {
+                        if (this.genderPieSeries[seriesIndex] === 'Female') {
+                            return '#ff00aa';
+                        }
+                        return '#00aaff';
+                    }
+                ]
+
+                // todo : add loading and error
+            }).catch(error => {
+                console.log(error) // todo
+            })
+        }
+    },
+    computed: {
+        selectedDayInfo: function () {
+            for (let i = 0; i < this.visitsByDays.length; i++) {
+                const day = new Date(this.visitsByDays[i].day)
+                if (day.getDate() == this.selectedDate.getDate() && day.getMonth() == this.selectedDate.getMonth() && day.getFullYear() == this.selectedDate.getFullYear()) {
+                    return this.visitsByDays[i]
+                }
+            }
+
+            return {}
+        }
+    },
+    created() {
+        this.loadStatistics()
     }
 }
 </script>
@@ -333,5 +414,11 @@ export default {
     ::v-deep .v-card {
         box-shadow: none !important;
     }
+}
+</style>
+
+<style>
+.apexcharts-toolbar {
+    z-index: 0 !important;
 }
 </style>

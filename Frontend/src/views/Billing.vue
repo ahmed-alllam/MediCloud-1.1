@@ -37,20 +37,19 @@ export default {
         fill: {
           type: 'gradient',
         },
-        chart: {
-          toolbar: {
-            show: false
-          },
+        xaxis: {
+          type: 'datetime',
         },
         yaxis: {
+          min: 0,
           title: {
             text: "Revenue (EGP)"
           }
         },
-        xaxis: {
-          categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-        },
         tooltip: {
+          x: {
+            format: 'dd MMM yyyy'
+          },
           y: {
             title: {
               formatter: () => {
@@ -62,9 +61,26 @@ export default {
       },
       series: [{
         name: 'Revenue',
-        data: [30, 40, 45, 50, 49, 60, 70, 91]
+        data: []
       }]
     }
+  },
+  methods: {
+    getRevenue() {
+      this.$http.get('https://medicloudeg.herokuapp.com/api/billing/stats').then(response => {
+        this.visitsByDays = data.visitsByDays;
+
+        for (let i = 0; i < this.visitsByDays.length; i++) {
+          this.series[0].data.push({
+            x: new Date(this.visitsByDays[i].day).getTime(),
+            y: this.visitsByDays[i].numberOfAppointments
+          });
+        }
+      })
+    }
+  },
+  created() {
+    this.getRevenue()
   }
 }
 </script>
