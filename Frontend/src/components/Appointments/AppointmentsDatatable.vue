@@ -95,7 +95,7 @@ export default {
             this.$router.push(`/appointments/edit/${appointment._id}`)
         }
     },
-    created() {
+    mounted() {
         this.getVisits()
     }
 }

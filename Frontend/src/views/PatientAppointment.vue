@@ -185,7 +185,7 @@ export default {
                 })
         },
     },
-    created() {
+    mounted() {
         if (this.edit)
             this.getVisit();
         else {

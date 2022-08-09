@@ -282,8 +282,6 @@ export default {
                     curve: 'smooth'
                 },
                 chart: {
-                    id: 'area-datetime',
-                    type: 'area',
                 },
                 xaxis: {
                     type: 'datetime',
@@ -311,36 +309,24 @@ export default {
             agePieSeries: [0, 0, 0, 0, 0, 0],
             genderPieSeries: [],
             drugsPieOptions: {
-                chart: {
-                    type: 'pie',
-                },
                 legend: {
                     position: 'bottom'
                 },
                 labels: [],
             },
             diseasesPieOptions: {
-                chart: {
-                    type: 'pie',
-                },
                 legend: {
                     position: 'bottom'
                 },
                 labels: [],
             },
             agePieOptions: {
-                chart: {
-                    type: 'pie',
-                },
                 legend: {
                     position: 'bottom'
                 },
                 labels: ['0-9', '9-18', '18-30', '30-45', '45-60', '60+'],
             },
             genderPieOptions: {
-                chart: {
-                    type: 'pie',
-                },
                 legend: {
                     position: 'bottom'
                 },
@@ -365,7 +351,7 @@ export default {
 
                 for (let i = 0; i < data.drugs.length; i++) {
                     this.drugsPieSeries.push(
-                        data.drugs[i].count
+                        data.drugs[i].total
                     );
                     this.drugsPieOptions.labels.push(data.drugs[i]._id);
                 }
@@ -429,7 +415,7 @@ export default {
             return {}
         }
     },
-    created() {
+    mounted() {
         this.loadStatistics()
     }
 }

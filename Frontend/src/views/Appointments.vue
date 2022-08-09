@@ -11,12 +11,6 @@ export default {
   components: {
     AppointmentsDatatable
   },
-  methods: {
-    
-  },
-  created() {
-    
-  }
 }
 </script>
 

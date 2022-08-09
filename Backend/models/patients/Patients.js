@@ -28,7 +28,8 @@ const PatientSchema = mongoose.Schema({
     type: String
   },
   patientBloodType: {
-    type: String
+    type: String,
+    enum: ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"]
   },
   patientEmergencyContacts: [
     {
@@ -37,7 +38,8 @@ const PatientSchema = mongoose.Schema({
     }
   ],
   patientGender: {
-    type: String
+    type: String,
+    enum: ["Male", "Female"],
   },
   patientStatus: {
     type: String
