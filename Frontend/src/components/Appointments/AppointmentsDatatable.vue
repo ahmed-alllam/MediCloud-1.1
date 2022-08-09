@@ -83,6 +83,8 @@ export default {
         },
 
         async deleteVisit(id) {
+            this.visits = this.visits.filter(visit => visit._id !== id);
+
             axios.delete(`https://medicloudeg.herokuapp.com/api/visits/${id}`).then(res => {
                 console.log(res)
             }).catch(err => console.log(err))

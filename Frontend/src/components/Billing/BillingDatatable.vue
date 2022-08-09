@@ -18,9 +18,9 @@
                     :sort-by="['created']" :sort-desc="true">
                     <template v-slot:item="props">
                         <tr>
-                            <td>{{ props.item.created | formatDate }}</td>
                             <td>{{ props.item.patientName }}</td>
                             <td>{{ props.item.visitCost }}</td>
+                            <td>{{ props.item.created | formatDate }}</td>
                         </tr>
                     </template>
                 </v-data-table>
@@ -42,9 +42,9 @@ export default {
         loading: true,
         billingSearch: "",
         billingHeader: [
-            { text: "Date", value: "created" },
             { text: "Patient Name", value: "patientName" },
             { text: "Amount (EGP)", value: "visitCost" },
+            { text: "Date", value: "created" },
         ],
         billings: []
     }),

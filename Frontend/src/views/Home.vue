@@ -16,7 +16,15 @@
                                     <datepicker v-model="selectedDate" :inline="true" class="datepicker" />
                                 </div>
 
-                                <div class="mt-5 ml-5 mr-5 pr-2">
+                                <div v-if="!loaded" class="loadingBar">
+                                    <v-progress-circular indeterminate color="primary" v-if="!errorLabel">
+                                    </v-progress-circular>
+                                    <label class="errorLabel">
+                                        {{ errorLabel }}
+                                    </label>
+                                </div>
+
+                                <div v-else class="mt-5 ml-5 mr-5 pr-2">
                                     <div class="row">
                                         <div class="col-6">
                                             <v-card class="stats-card blue lighten-2 white--text">
@@ -51,7 +59,7 @@
                                                 </v-card-title>
                                                 <v-card-text class="justify-center">
                                                     <div class="font-weight-bold">
-                                                        {{ selectedDayInfo.totalRevenue || 0 }} EGP
+                                                        {{ Math.round(selectedDayInfo.totalRevenue) || 0 }} EGP
                                                     </div>
                                                 </v-card-text>
                                             </v-card>
@@ -63,7 +71,7 @@
                                                 </v-card-title>
                                                 <v-card-text class="justify-center">
                                                     <div class="font-weight-bold">
-                                                        {{ selectedDayInfo.revenuePerPatient || 0 }} EGP
+                                                        {{ Math.round(selectedDayInfo.revenuePerPatient) || 0 }} EGP
                                                     </div>
                                                 </v-card-text>
                                             </v-card>
@@ -81,9 +89,22 @@
                         </v-card-title>
 
                         <v-card-text class="p-0">
-                            <div>
+                            <div v-if="!loaded" class="loadingBar">
+                                <v-progress-circular indeterminate color="primary" v-if="!errorLabel">
+                                </v-progress-circular>
+                                <label class="errorLabel">
+                                    {{ errorLabel }}
+                                </label>
+                            </div>
+
+                            <div v-else>
                                 <VueApexCharts v-if="series[0].data && series[0].data.length" type="line"
                                     :options="options" :series="series" />
+                                <div v-else class="text-center">
+                                    <label>
+                                        No Data Found
+                                    </label>
+                                </div>
                             </div>
                         </v-card-text>
                     </v-card>
@@ -138,7 +159,19 @@
                                         Prescriped Drugs
                                     </v-card-title>
                                     <v-card-text class="justify-center">
-                                        <VueApexCharts type="pie" :options="drugsPieOptions" :series="drugsPieSeries" />
+                                        <div v-if="!loaded" class="loadingBar">
+                                            <v-progress-circular indeterminate color="primary" v-if="!errorLabel">
+                                            </v-progress-circular>
+                                            <label class="errorLabel">
+                                                {{ errorLabel }}
+                                            </label>
+                                        </div>
+                                        <VueApexCharts v-else-if="drugsPieSeries && drugsPieSeries.length" type="pie" :options="drugsPieOptions" :series="drugsPieSeries" />
+                                        <div v-else class="text-center pt-10 pb-10">
+                                            <label>
+                                                No Data Found
+                                            </label>
+                                        </div>
                                     </v-card-text>
                                 </v-card>
                             </div>
@@ -148,8 +181,22 @@
                                         Diagnosed Diseases
                                     </v-card-title>
                                     <v-card-text class="justify-center">
-                                        <VueApexCharts type="pie" :options="diseasesPieOptions"
+                                        <div v-if="!loaded" class="loadingBar">
+                                            <v-progress-circular indeterminate color="primary" v-if="!errorLabel">
+                                            </v-progress-circular>
+                                            <label class="errorLabel pt-10 pb-10">
+                                                {{ errorLabel }}
+                                            </label>
+                                        </div>
+
+                                        <VueApexCharts v-else-if="diseasesPieSeries && diseasesPieSeries.length" type="pie" :options="diseasesPieOptions"
                                             :series="diseasesPieSeries" />
+
+                                        <div v-else class="text-center pt-10 pb-10">
+                                            <label>
+                                                No Data Found
+                                            </label>
+                                        </div>
                                     </v-card-text>
                                 </v-card>
                             </div>
@@ -160,7 +207,19 @@
                                     Patients' Age
                                 </v-card-title>
                                 <v-card-text class="justify-center">
-                                    <VueApexCharts type="pie" :options="agePieOptions" :series="agePieSeries" />
+                                    <div v-if="!loaded" class="loadingBar">
+                                        <v-progress-circular indeterminate color="primary" v-if="!errorLabel">
+                                        </v-progress-circular>
+                                        <label class="errorLabel">
+                                            {{ errorLabel }}
+                                        </label>
+                                    </div>
+                                    <VueApexCharts v-else-if="agePieSeries && agePieSeries.length && ageFound" type="pie" :options="agePieOptions" :series="agePieSeries" />
+                                    <div v-else class="text-center pt-10 pb-10">
+                                        <label>
+                                            No Data Found
+                                        </label>
+                                    </div>
                                 </v-card-text>
                             </v-card>
                         </div>
@@ -170,7 +229,21 @@
                                     Patients' Gender
                                 </v-card-title>
                                 <v-card-text class="justify-center">
-                                    <VueApexCharts type="pie" :options="genderPieOptions" :series="genderPieSeries" />
+
+                                    <div v-if="!loaded" class="loadingBar">
+                                        <v-progress-circular indeterminate color="primary" v-if="!errorLabel">
+                                        </v-progress-circular>
+                                        <label class="errorLabel">
+                                            {{ errorLabel }}
+                                        </label>
+                                    </div>
+
+                                    <VueApexCharts v-else-if="genderPieSeries && genderPieSeries.length" type="pie" :options="genderPieOptions" :series="genderPieSeries" />
+                                    <div v-else class="text-center pt-10 pb-10">
+                                        <label>
+                                            No Data Found
+                                        </label>
+                                    </div>
                                 </v-card-text>
                             </v-card>
                         </div>
@@ -196,15 +269,15 @@ export default {
     },
     data() {
         return {
+            errorLabel: '',
+            ageFound: false,
+            loaded: false,
             selectedDate: new Date(),
             visitsByDays: [],
             options: {
                 stroke: {
                     show: true,
                     curve: 'smooth'
-                },
-                fill: {
-                    type: 'gradient',
                 },
                 chart: {
                     id: 'area-datetime',
@@ -277,6 +350,8 @@ export default {
     methods: {
         loadStatistics() {
             axios.get('https://medicloudeg.herokuapp.com/api/dashboard').then(({ data }) => {
+                this.loaded = true;
+
                 this.visitsByDays = data.visitsByDays;
 
                 for (let i = 0; i < this.visitsByDays.length; i++) {
@@ -300,6 +375,9 @@ export default {
                     for (let j = 0; j < this.agePieOptions.labels.length; j++) {
                         if (data.patientsAgeDistribution[i]._id == this.agePieOptions.labels[j].split('-')[0]) {
                             ageSeries[j] = data.patientsAgeDistribution[i].count;
+
+                            if(ageSeries[j] > 0)
+                                this.ageFound = true;
                         }
                     }
                 }
@@ -325,6 +403,7 @@ export default {
 
                 // todo : add loading and error
             }).catch(error => {
+                this.errorLabel = 'Error loading statistics';
                 console.log(error) // todo
             })
         }
@@ -348,6 +427,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.loadingBar {
+    text-align: center;
+    margin: auto 100px;
+    padding: 100px 0 !important;
+}
+
+.errorLabel {
+    color: red;
+}
+
 .goodMorningHeader {
     font-size: 1.7rem;
     font-weight: bold;
