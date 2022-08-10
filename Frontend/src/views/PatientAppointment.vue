@@ -120,7 +120,7 @@ export default {
             return moment().format("LLLL")
         },
         getVisit() {
-            axios.get(`https://medicloudeg.herokuapp.com/api/visits/${this.$route.params.id}`)
+            axios.get(`https://api.medicloud.care/api/visits/${this.$route.params.id}`)
                 .then(response => {
                     this.model = response.data[0];
                     this.patient_id = this.model.patientId;
@@ -144,7 +144,7 @@ export default {
 
             this.$toast.info('Adding Appointment...');
 
-            axios.post("https://medicloudeg.herokuapp.com/api/visits/", {
+            axios.post("https://api.medicloud.care/api/visits/", {
                 patientId: this.patient_id,
                 ...this.model,
             })
@@ -169,7 +169,7 @@ export default {
 
             this.$toast.info('Editing Appointment...');
 
-            axios.patch(`https://medicloudeg.herokuapp.com/api/visits/${this.$route.params.id}`, {
+            axios.patch(`https://api.medicloud.care/api/visits/${this.$route.params.id}`, {
                 patientId: this.patient_id,
                 ...this.model,
             })

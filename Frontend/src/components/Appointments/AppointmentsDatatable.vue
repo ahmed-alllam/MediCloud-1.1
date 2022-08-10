@@ -69,7 +69,7 @@ export default {
     },
     methods: {
         async getVisits() {
-            axios.get("https://medicloudeg.herokuapp.com/api/visits/")
+            axios.get("https://api.medicloud.care/api/visits/")
                 .then(res => {
                     this.$toast.success("Loaded"); 
                     this.loading = false;
@@ -85,7 +85,7 @@ export default {
         async deleteVisit(id) {
             this.visits = this.visits.filter(visit => visit._id !== id);
 
-            axios.delete(`https://medicloudeg.herokuapp.com/api/visits/${id}`).then(res => {
+            axios.delete(`https://api.medicloud.care/api/visits/${id}`).then(res => {
                 console.log(res)
             }).catch(err => console.log(err))
         },

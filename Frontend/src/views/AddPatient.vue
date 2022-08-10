@@ -211,7 +211,7 @@ export default {
                 send_model['patient' + String(key).replace(/ /g, '')] = this.model[key]
             }
 
-            axios.post("https://medicloudeg.herokuapp.com/api/patients/", {
+            axios.post("https://api.medicloud.care/api/patients/", {
                 ...send_model
             }).then(res => {
                 const Patient = res.data;

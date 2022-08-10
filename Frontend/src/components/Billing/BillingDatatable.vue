@@ -50,7 +50,7 @@ export default {
     }),
     methods: {
         async getBillings() {
-            axios.get("https://medicloudeg.herokuapp.com/api/billing/").then(res => {
+            axios.get("https://api.medicloud.care/api/billing/").then(res => {
                 this.$toast.success("Loaded");
                 this.billings = res.data
                 this.loading = false

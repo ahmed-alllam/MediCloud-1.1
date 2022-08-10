@@ -337,7 +337,7 @@ export default {
     },
     methods: {
         loadStatistics() {
-            axios.get('https://medicloudeg.herokuapp.com/api/dashboard').then(({ data }) => {
+            axios.get('https://api.medicloud.care/api/dashboard').then(({ data }) => {
                 this.loaded = true;
 
                 this.visitsByDays = data.visitsByDays;

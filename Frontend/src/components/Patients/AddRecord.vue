@@ -181,7 +181,7 @@ export default {
                     this.patient_data.details_sections[this.section] = [this.model]
                 }
 
-                axios.patch("https://medicloudeg.herokuapp.com/api/patients/" + this.patient_data._id + "/", {
+                axios.patch("https://api.medicloud.care/api/patients/" + this.patient_data._id + "/", {
                     ['patient' + String(this.section).replace(/ /g, '')]: this.patient_data.details_sections[this.section]
                 })
                     .then(response => {

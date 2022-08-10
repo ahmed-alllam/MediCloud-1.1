@@ -85,7 +85,7 @@ export default {
   },
   methods: {
     getRevenue() {
-      axios.get('https://medicloudeg.herokuapp.com/api/billing/stats').then(res => {
+      axios.get('https://api.medicloud.care/api/billing/stats').then(res => {
         this.loaded = true;
         this.visitsByDays = res.data;
 

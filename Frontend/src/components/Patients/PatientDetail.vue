@@ -319,7 +319,7 @@ export default {
                     linkID = 'medicard/' + paramID;
             }
 
-            axios.get("https://medicloudeg.herokuapp.com/api/patients/" + linkID, { timeout: 30000 })
+            axios.get("https://api.medicloud.care/api/patients/" + linkID, { timeout: 30000 })
                 .then(response => {
                     const patient = response.data;
                     this.patient_data = patient;
@@ -362,7 +362,7 @@ export default {
             this.patient_data.details_sections = Object.fromEntries(Object.entries(this.patient_data.details_sections).filter(([, v]) => v && v.length > 0));
 
             // delete from database
-            axios.patch("https://medicloudeg.herokuapp.com/api/patients/" + this.patient_data._id + "/", {
+            axios.patch("https://api.medicloud.care/api/patients/" + this.patient_data._id + "/", {
                 ['patient' + String(this.current_dialog_item[0]).replace(/ /g, '')]: section
             })
                 .then(response => {
@@ -376,7 +376,7 @@ export default {
         addMediCardID() {
             if (this.valid) {
 
-                axios.patch("https://medicloudeg.herokuapp.com/api/patients/" + this.patient_data._id + "/", {
+                axios.patch("https://api.medicloud.care/api/patients/" + this.patient_data._id + "/", {
                     'patientMediCardID': this.inputMedicardID
                 })
                     .then(response => {

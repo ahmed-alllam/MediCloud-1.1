@@ -139,5 +139,10 @@ mongoose.connect(
   }
 );
 
+app.enable('trust proxy')
+app.use((req, res, next) => {
+    req.secure ? next() : res.redirect('https://' + req.headers.host + req.url)
+})
+
 // Listen
 app.listen(process.env.PORT);

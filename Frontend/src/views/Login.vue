@@ -47,7 +47,7 @@ export default {
                 this.$toast.clear();
                 this.$toast.info("Logging in...");
 
-                axios.post("https://medicloudeg.herokuapp.com/api/doctors/login/", {
+                axios.post("https://api.medicloud.care/api/doctors/login/", {
                     email: this.emailLogin,
                     password: this.passwordLogin
                 }).then(async res => {

@@ -862,7 +862,7 @@ export default {
             if (this.newsLetterEmail === '') {
                 this.newsLetterError = "Please enter your email";
             } else {
-                axios.post("https://medicloudeg.herokuapp.com/forms/newsletter", 
+                axios.post("https://api.medicloud.care/forms/newsletter", 
                     {
                         "email": this.newsLetterEmail
                     }
@@ -879,7 +879,7 @@ export default {
             if (this.demoEmail === '' || this.demoPhone === '' || this.demoName === '') {
                 this.demoError = "Please fill the fields in the form.";
             } else {
-                axios.post("https://medicloudeg.herokuapp.com/forms/demo", 
+                axios.post("https://api.medicloud.care/forms/demo", 
                     {
                         "email": this.demoEmail,
                         "name": this.demoName,

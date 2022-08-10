@@ -184,7 +184,7 @@ export default {
             this.$refs.form.validate();
 
             if (this.valid) {
-                axios.patch("https://medicloudeg.herokuapp.com/api/patients/" + this.patient_data._id + "/", {
+                axios.patch("https://api.medicloud.care/api/patients/" + this.patient_data._id + "/", {
                     ['patient' + String(this.section).replace(/ /g, '')]: this.model
                 })
                     .then(response => {
