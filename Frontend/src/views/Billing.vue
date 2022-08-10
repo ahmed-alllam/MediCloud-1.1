@@ -100,7 +100,7 @@ export default {
       })
     }
   },
-  mounted() {
+  created() {
     this.getRevenue()
   }
 }

@@ -90,7 +90,6 @@
                         </v-card-title>
 
                         <v-card-text class="p-0">
-                            {{ series[0].data }}
                             <div v-if="!loaded" class="loadingBar">
                                 <v-progress-circular indeterminate color="primary" v-if="!errorLabel">
                                 </v-progress-circular>
@@ -420,7 +419,7 @@ export default {
             return {}
         }
     },
-    mounted() {
+    created() {
         this.loadStatistics()
     }
 }

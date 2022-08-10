@@ -171,7 +171,7 @@ export default {
             this.update_schema();
         }
     },
-    mounted() {
+    created() {
         this.update_schema();
     },
     methods: {

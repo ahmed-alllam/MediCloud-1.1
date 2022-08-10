@@ -825,7 +825,7 @@ export default {
             navOpen: false,
         }
     },
-    mounted() {
+    created() {
         this.testmonals = [
             {
                 image: 'testimonial-3.jpg',
