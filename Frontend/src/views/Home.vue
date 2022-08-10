@@ -89,7 +89,7 @@
                             Appointments Per Day
                         </v-card-title>
 
-                        <v-card-text class="p-0">
+                        <v-card-text class="p-0 pb-10">
                             <div v-if="!loaded" class="loadingBar">
                                 <v-progress-circular indeterminate color="primary" v-if="!errorLabel">
                                 </v-progress-circular>
@@ -294,14 +294,18 @@ export default {
                     min: 0,
                     title: {
                         text: 'Appointments'
-                    }
+                    },
+                    labels: {
+                        formatter: function (val) {
+                            return val.toFixed(0);
+                        }
+                    },
                 },
                 tooltip: {
                     x: {
                         format: 'dd MMM yyyy'
                     }
                 },
-
             },
             series: [{
                 name: 'Appointments',
@@ -393,8 +397,8 @@ export default {
                 }
 
                 this.genderPieOptions.colors = [
-                     ({ seriesIndex }) => {
-                        if (this.genderPieSeries && this.genderPieSeries[seriesIndex] === 'Female') {
+                    ({ seriesIndex }) => {
+                        if (this.genderPieSeries && this.genderPieOptions.labels[seriesIndex] === 'Female') {
                             return '#ff00aa';
                         }
                         return '#00aaff';

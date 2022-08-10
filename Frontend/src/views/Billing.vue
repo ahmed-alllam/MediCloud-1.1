@@ -7,7 +7,7 @@
 
     <v-container>
 
-      <v-card class="mt-8 mr-2 ml-2 mb-10">
+      <v-card class="mt-8 mr-2 ml-2 mb-10 pb-10">
         <v-card-title>
           Revenue Over Time
         </v-card-title>
