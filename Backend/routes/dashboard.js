@@ -86,6 +86,11 @@ router.get("/api/dashboard/", async (req, res) => {
                             $avg: "$visitCost"
                         }
                     }
+                },
+                {
+                    $sort: {
+                        day: 1
+                    }
                 }
             ])
 

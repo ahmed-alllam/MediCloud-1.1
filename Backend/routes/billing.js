@@ -77,6 +77,11 @@ router.get("/api/billing/stats", async (req, res) => {
               $sum: "$visitCost"
             }
           }
+        },
+        {
+          $sort: {
+            day: 1
+          }
         }
       ]);
 

@@ -3,7 +3,7 @@
     <v-container class="pl-5 pt-10 pr-5 pb-10">
         <div>
             <h3 class="goodMorningHeader">
-                {{greeting}}, Dr. {{ $store.state.user_name.split(' ')[0] }}
+                {{ greeting }}, Dr. {{ $store.state.user_name.split(' ')[0] }}
             </h3>
 
 
@@ -13,7 +13,8 @@
                         <v-card-text>
                             <div class="row datepicker-row">
                                 <div>
-                                    <datepicker :disabled-dates="{from: new Date()}" v-model="selectedDate" :inline="true" class="datepicker" />
+                                    <datepicker :disabled-dates="{ from: new Date() }" v-model="selectedDate"
+                                        :inline="true" class="datepicker" />
                                 </div>
 
                                 <div v-if="!loaded" class="loadingBar">
@@ -89,6 +90,7 @@
                         </v-card-title>
 
                         <v-card-text class="p-0">
+                            {{ series[0].data }}
                             <div v-if="!loaded" class="loadingBar">
                                 <v-progress-circular indeterminate color="primary" v-if="!errorLabel">
                                 </v-progress-circular>
@@ -166,7 +168,8 @@
                                                 {{ errorLabel }}
                                             </label>
                                         </div>
-                                        <VueApexCharts v-else-if="drugsPieSeries && drugsPieSeries.length" type="pie" :options="drugsPieOptions" :series="drugsPieSeries" />
+                                        <VueApexCharts v-else-if="drugsPieSeries && drugsPieSeries.length" type="pie"
+                                            :options="drugsPieOptions" :series="drugsPieSeries" />
                                         <div v-else class="text-center pt-10 pb-10">
                                             <label>
                                                 No Data Found
@@ -189,8 +192,8 @@
                                             </label>
                                         </div>
 
-                                        <VueApexCharts v-else-if="diseasesPieSeries && diseasesPieSeries.length" type="pie" :options="diseasesPieOptions"
-                                            :series="diseasesPieSeries" />
+                                        <VueApexCharts v-else-if="diseasesPieSeries && diseasesPieSeries.length"
+                                            type="pie" :options="diseasesPieOptions" :series="diseasesPieSeries" />
 
                                         <div v-else class="text-center pt-10 pb-10">
                                             <label>
@@ -214,7 +217,8 @@
                                             {{ errorLabel }}
                                         </label>
                                     </div>
-                                    <VueApexCharts v-else-if="agePieSeries && agePieSeries.length && ageFound" type="pie" :options="agePieOptions" :series="agePieSeries" />
+                                    <VueApexCharts v-else-if="agePieSeries && agePieSeries.length && ageFound"
+                                        type="pie" :options="agePieOptions" :series="agePieSeries" />
                                     <div v-else class="text-center pt-10 pb-10">
                                         <label>
                                             No Data Found
@@ -238,7 +242,8 @@
                                         </label>
                                     </div>
 
-                                    <VueApexCharts v-else-if="genderPieSeries && genderPieSeries.length" type="pie" :options="genderPieOptions" :series="genderPieSeries" />
+                                    <VueApexCharts v-else-if="genderPieSeries && genderPieSeries.length" type="pie"
+                                        :options="genderPieOptions" :series="genderPieSeries" />
                                     <div v-else class="text-center pt-10 pb-10">
                                         <label>
                                             No Data Found
@@ -331,6 +336,7 @@ export default {
                     position: 'bottom'
                 },
                 labels: [],
+                colors: [],
 
             },
         }
@@ -371,7 +377,7 @@ export default {
                         if (data.patientsAgeDistribution[i]._id == this.agePieOptions.labels[j].split('-')[0]) {
                             ageSeries[j] = data.patientsAgeDistribution[i].count;
 
-                            if(ageSeries[j] > 0)
+                            if (ageSeries[j] > 0)
                                 this.ageFound = true;
                         }
                     }
@@ -388,18 +394,17 @@ export default {
                 }
 
                 this.genderPieOptions.colors = [
-                    function ({ seriesIndex }) {
-                        if (this.genderPieSeries[seriesIndex] === 'Female') {
+                     ({ seriesIndex }) => {
+                        if (this.genderPieSeries && this.genderPieSeries[seriesIndex] === 'Female') {
                             return '#ff00aa';
                         }
                         return '#00aaff';
                     }
                 ]
 
-                // todo : add loading and error
             }).catch(error => {
                 this.errorLabel = 'Error loading statistics';
-                console.log(error) // todo
+                console.log(error)
             })
         }
     },
@@ -481,7 +486,7 @@ export default {
         font-size: medium !important;
         font-weight: bold !important;
         word-break: normal;
-        color: #fff;
+        color: #fff !important;
         text-align: center !important;
     }
 
