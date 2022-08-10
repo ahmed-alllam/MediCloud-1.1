@@ -35,12 +35,18 @@ router.get("/api/billing/stats", async (req, res) => {
               $let: {
                 vars: {
                   day: {
-                    $dayOfMonth: "$created"
+                    $dayOfMonth: {
+                      date: "$created",
+                      'timezone': process.env.TZ
+                  }
                   },
                   remainder: {
                     $mod: [
                       {
-                        $dayOfMonth: "$created"
+                        $dayOfMonth: {
+                          date: "$created",
+                          'timezone': process.env.TZ
+                      }
                       },
                       1
                     ]
@@ -50,10 +56,16 @@ router.get("/api/billing/stats", async (req, res) => {
                 in: {
                   $dateFromParts: {
                     year: {
-                      $year: "$created"
+                      $year: {
+                        date: "$created",
+                        'timezone': process.env.TZ
+                    }
                     },
                     month: {
-                      $month: "$created"
+                      $month: {
+                        date: "$created",
+                        'timezone': process.env.TZ
+                    }
                     },
                     day: {
                       $subtract: [

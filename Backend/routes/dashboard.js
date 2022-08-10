@@ -20,12 +20,18 @@ router.get("/api/dashboard/", async (req, res) => {
                             $let: {
                                 vars: {
                                     day: {
-                                        $dayOfMonth: "$created"
+                                        $dayOfMonth: {
+                                            date: "$created",
+                                            'timezone': process.env.TZ
+                                        }
                                     },
                                     remainder: {
                                         $mod: [
                                             {
-                                                $dayOfMonth: "$created"
+                                                $dayOfMonth: {
+                                                    date: "$created",
+                                                    'timezone': process.env.TZ
+                                                }
                                             },
                                             1
                                         ]
@@ -35,10 +41,16 @@ router.get("/api/dashboard/", async (req, res) => {
                                 in: {
                                     $dateFromParts: {
                                         year: {
-                                            $year: "$created"
+                                            $year: {
+                                                date: "$created",
+                                                'timezone': process.env.TZ
+                                            }
                                         },
                                         month: {
-                                            $month: "$created"
+                                            $month: {
+                                                date: "$created",
+                                                'timezone': process.env.TZ
+                                            }
                                         },
                                         day: {
                                             $subtract: [
@@ -158,15 +170,16 @@ router.get("/api/dashboard/", async (req, res) => {
                     $addFields: {
                         age: {
                             $round: [{
-                            $divide: [
-                                {
-                                    $subtract: [
-                                        new Date(),
-                                        "$patient.patientBirthDate"
-                                    ]
-                                },
-                                365 * 24 * 60 * 60 * 1000
-                            ]}, 0]
+                                $divide: [
+                                    {
+                                        $subtract: [
+                                            new Date(),
+                                            "$patient.patientBirthDate"
+                                        ]
+                                    },
+                                    365 * 24 * 60 * 60 * 1000
+                                ]
+                            }, 0]
                         }
                     }
                 },
