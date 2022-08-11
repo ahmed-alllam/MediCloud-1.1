@@ -18,6 +18,9 @@ const routes = [
     path: '/',
     name: 'Landing Page',
     component: () => import("../views/LandingPage.vue"),
+    meta: {
+      title: 'The care you deserve'
+    }
   },
   {
     path: '/login',
