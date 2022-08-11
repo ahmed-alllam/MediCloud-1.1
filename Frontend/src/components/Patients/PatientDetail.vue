@@ -506,6 +506,8 @@ export default {
 #top-content #basic-info .name {
     font-size: 15px;
     color: #999999;
+    text-align: center;
+    display: block;
 }
 
 #top-content #basic-info .value {
@@ -513,6 +515,8 @@ export default {
     margin-top: 20px;
     font-size: 15px;
     color: #333333;
+    text-align: center;
+    display: block;
 }
 
 #top-content span,

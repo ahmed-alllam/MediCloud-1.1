@@ -291,7 +291,7 @@ export default {
                     type: 'datetime',
                 },
                 yaxis: {
-                    min: 0,
+                    // min: 0,
                     title: {
                         text: 'Appointments'
                     },
