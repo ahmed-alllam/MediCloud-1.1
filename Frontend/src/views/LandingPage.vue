@@ -429,7 +429,7 @@
                             <div class="card">
                                 <div class="card-body card-body-patients">
                                     <div class="card-title">INDVIDUAL</div>
-                                    <div class="price"><span class="currency">EGP</span><span class="value">100</span>
+                                    <div class="price"><span class="currency">EGP</span><span class="value">60</span>
                                     </div>
                                     <div class="frequency">Per Year</div>
                                     <div class="divider"></div>
@@ -464,7 +464,7 @@
                             <div class="card">
                                 <div class="card-body card-body-patients">
                                     <div class="card-title">FAMILY</div>
-                                    <div class="price"><span class="currency">EGP</span><span class="value">300</span>
+                                    <div class="price"><span class="currency">EGP</span><span class="value">250</span>
                                     </div>
                                     <div class="frequency">Per Year</div>
                                     <div class="divider"></div>
