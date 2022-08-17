@@ -707,7 +707,7 @@
 
                             <!-- todo add social links here -->
 
-                            <a href="#" class="social-icon fa fa-facebook"></a>
+                            <a href="#" class="social-icon fa fa-facebook">https://www.facebook.com/medicloud.care</a>
                             <a href="#" class="social-icon fa fa-linkedin"></a>
                             <a href="#" class="social-icon fa fa-youtube"></a>
 
