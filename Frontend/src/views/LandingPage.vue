@@ -422,7 +422,54 @@
                 <div class="row">
                     <div class="col-lg-12">
 
-                        <div v-if="isPatient" class="pricing-cards">
+                        <div v-if="isPatient" class="pricing-cards" dir="rtl">
+
+
+
+                            <!-- Card-->
+                            <div class="card">
+                                <div class="card-body card-body-patients">
+                                    <div class="card-title">فردي</div>
+                                    <div class="price"><span class="value">٦٠</span><span class="currency">جنيه</span>
+                                    </div>
+                                    <div class="frequency">سنوياً</div>
+                                    <div class="divider"></div>
+                                    <ul class="list-unstyled li-space-lg">
+                                        <li class="media">
+                                            <div class="media-body" style="text-align: right; margin-right:8px">خصومات
+                                                لحد ٦٠٪ مدي الحياه</div>
+                                            <i class="fas fa-check"></i>
+                                        </li>
+                                        <br />
+                                        <li class="media">
+                                            <div class="media-body" style="text-align: right; margin-right:8px">جمع كل
+                                                بياناتك الصحيه بشكل منظم</div>
+                                            <i class="fas fa-check"></i>
+                                        </li>
+                                        <br />
+
+                                        <li class="media">
+                                            <div class="media-body" style="text-align: right; margin-right:8px">احصل علي
+                                                بطاقه صحيه في حاله الطوارئ</div>
+                                            <i class="fas fa-check"></i>
+                                        </li>
+                                        <br />
+
+
+                                        <li class="media">
+                                            <div class="media-body" style="text-align: right; margin-right:8px">تابع
+                                                تقدمك الصحي و قياساتك اليوميه</div>
+                                            <i class="fas fa-check"></i>
+                                        </li>
+                                    </ul>
+                                    <div class="button-wrapper">
+                                        <a class="btn-solid-reg page-scroll pricing-signup" href="javascript:void()"
+                                            @click="scrollTo('details')">اشترك الآن</a>
+                                    </div>
+                                </div>
+                            </div> <!-- end of card -->
+                            <!-- end of card -->
+
 
                             <!-- Card-->
                             <div class="card">
@@ -476,67 +523,19 @@
                             <!-- end of card -->
 
 
-                            <!-- Card-->
-                            <div class="card">
-                                <div class="card-body card-body-patients">
-                                    <div class="card-title">فردي</div>
-                                    <div class="price"><span class="value">٦٠</span><span class="currency">جنيه</span>
-                                    </div>
-                                    <div class="frequency">سنوياً</div>
-                                    <div class="divider"></div>
-                                    <ul class="list-unstyled li-space-lg">
-                                        <li class="media">
-                                            <div class="media-body" style="text-align: right; margin-right:8px">خصومات
-                                                لحد ٦٠٪ مدي الحياه</div>
-                                            <i class="fas fa-check"></i>
-                                        </li>
-                                        <br />
-                                        <li class="media">
-                                            <div class="media-body" style="text-align: right; margin-right:8px">جمع كل
-                                                بياناتك الصحيه بشكل منظم</div>
-                                            <i class="fas fa-check"></i>
-                                        </li>
-                                        <br />
-
-                                        <li class="media">
-                                            <div class="media-body" style="text-align: right; margin-right:8px">احصل علي
-                                                بطاقه صحيه في حاله الطوارئ</div>
-                                            <i class="fas fa-check"></i>
-                                        </li>
-                                        <br />
-
-
-                                        <li class="media">
-                                            <div class="media-body" style="text-align: right; margin-right:8px">تابع
-                                                تقدمك الصحي و قياساتك اليوميه</div>
-                                            <i class="fas fa-check"></i>
-                                        </li>
-                                    </ul>
-                                    <div class="button-wrapper">
-                                        <a class="btn-solid-reg page-scroll pricing-signup" href="javascript:void()"
-                                            @click="scrollTo('details')">اشترك الآن</a>
-                                    </div>
-                                </div>
-                            </div> <!-- end of card -->
-                            <!-- end of card -->
-
-
                         </div> <!-- end of col -->
 
-                        <div v-else class="pricing-cards">
+                        <div v-else class="pricing-cards" dir="rtl">
 
 
                             <!-- Card-->
                             <div class="card">
-                                <!--<div class="label">
-                            <p class="best-value">Best Value</p>
-                        </div> -->
                                 <div class="card-body card-body-doctors">
-                                    <div class="card-title">الباقه المتكامله</div>
+                                    <div class="card-title">الباقه الاساسيه</div>
                                     <div class="frequency">١٤ يوم مجاناً</div>
-                                    <div class="price"><span class="value">٧٠٠</span><span class="currency">جنيه</span>
+                                    <div class="price"><span class="value">٣٠٠</span><span class="currency">جنيه</span>
+                                        <div class="frequency">لكل مستخدم شهرياً</div>
                                     </div>
-                                    <div class="frequency">لكل مستخدم شهرياً</div>
                                     <div class="divider"></div>
                                     <ul class="list-unstyled li-space-lg" dir="rtl" style="text-align:right">
                                         <li class="media">
@@ -553,20 +552,20 @@
                                         <br />
 
                                         <li class="media">
-                                            <i class="fas fa-check"></i>
+                                            <i class="fas fa-times"></i>
                                             <div class="media-body" style="margin-right:8px">تابع عيادتك مالياً</div>
                                         </li>
                                         <br />
 
                                         <li class="media">
-                                            <i class="fas fa-check"></i>
+                                            <i class="fas fa-times"></i>
                                             <div class="media-body" style="margin-right:8px">احصل علي احصائيات هامه
                                                 ومفصله</div>
                                         </li>
                                         <br />
 
                                         <li class="media">
-                                            <i class="fas fa-check"></i>
+                                            <i class="fas fa-times"></i>
                                             <div class="media-body" style="margin-right:8px">تواصل وتابع مع مرضاك عن
                                                 طريق خدمه الرسائل</div>
                                         </li>
@@ -632,12 +631,15 @@
 
                             <!-- Card-->
                             <div class="card">
+                                <!--<div class="label">
+                            <p class="best-value">Best Value</p>
+                        </div> -->
                                 <div class="card-body card-body-doctors">
-                                    <div class="card-title">الباقه الاساسيه</div>
+                                    <div class="card-title">الباقه المتكامله</div>
                                     <div class="frequency">١٤ يوم مجاناً</div>
-                                    <div class="price"><span class="value">٣٠٠</span><span class="currency">جنيه</span>
-                                        <div class="frequency">لكل مستخدم شهرياً</div>
+                                    <div class="price"><span class="value">٧٠٠</span><span class="currency">جنيه</span>
                                     </div>
+                                    <div class="frequency">لكل مستخدم شهرياً</div>
                                     <div class="divider"></div>
                                     <ul class="list-unstyled li-space-lg" dir="rtl" style="text-align:right">
                                         <li class="media">
@@ -654,20 +656,20 @@
                                         <br />
 
                                         <li class="media">
-                                            <i class="fas fa-times"></i>
+                                            <i class="fas fa-check"></i>
                                             <div class="media-body" style="margin-right:8px">تابع عيادتك مالياً</div>
                                         </li>
                                         <br />
 
                                         <li class="media">
-                                            <i class="fas fa-times"></i>
+                                            <i class="fas fa-check"></i>
                                             <div class="media-body" style="margin-right:8px">احصل علي احصائيات هامه
                                                 ومفصله</div>
                                         </li>
                                         <br />
 
                                         <li class="media">
-                                            <i class="fas fa-times"></i>
+                                            <i class="fas fa-check"></i>
                                             <div class="media-body" style="margin-right:8px">تواصل وتابع مع مرضاك عن
                                                 طريق خدمه الرسائل</div>
                                         </li>
@@ -679,6 +681,7 @@
                                 </div>
                             </div> <!-- end of card -->
                             <!-- end of card -->
+
 
 
                         </div> <!-- end of col -->
@@ -780,7 +783,8 @@
             <div class="footer">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-4">
+
+                        <div class="col-md-4 order-md-3">
                             <div class="footer-col first">
                                 <h4>عن ميدي كلاود</h4>
                                 <p class="p-small">احنا ميدي كلاود شركه مصريه ناشئة هدفها تحسين مستوي الرعايه الصحيه في
@@ -791,7 +795,9 @@
                                 </p>
                             </div>
                         </div> <!-- end of col -->
-                        <div class="col-md-4">
+
+
+                        <div class="col-md-4 order-md-2">
                             <h4>Contact Us</h4>
                             <ul class="list-unstyled li-space-lg p-small">
                                 <li class="media">
@@ -820,7 +826,8 @@
                                 </li>
                             </ul>
                         </div> <!-- end of col -->
-                        <div class="col-md-4">
+
+                        <div class="col-md-4 order-md-1">
                             <h4>روابط تهمك</h4>
 
                             <ul>
@@ -839,6 +846,7 @@
                                 </li>
                             </ul>
                         </div>
+
 
                     </div> <!-- end of row -->
                 </div> <!-- end of container -->
@@ -1570,6 +1578,10 @@ screen and (-ms-high-contrast: none) {
 .pricing-cards {
     margin-left: auto;
     margin-right: auto;
+}
+
+.button-wrapper {
+    margin-top: 90px;
 }
 
 .pricing-signup {
