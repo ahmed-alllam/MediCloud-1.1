@@ -436,30 +436,30 @@
                                     <div class="divider"></div>
                                     <ul class="list-unstyled li-space-lg">
                                         <li class="media">
+                                            <i class="fas fa-check"></i>
                                             <div class="media-body" style="text-align: right; margin-right:8px">خصومات
                                                 لحد ٦٠٪ مدي الحياه</div>
-                                            <i class="fas fa-check"></i>
                                         </li>
                                         <br />
                                         <li class="media">
+                                            <i class="fas fa-check"></i>
                                             <div class="media-body" style="text-align: right; margin-right:8px">جمع كل
                                                 بياناتك الصحيه بشكل منظم</div>
-                                            <i class="fas fa-check"></i>
                                         </li>
                                         <br />
 
                                         <li class="media">
+                                            <i class="fas fa-check"></i>
                                             <div class="media-body" style="text-align: right; margin-right:8px">احصل علي
                                                 بطاقه صحيه في حاله الطوارئ</div>
-                                            <i class="fas fa-check"></i>
                                         </li>
                                         <br />
 
 
                                         <li class="media">
+                                            <i class="fas fa-check"></i>
                                             <div class="media-body" style="text-align: right; margin-right:8px">تابع
                                                 تقدمك الصحي و قياساتك اليوميه</div>
-                                            <i class="fas fa-check"></i>
                                         </li>
                                     </ul>
                                     <div class="button-wrapper">
@@ -481,37 +481,37 @@
                                     <div class="divider"></div>
                                     <ul class="list-unstyled li-space-lg">
                                         <li class="media">
+                                            <i class="fas fa-check"></i>
                                             <div class="media-body" style="text-align: right; margin-right:8px">استمتع
                                                 بخصومات طبيه لحد ٦٠٪ لعائلتك</div>
-                                            <i class="fas fa-check"></i>
                                         </li>
                                         <br />
 
                                         <li class="media">
+                                            <i class="fas fa-check"></i>
                                             <div class="media-body" style="text-align: right; margin-right:8px">احتفظ
                                                 بجميع بيانات عائلتك الصحيه</div>
-                                            <i class="fas fa-check"></i>
                                         </li>
                                         <br />
 
                                         <li class="media">
+                                            <i class="fas fa-check"></i>
                                             <div class="media-body" style="text-align: right; margin-right:8px">احصل علي
                                                 كارت ميدي كارد لاسرتك</div>
-                                            <i class="fas fa-check"></i>
                                         </li>
                                         <br />
 
                                         <li class="media">
+                                            <i class="fas fa-check"></i>
                                             <div class="media-body" style="text-align: right; margin-right:8px">تابع
                                                 التقدم الصحي لجميع افراد اسرتك</div>
-                                            <i class="fas fa-check"></i>
                                         </li>
                                         <br />
 
                                         <li class="media">
+                                            <i class="fas fa-check"></i>
                                             <div class="media-body" style="text-align: right; margin-right:8px">تابع
                                                 حاله افراد الاسره المسافرين بالخارج</div>
-                                            <i class="fas fa-check"></i>
                                         </li>
                                     </ul>
                                     <div class="button-wrapper">
@@ -1624,7 +1624,7 @@ screen and (-ms-high-contrast: none) {
 }
 
 .card-body-patients {
-    min-height: 630px;
+    min-height: 660px;
 }
 
 .cards-2 .card .card-title {
