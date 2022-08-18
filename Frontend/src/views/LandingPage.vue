@@ -13,7 +13,7 @@
                 <!-- <a class="navbar-brand logo-image" href="index.html"><img :src="require('@/assets/images/logo.svg')"
                     alt="alternative"></a> -->
 
-                <span class="navbar-brand logo-image">MediCloud</span>
+                <span class="navbar-brand logo-image">MediCloud - ميدي كلاود</span>
 
                 <!-- Mobile Menu Toggle Button -->
                 <button @click="navOpen = !navOpen" class="navbar-toggler" type="button" data-toggle="collapse"
@@ -27,24 +27,24 @@
                 <div :class="`collapse navbar-collapse ${navOpen ? 'show' : ''}`" id="navbarsExampleDefault">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <a class="nav-link page-scroll" href="#">HOME <span class="sr-only">(current)</span></a>
+                            <a class="nav-link page-scroll" href="#">الرئيسية <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link page-scroll" href="javascript:void()"
-                                @click="scrollTo('features')">FEATURES</a>
+                                @click="scrollTo('features')">المميزات</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link page-scroll" href="javascript:void()"
-                                @click="scrollTo('details')">REQUEST DEMO</a>
+                            <a class="nav-link page-scroll" href="javascript:void()" @click="scrollTo('details')">اشترك
+                                الآن</a>
                         </li>
 
                         <li class="nav-item">
                             <a class="nav-link page-scroll" href="javascript:void()"
-                                @click="scrollTo('pricing')">PRICING</a>
+                                @click="scrollTo('pricing')">الاسعار</a>
                         </li>
                     </ul>
                     <span class="nav-item">
-                        <router-link class="btn-outline-sm" to="/login">LOG IN</router-link>
+                        <router-link class="btn-outline-sm" to="/login">تسجيل الدخول</router-link>
                     </span>
                 </div>
             </div> <!-- end of container -->
@@ -57,7 +57,7 @@
             <div class="header-content">
                 <div class="container">
                     <div class="row">
-                        <div class="col-lg-6 order-lg-2">
+                        <div class="col-lg-6">
                             <div class="image-container">
                                 <div class="img-wrapper">
                                     <img class="img-fluid" :src="require('@/assets/images/header-software-app.png')"
@@ -65,13 +65,15 @@
                                 </div> <!-- end of img-wrapper -->
                             </div> <!-- end of image-container -->
                         </div> <!-- end of col -->
-                        <div class="col-lg-6 order-lg-1">
+                        <div class="col-lg-6">
                             <div class="text-container">
-                                <h1>Reshaping the healthcare tech industry</h1>
-                                <p class="p-large">MediCloud is a fast-growing healthcare tech startup founded in
-                                    Egypt that aims to bring the latest technologies into the medical field</p>
+                                <h1>خليك دايماً مطمن... مع ميدي كلاود</h1>
+                                <p class="p-large">احنا ميدي كلاود شركه مصريه ناشئة هدفها تحسين مستوي
+                                    الرعايه الصحيه في مصر عن طريق ادخال احدث التكنولوجيا ضمن المنظومة الصحيه
+                                    وتقديم احسن المنتجات و البرامج بشكل سهل للجميع و بأقل الأسعار
+                                </p>
                                 <a class="btn-solid-lg page-scroll" href="javascript:void()"
-                                    @click="scrollTo('details')">SIGN UP</a>
+                                    @click="scrollTo('details')">اشترك الآن</a>
                             </div> <!-- end of text-container -->
                         </div> <!-- end of col -->
                     </div> <!-- end of row -->
@@ -83,8 +85,8 @@
 
         <!-- Customers -->
         <!-- <div class="slider-1"> -->
-            <!-- <div class="container"> -->
-                <!-- <div class="row">
+        <!-- <div class="container"> -->
+        <!-- <div class="row">
                     <div class="col-lg-12">
                         <h3 class="section-title">Our New Partners and Customers</h3>
                     </div> 
@@ -93,73 +95,9 @@
                             style="width: 100%; height: auto; object-fit: cover;">
                     </div> 
                 </div>  -->
-            <!-- </div> -->
+        <!-- </div> -->
         <!-- </div> -->
         <!-- end of customers -->
-
-
-        <!-- Description -->
-        <div class="cards-1">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="above-heading">DESCRIPTION</div>
-                        <h2 class="h2-heading">A Central Secure Medical Data Cloud for all healthcare customers</h2>
-                    </div> <!-- end of col -->
-                </div> <!-- end of row -->
-                <div class="row">
-                    <div class="col-lg-12">
-
-                        <!-- Card -->
-                        <div class="card">
-                            <div class="card-image">
-                                <img class="img-fluid" :src="require('@/assets/images/description-1.png')"
-                                    alt="alternative" style="width: 200px; height: 200px; object-fit: contain;">
-                            </div>
-                            <div class="card-body">
-                                <h4 class="card-title">End-to End Encrypted Cloud</h4>
-                                <p>No more serious medical data breaches, thanks to our cutting-edge technologies,
-                                    making it
-                                    100% secure cloud for your confidential medical data</p>
-                            </div>
-                        </div>
-                        <!-- end of card -->
-
-                        <!-- Card -->
-                        <div class="card">
-                            <div class="card-image">
-                                <img class="img-fluid" :src="require('@/assets/images/description-2.png')"
-                                    alt="alternative" style="width: 200px; height: 200px; object-fit: contain;">
-                            </div>
-                            <div class="card-body">
-                                <h4 class="card-title">Centralized cloud everywhere</h4>
-                                <p>Your data will be in sync wherever you go, between all hospitals, clinics, and labs
-                                    with
-                                    no more redundancy</p>
-                            </div>
-                        </div>
-                        <!-- end of card -->
-
-                        <!-- Card -->
-                        <div class="card">
-                            <div class="card-image">
-                                <img class="img-fluid" :src="require('@/assets/images/description-3.png')"
-                                    alt="alternative" style="width: 200px; height: 200px; object-fit: contain;">
-                            </div>
-                            <div class="card-body">
-                                <h4 class="card-title">Linker between all medical providers</h4>
-                                <p>Easier communication between all medical providers in Egypt by providing a link for
-                                    each
-                                    healthcare stakeholder</p>
-                            </div>
-                        </div>
-                        <!-- end of card -->
-
-                    </div> <!-- end of col -->
-                </div> <!-- end of row -->
-            </div> <!-- end of container -->
-        </div> <!-- end of cards-1 -->
-        <!-- end of description -->
 
 
         <!-- Features -->
@@ -167,11 +105,9 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="above-heading">FEATURES</div>
-                        <h2 class="h2-heading">Our Medical Cloud Features</h2>
-                        <p class="p-heading">Benefit from our valuable features and technical solutions for both
-                            patients
-                            and doctors</p>
+                        <div class="above-heading">المميزات</div>
+                        <h2 class="h2-heading">مميزات ميدي كلاود</h2>
+                        <p class="p-heading">استمتع بمميزات ميدي كلاود القيمه و حلولنا التكنولوجيه للأطباء و المرضى</p>
                     </div> <!-- end of col -->
                 </div> <!-- end of row -->
                 <div class="row">
@@ -180,16 +116,14 @@
                         <!-- Tabs Links -->
                         <ul class="nav nav-tabs" id="argoTabs" role="tablist">
                             <li class="nav-item patient-feature-tab">
-                                <button :class="`nav-link ${isPatient ? 'active' : ''}`" id="nav-tab-1"
-                                    data-toggle="tab" role="tab" aria-controls="tab-1" aria-selected="true"
-                                    @click="(isPatient = true)">For
-                                    Patients</button>
-                            </li>
-                            <li class="nav-item doctor-feature-tab">
                                 <button :class="`nav-link ${isPatient ? '' : 'active'}`" id="nav-tab-2"
                                     data-toggle="tab" role="tab" aria-controls="tab-2" aria-selected="false"
-                                    @click="(isPatient = false)">For
-                                    Doctors</button>
+                                    @click="(isPatient = false)">للأطباء</button>
+                            </li>
+                            <li class="nav-item doctor-feature-tab">
+                                <button :class="`nav-link ${isPatient ? 'active' : ''}`" id="nav-tab-1"
+                                    data-toggle="tab" role="tab" aria-controls="tab-1" aria-selected="true"
+                                    @click="(isPatient = true)">للمرضى</button>
                             </li>
                         </ul>
 
@@ -198,22 +132,25 @@
                         <!-- Patient Tabs Content -->
                         <div v-if="isPatient" class="tab-content" id="argoTabsContent">
 
+
                             <!-- Tab -->
-                            <div class="tab-pane show active" id="tab-1" role="tabpanel" aria-labelledby="tab-1">
+                            <div class="tab-pane show active" id="tab-2" role="tabpanel" aria-labelledby="tab-2">
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="image-container">
                                             <img class="img-fluid feature-img"
-                                                :src="require('@/assets/images/features-1.png')" alt="alternative">
+                                                :src="require('@/assets/images/features-2.png')" alt="alternative">
                                         </div> <!-- end of image-container -->
                                     </div> <!-- end of col -->
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-6 ">
                                         <div class="text-container">
-                                            <h3>Save your medical data and emergency in a secure cloud</h3>
-                                            <p>Save your medical data in a secure cloud, and never worry about losing
-                                                it.
-                                                We will take care of it for you with 100% security
-                                                Have an emergency profile to save your life with MediCard</p>
+                                            <h3>خصومات طبيه لحد ٦٠٪ مدي الحياه</h3>
+                                            <p>
+                                                مصاريف التحاليل و الاشعه و الادويه بتكون مكلفه ليك؟ مع ميدي كلاود تقدر
+                                                تاخد خصومات كامله توصل لحد ٦٠٪ علي شبكه من المعامل و مراكز الاشعه و
+                                                الصيدليات المتعاقدين معنا
+
+                                            </p>
                                         </div> <!-- end of text-container -->
                                     </div> <!-- end of col -->
                                 </div> <!-- end of row -->
@@ -221,21 +158,20 @@
                             <!-- end of tab -->
 
                             <!-- Tab -->
-                            <div class="tab-pane show active" id="tab-2" role="tabpanel" aria-labelledby="tab-2">
+                            <div class="tab-pane show active" id="tab-1" role="tabpanel" aria-labelledby="tab-1">
                                 <div class="row">
-                                    <div class="col-lg-6 order-lg-2">
+                                    <div class="col-lg-6  order-lg-2">
                                         <div class="image-container">
                                             <img class="img-fluid feature-img"
-                                                :src="require('@/assets/images/features-2.png')" alt="alternative">
+                                                :src="require('@/assets/images/features-1.png')" alt="alternative">
                                         </div> <!-- end of image-container -->
                                     </div> <!-- end of col -->
                                     <div class="col-lg-6 order-lg-first">
                                         <div class="text-container">
-                                            <h3>Get Discounts up to 60%</h3>
-                                            <p>Paying for your lab tests and scans can be quite expensive, With your
-                                                MediCard, you can have
-                                                discounts up to 60% for any labs, scans, prescriptions,
-                                                and more.
+                                            <h3>احتفظ ببياناتك الصحيه بشكل منظم و آمن</h3>
+                                            <p>احتفظ بجميع بياناتك الصحيه بشكل منظم و آمن على ميدي كلاود، حيث يمكنك
+                                                التحكم بها بسهولة و بشكل دائم.
+                                                احصل علي ملف طوارئ يساعدك في الحالات الطارئه لانقاذ حياتك مع ميدي كارد
                                             </p>
                                         </div> <!-- end of text-container -->
                                     </div> <!-- end of col -->
@@ -254,11 +190,12 @@
                                     </div> <!-- end of col -->
                                     <div class="col-lg-6">
                                         <div class="text-container">
-                                            <h3>Keep track of your medical progress</h3>
-                                            <p>You can keep track of having you medications by using our
-                                                daily routine checklist that reminds you of taking pills.
-                                                you can also benefit from our diary that keeps track of your mental
-                                                health.
+                                            <h3>تابع تقدمك الصحي</h3>
+                                            <p>
+                                                دلوقتي تقدر تتابع تقدمك الصحي بسهوله عند طريق ميدي كلاود اللي هيفكرك
+                                                دايما بمواعيد الادويه يوميا بجانب دفتر تدوين يوميات بيساعدك علي تصفيه
+                                                ذهنك و المحافظه علي الراحه و الصحه النفسيه
+
                                             </p>
                                         </div> <!-- end of text-container -->
                                     </div> <!-- end of col -->
@@ -283,10 +220,11 @@
                                     </div> <!-- end of col -->
                                     <div class="col-lg-6">
                                         <div class="text-container">
-                                            <h3>Keep track of you records and patients</h3>
-                                            <p>Using MediCloud, you can keep track of your records and patients.
-                                                You can also see the records of your patients. MediCloud allows you to
-                                                see useful statistics and future predictions about your clinic.
+                                            <h3>احتفظ بجميع بيانات مرضاك</h3>
+                                            <p>ميدي كلاود بتتيحلك الاحتفاظ بجميع بيانات مرضي عيادتك او معملك
+                                                بكل آمن ١٠٠٪ و عالي الدقه. وكمان تقدر تشوف احصائيات مفصله ومهمه عن
+                                                عيادتك في الفتره الاخيره
+
                                             </p>
                                         </div> <!-- end of text-container -->
                                     </div> <!-- end of col -->
@@ -305,10 +243,11 @@
                                     </div> <!-- end of col -->
                                     <div class="col-lg-6 order-lg-first">
                                         <div class="text-container">
-                                            <h3>Increase your flow and revenue</h3>
-                                            <p>By using MediCloud Clinic you can increase your flow and revenue
-                                                by have a way of comminucation with your patients as well as giving
-                                                them a card with your clinic name and logo on it.
+                                            <h3>زود من دخل عيادتك و عدد الزيارات</h3>
+                                            <p>بإستخدامك لميدي كلاود تقدر تزود من دخلك و عدد الزيارات يومياً
+                                                عن طريق اتاحه التواصل بينك وبين المرضي وارسال اشعارات في حاله العروض او
+                                                الخصومات
+
                                             </p>
                                         </div> <!-- end of text-container -->
                                     </div> <!-- end of col -->
@@ -327,12 +266,12 @@
                                     </div> <!-- end of col -->
                                     <div class="col-lg-6">
                                         <div class="text-container">
-                                            <h3>Reduce wasted time and money</h3>
-                                            <p>Why waste time on taking the exact history of your patient if you can see
-                                                it
-                                                in detail in seconds, by using MediCloud you can see your patient's
-                                                history
-                                                by just tapping their MediCard into you phone.
+                                            <h3>قلل من الوقت الضائع</h3>
+                                            <p>
+                                                ليه تضيع وقت كبير في اثناء الكشف لكل عيان لاخد التاريخ المرضي اذا كان
+                                                ممكن تستخدم ميدي كلاود اللي بتتيحلك تشوف التاريخ المرضي الكامل
+                                                لمريضك بمجرد ضغطه زر
+
                                             </p>
                                         </div> <!-- end of text-container -->
                                     </div> <!-- end of col -->
@@ -361,30 +300,32 @@
 
                     <div class="col-lg-8 details-container">
                         <div class="text-container" style="text-align: center;">
-                            <h2>Now Is The Time to use the latest technologies in healthcare</h2>
+                            <h2>اللحظه بتفرق، سجل دلوقتي مع ميدي كلاود</h2>
 
                             <div class="row">
 
-                                <div class="col-12 col-md-6">
 
-                                    <p>Whether you are a Doctor or a patient, you can
-                                        benefit now from our healthcare solutions
+                                <div class="col-12 col-md-6 order-md-1">
+
+                                    <p style="font-size: 18px">سواء كنت دكتور او مريض، دلوقتي تقدر تسجل مع ميدي كلاود
+                                        وتستفاد بجميع العروض
+                                        والمميزات المقدمه
                                     </p>
 
-                                    <p style="color:#26b3ff;">Register now to get a Free demo!</p>
+                                    <p style="color:#26b3ff; font-size: 18px">سجل الآن مجاناً</p>
                                 </div>
 
-
-                                <form class="form-group col-12 col-md-6">
-                                    <div>
-                                        <InputText v-model="demoName" id="name" type="text" class="p-inputtext-sm" placeholder="Name"
-                                            required />
-                                        <InputText v-model="demoEmail" id="email" type="email" class="p-inputtext-sm" placeholder="Email"
-                                            required />
+                                <form class="form-group col-12 col-md-6 order-md-0">
+                                    <div dir="rtl">
+                                        <InputText v-model="demoName" id="name" type="text" class="p-inputtext-sm"
+                                            placeholder="الاسم" required />
+                                        <InputText v-model="demoEmail" id="email" type="email" class="p-inputtext-sm"
+                                            placeholder="ايميل" />
                                         <InputText v-model="demoPhone" id="phone" type="tel" class="p-inputtext-sm"
-                                            placeholder="Phone Number" required />
+                                            placeholder="رقم موبايل" required />
                                         <br />
-                                        <a class="btn-solid-reg page-scroll" href="javascript:void()" @click="sendDemoForm">SEND</a>
+                                        <a v-if="demoButtonEnabled" class="btn-solid-reg page-scroll"
+                                            href="javascript:void()" @click="sendDemoForm">سجل</a>
                                         <br />
                                         <br />
                                         <label>{{ demoError }}</label>
@@ -399,26 +340,84 @@
         </div> <!-- end of basic-1 -->
         <!-- end of details -->
 
+
+        <!--         
+        <div class="cards-1">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="above-heading">DESCRIPTION</div>
+                        <h2 class="h2-heading">A Central Secure Medical Data Cloud for all healthcare customers</h2>
+                    </div> 
+                </div> end of row
+                <div class="row">
+                    <div class="col-lg-12">
+
+                        <div class="card">
+                            <div class="card-image">
+                                <img class="img-fluid" :src="require('@/assets/images/description-1.png')"
+                                    alt="alternative" style="width: 200px; height: 200px; object-fit: contain;">
+                            </div>
+                            <div class="card-body">
+                                <h4 class="card-title">End-to End Encrypted Cloud</h4>
+                                <p>No more serious medical data breaches, thanks to our cutting-edge technologies,
+                                    making it
+                                    100% secure cloud for your confidential medical data</p>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-image">
+                                <img class="img-fluid" :src="require('@/assets/images/description-2.png')"
+                                    alt="alternative" style="width: 200px; height: 200px; object-fit: contain;">
+                            </div>
+                            <div class="card-body">
+                                <h4 class="card-title">Centralized cloud everywhere</h4>
+                                <p>Your data will be in sync wherever you go, between all hospitals, clinics, and labs
+                                    with
+                                    no more redundancy</p>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-image">
+                                <img class="img-fluid" :src="require('@/assets/images/description-3.png')"
+                                    alt="alternative" style="width: 200px; height: 200px; object-fit: contain;">
+                            </div>
+                            <div class="card-body">
+                                <h4 class="card-title">Linker between all medical providers</h4>
+                                <p>Easier communication between all medical providers in Egypt by providing a link for
+                                    each
+                                    healthcare stakeholder</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div> -->
+
         <!-- Pricing -->
         <div id="pricing" ref="pricing" class="cards-2 tabs">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="above-heading">PRICING</div>
-                        <h2 class="h2-heading">Pricing Options Table</h2>
+                        <div class="above-heading">الأسعار</div>
+                        <h2 class="h2-heading">جدول اسعار ميدي كلاود</h2>
                     </div> <!-- end of col -->
                 </div> <!-- end of row -->
                 <ul class="nav nav-tabs" role="tablist">
                     <li class="nav-item patient-feature-tab">
-                        <button :class="`nav-link ${isPatient ? 'active' : ''}`" id="nav-tab-3" data-toggle="tab"
-                            role="tab" aria-controls="tab-1" aria-selected="true" @click="(isPatient = true)">For
-                            Patients</button>
+                        <button :class="`nav-link ${isPatient ? '' : 'active'}`" id="nav-tab-4" data-toggle="tab"
+                            role="tab" aria-controls="tab-2" aria-selected="false" @click="(isPatient = false)">للأطباء
+                        </button>
                     </li>
                     <li class="nav-item doctor-feature-tab">
-                        <button :class="`nav-link ${isPatient ? '' : 'active'}`" id="nav-tab-4" data-toggle="tab"
-                            role="tab" aria-controls="tab-2" aria-selected="false" @click="(isPatient = false)">For
-                            Doctors</button>
+                        <button :class="`nav-link ${isPatient ? 'active' : ''}`" id="nav-tab-3" data-toggle="tab"
+                            role="tab" aria-controls="tab-1" aria-selected="true" @click="(isPatient = true)">للمرضى
+                        </button>
                     </li>
+
                 </ul>
                 <div class="row">
                     <div class="col-lg-12">
@@ -428,160 +427,104 @@
                             <!-- Card-->
                             <div class="card">
                                 <div class="card-body card-body-patients">
-                                    <div class="card-title">INDVIDUAL</div>
-                                    <div class="price"><span class="currency">EGP</span><span class="value">60</span>
+                                    <div class="card-title">للعائله</div>
+                                    <div class="price"><span class="value">٢٥٠</span><span class="currency">جنيه</span>
                                     </div>
-                                    <div class="frequency">Per Year</div>
+                                    <div class="frequency">سنوياَ</div>
                                     <div class="divider"></div>
                                     <ul class="list-unstyled li-space-lg">
                                         <li class="media">
+                                            <div class="media-body" style="text-align: right; margin-right:8px">استمتع
+                                                بخصومات طبيه لحد ٦٠٪ لعائلتك</div>
                                             <i class="fas fa-check"></i>
-                                            <div class="media-body">Save all of your medical data</div>
                                         </li>
+                                        <br />
+
                                         <li class="media">
+                                            <div class="media-body" style="text-align: right; margin-right:8px">احتفظ
+                                                بجميع بيانات عائلتك الصحيه</div>
                                             <i class="fas fa-check"></i>
-                                            <div class="media-body">Have a MediCard for emergency</div>
                                         </li>
+                                        <br />
+
                                         <li class="media">
+                                            <div class="media-body" style="text-align: right; margin-right:8px">احصل علي
+                                                كارت ميدي كارد لاسرتك</div>
                                             <i class="fas fa-check"></i>
-                                            <div class="media-body">Get Discounts up to 60%</div>
                                         </li>
+                                        <br />
+
                                         <li class="media">
+                                            <div class="media-body" style="text-align: right; margin-right:8px">تابع
+                                                التقدم الصحي لجميع افراد اسرتك</div>
                                             <i class="fas fa-check"></i>
-                                            <div class="media-body">Keep track of your medical progress</div>
+                                        </li>
+                                        <br />
+
+                                        <li class="media">
+                                            <div class="media-body" style="text-align: right; margin-right:8px">تابع
+                                                حاله افراد الاسره المسافرين بالخارج</div>
+                                            <i class="fas fa-check"></i>
                                         </li>
                                     </ul>
                                     <div class="button-wrapper">
                                         <a class="btn-solid-reg page-scroll pricing-signup" href="javascript:void()"
-                                            @click="scrollTo('details')">SIGN
-                                            UP</a>
+                                            @click="scrollTo('details')">اشترك الآن</a>
                                     </div>
                                 </div>
                             </div> <!-- end of card -->
                             <!-- end of card -->
 
+
                             <!-- Card-->
                             <div class="card">
                                 <div class="card-body card-body-patients">
-                                    <div class="card-title">FAMILY</div>
-                                    <div class="price"><span class="currency">EGP</span><span class="value">250</span>
+                                    <div class="card-title">فردي</div>
+                                    <div class="price"><span class="value">٦٠</span><span class="currency">جنيه</span>
                                     </div>
-                                    <div class="frequency">Per Year</div>
+                                    <div class="frequency">سنوياً</div>
                                     <div class="divider"></div>
                                     <ul class="list-unstyled li-space-lg">
                                         <li class="media">
+                                            <div class="media-body" style="text-align: right; margin-right:8px">خصومات
+                                                لحد ٦٠٪ مدي الحياه</div>
                                             <i class="fas fa-check"></i>
-                                            <div class="media-body">Store your families data</div>
                                         </li>
+                                        <br />
                                         <li class="media">
+                                            <div class="media-body" style="text-align: right; margin-right:8px">جمع كل
+                                                بياناتك الصحيه بشكل منظم</div>
                                             <i class="fas fa-check"></i>
-                                            <div class="media-body">Get MediCard for your family</div>
                                         </li>
+                                        <br />
+
                                         <li class="media">
+                                            <div class="media-body" style="text-align: right; margin-right:8px">احصل علي
+                                                بطاقه صحيه في حاله الطوارئ</div>
                                             <i class="fas fa-check"></i>
-                                            <div class="media-body">Track your families medical progress</div>
                                         </li>
+                                        <br />
+
+
                                         <li class="media">
+                                            <div class="media-body" style="text-align: right; margin-right:8px">تابع
+                                                تقدمك الصحي و قياساتك اليوميه</div>
                                             <i class="fas fa-check"></i>
-                                            <div class="media-body">Enjoy a 60% discount with your family</div>
-                                        </li>
-                                        <li class="media">
-                                            <i class="fas fa-check"></i>
-                                            <div class="media-body">Never worry about abroad members</div>
                                         </li>
                                     </ul>
                                     <div class="button-wrapper">
                                         <a class="btn-solid-reg page-scroll pricing-signup" href="javascript:void()"
-                                            @click="scrollTo('details')">SIGN
-                                            UP</a>
+                                            @click="scrollTo('details')">اشترك الآن</a>
                                     </div>
                                 </div>
                             </div> <!-- end of card -->
                             <!-- end of card -->
+
 
                         </div> <!-- end of col -->
 
                         <div v-else class="pricing-cards">
 
-                            <!-- Card-->
-                            <div class="card">
-                                <div class="card-body card-body-doctors">
-                                    <div class="card-title">BASIC</div>
-                                    <div class="frequency">14 days free, then</div>
-                                    <div class="price"><span class="currency">EGP</span><span class="value">300</span>
-                                        <div class="frequency">Per User Monthly</div>
-                                    </div>
-                                    <div class="divider"></div>
-                                    <ul class="list-unstyled li-space-lg">
-                                        <li class="media">
-                                            <i class="fas fa-check"></i>
-                                            <div class="media-body">Securly save patient's records</div>
-                                        </li>
-                                        <li class="media">
-                                            <i class="fas fa-check"></i>
-                                            <div class="media-body">Access patient's medical profile</div>
-                                        </li>
-                                        <li class="media">
-                                            <i class="fas fa-times"></i>
-                                            <div class="media-body">Manage your clinic financially</div>
-                                        </li>
-                                        <li class="media">
-                                            <i class="fas fa-times"></i>
-                                            <div class="media-body">Get important statistical insights</div>
-                                        </li>
-                                        <li class="media">
-                                            <i class="fas fa-times"></i>
-                                            <div class="media-body">Connect and message with patients</div>
-                                        </li>
-                                    </ul>
-                                    <div class="button-wrapper">
-                                        <a class="btn-solid-reg page-scroll pricing-signup" href="javascript:void()"
-                                            @click="scrollTo('details')">SIGN
-                                            UP</a>
-                                    </div>
-                                </div>
-                            </div> <!-- end of card -->
-                            <!-- end of card -->
-
-                            <!-- Card-->
-                            <div class="card">
-                                <div class="card-body card-body-doctors">
-                                    <div class="card-title">ADVANCED</div>
-                                    <div class="frequency">14 days free, then</div>
-                                    <div class="price"><span class="currency">EGP</span><span class="value">500</span>
-                                    </div>
-                                    <div class="frequency">Per User Monthly</div>
-                                    <div class="divider"></div>
-                                    <ul class="list-unstyled li-space-lg">
-                                        <li class="media">
-                                            <i class="fas fa-check"></i>
-                                            <div class="media-body">Securly save patient's records</div>
-                                        </li>
-                                        <li class="media">
-                                            <i class="fas fa-check"></i>
-                                            <div class="media-body">Access patient's medical profile</div>
-                                        </li>
-                                        <li class="media">
-                                            <i class="fas fa-check"></i>
-                                            <div class="media-body">Manage your clinic financially</div>
-                                        </li>
-                                        <li class="media">
-                                            <i class="fas fa-times"></i>
-                                            <div class="media-body">Get important statistical insights</div>
-                                        </li>
-                                        <li class="media">
-                                            <i class="fas fa-times"></i>
-                                            <div class="media-body">Connect and message with patients</div>
-                                        </li>
-                                    </ul>
-                                    <div class="button-wrapper">
-                                        <a class="btn-solid-reg page-scroll pricing-signup" href="javascript:void()"
-                                            @click="scrollTo('details')">SIGN
-                                            UP</a>
-                                    </div>
-                                </div>
-                            </div> <!-- end of card -->
-                            <!-- end of card -->
 
                             <!-- Card-->
                             <div class="card">
@@ -589,42 +532,154 @@
                             <p class="best-value">Best Value</p>
                         </div> -->
                                 <div class="card-body card-body-doctors">
-                                    <div class="card-title">COMPLETE</div>
-                                    <div class="frequency">14 days free, then</div>
-                                    <div class="price"><span class="currency">EGP</span><span class="value">700</span>
+                                    <div class="card-title">الباقه المتكامله</div>
+                                    <div class="frequency">١٤ يوم مجاناً</div>
+                                    <div class="price"><span class="value">٧٠٠</span><span class="currency">جنيه</span>
                                     </div>
-                                    <div class="frequency">Per User Monthly</div>
+                                    <div class="frequency">لكل مستخدم شهرياً</div>
                                     <div class="divider"></div>
-                                    <ul class="list-unstyled li-space-lg">
+                                    <ul class="list-unstyled li-space-lg" dir="rtl" style="text-align:right">
                                         <li class="media">
                                             <i class="fas fa-check"></i>
-                                            <div class="media-body">Securly save patient's records</div>
+                                            <div class="media-body" style="margin-right:8px">احتفظ بجميع بيانات مرضاك
+                                                بآمان</div>
                                         </li>
+                                        <br />
                                         <li class="media">
                                             <i class="fas fa-check"></i>
-                                            <div class="media-body">Access patient's medical profile</div>
+                                            <div class="media-body" style="margin-right:8px">شوف التاريخ المرضي الكامل
+                                                لمريضك</div>
                                         </li>
+                                        <br />
+
                                         <li class="media">
                                             <i class="fas fa-check"></i>
-                                            <div class="media-body">Manage your clinic financially</div>
+                                            <div class="media-body" style="margin-right:8px">تابع عيادتك مالياً</div>
                                         </li>
+                                        <br />
+
                                         <li class="media">
                                             <i class="fas fa-check"></i>
-                                            <div class="media-body">Get important statistical insights</div>
+                                            <div class="media-body" style="margin-right:8px">احصل علي احصائيات هامه
+                                                ومفصله</div>
                                         </li>
+                                        <br />
+
                                         <li class="media">
                                             <i class="fas fa-check"></i>
-                                            <div class="media-body">Connect and message with patients</div>
+                                            <div class="media-body" style="margin-right:8px">تواصل وتابع مع مرضاك عن
+                                                طريق خدمه الرسائل</div>
                                         </li>
                                     </ul>
                                     <div class="button-wrapper">
                                         <a class="btn-solid-reg page-scroll pricing-signup" href="javascript:void()"
-                                            @click="scrollTo('details')">SIGN
-                                            UP</a>
+                                            @click="scrollTo('details')">اشترك الآن</a>
                                     </div>
                                 </div>
                             </div> <!-- end of card -->
                             <!-- end of card -->
+
+
+                            <!-- Card-->
+                            <div class="card">
+                                <div class="card-body card-body-doctors">
+                                    <div class="card-title">الباقه المتقدمه</div>
+                                    <div class="frequency">١٤ يوم مجاناَ</div>
+                                    <div class="price"><span class="value">٥٠٠</span><span class="currency">جنيه</span>
+                                    </div>
+                                    <div class="frequency">لكل مستخدم شهرياَ</div>
+                                    <div class="divider"></div>
+                                    <ul class="list-unstyled li-space-lg" dir="rtl" style="text-align:right">
+                                        <li class="media">
+                                            <i class="fas fa-check"></i>
+                                            <div class="media-body" style="margin-right:8px">احتفظ بجميع بيانات مرضاك
+                                                بآمان</div>
+                                        </li>
+                                        <br />
+                                        <li class="media">
+                                            <i class="fas fa-check"></i>
+                                            <div class="media-body" style="margin-right:8px">شوف التاريخ المرضي الكامل
+                                                لمريضك</div>
+                                        </li>
+                                        <br />
+
+                                        <li class="media">
+                                            <i class="fas fa-check"></i>
+                                            <div class="media-body" style="margin-right:8px">تابع عيادتك مالياً</div>
+                                        </li>
+                                        <br />
+
+                                        <li class="media">
+                                            <i class="fas fa-times"></i>
+                                            <div class="media-body" style="margin-right:8px">احصل علي احصائيات هامه
+                                                ومفصله</div>
+                                        </li>
+                                        <br />
+
+                                        <li class="media">
+                                            <i class="fas fa-times"></i>
+                                            <div class="media-body" style="margin-right:8px">تواصل وتابع مع مرضاك عن
+                                                طريق خدمه الرسائل</div>
+                                        </li>
+                                    </ul>
+                                    <div class="button-wrapper">
+                                        <a class="btn-solid-reg page-scroll pricing-signup" href="javascript:void()"
+                                            @click="scrollTo('details')">اشترك الآن</a>
+                                    </div>
+                                </div>
+                            </div> <!-- end of card -->
+                            <!-- end of card -->
+
+                            <!-- Card-->
+                            <div class="card">
+                                <div class="card-body card-body-doctors">
+                                    <div class="card-title">الباقه الاساسيه</div>
+                                    <div class="frequency">١٤ يوم مجاناً</div>
+                                    <div class="price"><span class="value">٣٠٠</span><span class="currency">جنيه</span>
+                                        <div class="frequency">لكل مستخدم شهرياً</div>
+                                    </div>
+                                    <div class="divider"></div>
+                                    <ul class="list-unstyled li-space-lg" dir="rtl" style="text-align:right">
+                                        <li class="media">
+                                            <i class="fas fa-check"></i>
+                                            <div class="media-body" style="margin-right:8px">احتفظ بجميع بيانات مرضاك
+                                                بآمان</div>
+                                        </li>
+                                        <br />
+                                        <li class="media">
+                                            <i class="fas fa-check"></i>
+                                            <div class="media-body" style="margin-right:8px">شوف التاريخ المرضي الكامل
+                                                لمريضك</div>
+                                        </li>
+                                        <br />
+
+                                        <li class="media">
+                                            <i class="fas fa-times"></i>
+                                            <div class="media-body" style="margin-right:8px">تابع عيادتك مالياً</div>
+                                        </li>
+                                        <br />
+
+                                        <li class="media">
+                                            <i class="fas fa-times"></i>
+                                            <div class="media-body" style="margin-right:8px">احصل علي احصائيات هامه
+                                                ومفصله</div>
+                                        </li>
+                                        <br />
+
+                                        <li class="media">
+                                            <i class="fas fa-times"></i>
+                                            <div class="media-body" style="margin-right:8px">تواصل وتابع مع مرضاك عن
+                                                طريق خدمه الرسائل</div>
+                                        </li>
+                                    </ul>
+                                    <div class="button-wrapper">
+                                        <a class="btn-solid-reg page-scroll pricing-signup" href="javascript:void()"
+                                            @click="scrollTo('details')">اشترك الآن</a>
+                                    </div>
+                                </div>
+                            </div> <!-- end of card -->
+                            <!-- end of card -->
+
 
                         </div> <!-- end of col -->
                     </div>
@@ -677,24 +732,24 @@
 
 
         <!-- Newsletter -->
-        <div class="form">
+        <div class="form newsletter">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="text-container">
-                            <div class="above-heading">NEWSLETTER</div>
-                            <h2>Subscribe to MediCloud's newsletter to stay informed</h2>
+                            <div class="above-heading">تابع آخر الاخبار</div>
+                            <h2>اشترك في نشره ميدي كلاود وكن علي علم بكل جديد من مميزات و خصومات</h2>
 
                             <!-- Newsletter Form -->
-                            <form id="newsletterForm" data-toggle="validator" data-focus="false">
-                                <InputText id="newsletterEmail" type="email" placeholder="Email"
+                            <form id="newsletterForm" data-toggle="validator" data-focus="false" dir="rtl">
+                                <InputText id="newsletterEmail" type="email" placeholder="ايميل"
                                     v-model="newsLetterEmail" required />
                                 <br />
-                                <a class="btn-solid-reg page-scroll" href="javascript:void()"
-                                    @click="sendNewsLetterForm">SEND</a>
-                                <br/>
-                                <br/>
-                                <label>{{newsLetterError}}</label>
+                                <a v-if="newsletterButtonEnabled" class="btn-solid-reg page-scroll"
+                                    href="javascript:void()" @click="sendNewsLetterForm">سجل</a>
+                                <br />
+                                <br />
+                                <label>{{ newsLetterError }}</label>
                             </form>
                             <!-- end of newsletter form -->
 
@@ -707,7 +762,7 @@
 
                             <!-- todo add social links here -->
 
-                            <a href="#" class="social-icon fa fa-facebook">https://www.facebook.com/medicloud.care</a>
+                            <a href="https://www.facebook.com/medicloud.care" class="social-icon fa fa-facebook"></a>
                             <a href="#" class="social-icon fa fa-linkedin"></a>
                             <a href="#" class="social-icon fa fa-youtube"></a>
 
@@ -727,11 +782,12 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="footer-col first">
-                                <h4>About MediCloud</h4>
-                                <p class="p-small">MediCloud is growing startup in Egypt
-                                    aiming to reshape the way the healthcare tech industry
-                                    currently works by providing cutting-edge technologies
-                                    as its healthcare solutions.
+                                <h4>عن ميدي كلاود</h4>
+                                <p class="p-small">احنا ميدي كلاود شركه مصريه ناشئة هدفها تحسين مستوي الرعايه الصحيه في
+                                    مصر عن طريق ادخال احدث التكنولوجيا ضمن المنظومة الصحيه وتقديم احسن المنتجات و
+                                    البرامج بشكل سهل للجميع و بأقل الأسعار
+
+
                                 </p>
                             </div>
                         </div> <!-- end of col -->
@@ -742,7 +798,7 @@
                                     <div class="media-body">
                                         <i class="fa fa-map"></i>
                                         <span>
-                                            South Teseen, 5th District, New Cairo
+                                            شارع التسعين الجنوبي - التجمع الخامس - القاهره الجديده
                                         </span>
                                     </div>
                                 </li>
@@ -765,21 +821,21 @@
                             </ul>
                         </div> <!-- end of col -->
                         <div class="col-md-4">
-                            <h4>Quick Links</h4>
+                            <h4>روابط تهمك</h4>
 
                             <ul>
                                 <li>
-                                    <a href="#">Home<span class="sr-only">(current)</span></a>
+                                    <a href="#">الرئيسية<span class="sr-only">(current)</span></a>
                                 </li>
                                 <li>
-                                    <a href="javascript:void()" @click="scrollTo('features')">Features</a>
+                                    <a href="javascript:void()" @click="scrollTo('features')">المميزات</a>
                                 </li>
                                 <li>
-                                    <a href="javascript:void()" @click="scrollTo('details')">Request Demo</a>
+                                    <a href="javascript:void()" @click="scrollTo('details')">سجل الآن</a>
                                 </li>
 
                                 <li>
-                                    <a href="javascript:void()" @click="scrollTo('pricing')">Pricing</a>
+                                    <a href="javascript:void()" @click="scrollTo('pricing')">الاسعار</a>
                                 </li>
                             </ul>
                         </div>
@@ -795,7 +851,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-12">
-                            <p class="p-small">Copyright © 2022 <a href="https://www.medicloud.com">MediCloud</a></p>
+                            <p class="p-small">جميع الحقوق محفوظه ٢٠٢٢</p><a href="#">ميدي كلاود</a>
                         </div> <!-- end of col -->
                     </div> <!-- enf of row -->
                 </div> <!-- end of container -->
@@ -823,6 +879,9 @@ export default {
             testmonals: [],
             isPatient: true,
             navOpen: false,
+
+            newsletterButtonEnabled: true,
+            demoButtonEnabled: true,
         }
     },
     created() {
@@ -860,38 +919,45 @@ export default {
         },
         async sendNewsLetterForm() {
             if (this.newsLetterEmail === '') {
-                this.newsLetterError = "Please enter your email";
+                this.newsLetterError = "الرجاء ادخال البريد الالكتروني";
             } else {
-                axios.post("https://api.medicloud.care/forms/newsletter", 
+                this.newsletterButtonEnabled = false;
+                this.newsLetterError = "جاري الإرسال... انتظر قليلا";
+                axios.post("https://api.medicloud.care/forms/newsletter",
                     {
                         "email": this.newsLetterEmail
                     }
                 )
-                .then(() => { 
-                    this.newsLetterError = "Thanks for sumbitting you email, now you will get all news about MediCloud"; 
-                })
-                .catch(() => {
-                     this.newsLetterError = "An error occured, please try again"; 
-                });
+                    .then(() => {
+                        this.newsLetterError = "شكرا لك لاشتراكك في النشرة الإخبارية، سيصلك جميع عروضنا الجديده";
+
+                    })
+                    .catch(() => {
+                        this.newsLetterError = "حدث خطأ، حاول مرة اخرى";
+                        this.newsletterButtonEnabled = true;
+                    });
             }
         },
         async sendDemoForm() {
             if (this.demoEmail === '' || this.demoPhone === '' || this.demoName === '') {
-                this.demoError = "Please fill the fields in the form.";
+                this.demoError = "من فضلك املأ كل الحقول";
             } else {
-                axios.post("https://api.medicloud.care/forms/demo", 
+                this.demoError = "جاري الإرسال... انتظر قليلا";
+                this.demoButtonEnabled = false;
+                axios.post("https://api.medicloud.care/forms/demo",
                     {
                         "email": this.demoEmail,
                         "name": this.demoName,
                         "phone": this.demoPhone,
                     }
                 )
-                .then(() => { 
-                    this.demoError = "Thanks for sumbitting the form, we will contact you soon!"; 
-                })
-                .catch(() => {
-                     this.demoError = "An error occured, please try again"; 
-                });
+                    .then(() => {
+                        this.demoError = "تم الإرسال بنجاح، سيتم الرد عليك في أقرب وقت ممكن";
+                    })
+                    .catch(() => {
+                        this.demoError = "حدث خطأ، من فضلك حاول مرة أخرى";
+                        this.demoButtonEnabled = true;
+                    });
             }
         },
     }
@@ -979,6 +1045,7 @@ h6 {
 
 .p-heading {
     margin-bottom: 3.25rem;
+    text-align: right;
 }
 
 .testimonial-text {
@@ -1219,9 +1286,10 @@ screen and (-ms-high-contrast: none) {
 /*    04. Header     */
 /*********************/
 .header {
-    background: url('~@/assets/images/background.svg') no-repeat;
+    // background: url('~@/assets/images/background.svg') no-repeat;
+    background-color: #26b3ff;
     background-size: cover;
-    padding-bottom: 200px;
+    padding-bottom: 150px;
 }
 
 .header .header-content {
@@ -1335,12 +1403,13 @@ screen and (-ms-high-contrast: none) {
 
 #features {
     padding: 30px 10px;
+    background-color: #fff;
 }
 
 .tabs {
     padding-top: 8rem;
     padding-bottom: 8.125rem;
-    background-color: #f3f7fd;
+    // background-color: #f3f7fd;
 }
 
 .tabs .h2-heading,
@@ -1444,8 +1513,8 @@ screen and (-ms-high-contrast: none) {
 }
 
 .feature-img {
-    width: 600px;
-    height: 300px;
+    width: 500px;
+    height: 250px;
     object-fit: cover;
     border-radius: 5%;
 }
@@ -1460,6 +1529,7 @@ screen and (-ms-high-contrast: none) {
 #details {
     padding: 35px 20px;
     text-align: center;
+    background-color: #f3f7fd;
 }
 
 .basic-1 {
@@ -1493,6 +1563,9 @@ screen and (-ms-high-contrast: none) {
 /***********************/
 /*     11. Pricing     */
 /***********************/
+#pricing {
+    background-color: #fff;
+}
 
 .pricing-cards {
     margin-left: auto;
@@ -1531,15 +1604,15 @@ screen and (-ms-high-contrast: none) {
 }
 
 .cards-2 .card .card-body {
-    padding: 2.5rem 2rem 2.75rem 2em;
+    padding: 2.5rem 1rem 1rem 2em;
 }
 
 .card-body-doctors {
-    height: 600px;
+    min-height: 600px;
 }
 
 .card-body-patients {
-    height: 550px;
+    min-height: 630px;
 }
 
 .cards-2 .card .card-title {
@@ -1642,6 +1715,10 @@ screen and (-ms-high-contrast: none) {
 /**************************/
 /*     13. Newsletter     */
 /**************************/
+
+.newsletter {
+    background-color: #ffffff;
+}
 
 .form {
     // padding-top: 4rem;
@@ -2001,7 +2078,7 @@ screen and (-ms-high-contrast: none) {
 
     /* Header */
     .header .header-content {
-        text-align: left;
+        text-align: right;
     }
 
     .header .text-container {
@@ -2021,7 +2098,7 @@ screen and (-ms-high-contrast: none) {
     }
 
     .img-wrapper {
-        margin-left: 90px;
+        // margin-left: 90px;
     }
 
     .header-frame {
@@ -2257,8 +2334,8 @@ screen and (-ms-high-contrast: none) {
     }
 
     .cards-2 .card .card-body {
-        padding-right: 2.25rem;
-        padding-left: 2.25rem;
+        padding-right: 1.5rem;
+        padding-left: 1.5rem;
     }
 
     /* end of pricing */

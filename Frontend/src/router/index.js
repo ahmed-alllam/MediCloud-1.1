@@ -19,7 +19,7 @@ const routes = [
     name: 'Landing Page',
     component: () => import("../views/LandingPage.vue"),
     meta: {
-      title: 'The care you deserve'
+      title: 'خليك دايماً مطمن'
     }
   },
   {
