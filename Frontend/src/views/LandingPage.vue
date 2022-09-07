@@ -319,8 +319,8 @@
                                     <div dir="rtl">
                                         <InputText v-model="demoName" id="name" type="text" class="p-inputtext-sm"
                                             placeholder="الاسم" required />
-                                        <InputText v-model="demoEmail" id="email" type="email" class="p-inputtext-sm"
-                                            placeholder="ايميل" />
+                                        <!-- <InputText v-model="demoEmail" id="email" type="email" class="p-inputtext-sm"
+                                            placeholder="ايميل" /> -->
                                         <InputText v-model="demoPhone" id="phone" type="tel" class="p-inputtext-sm"
                                             placeholder="رقم موبايل" required />
                                         <br />
@@ -947,7 +947,7 @@ export default {
             }
         },
         async sendDemoForm() {
-            if (this.demoEmail === '' || this.demoPhone === '' || this.demoName === '') {
+            if (this.demoPhone === '' || this.demoName === '') {
                 this.demoError = "من فضلك املأ كل الحقول";
             } else {
                 this.demoError = "جاري الإرسال... انتظر قليلا";
