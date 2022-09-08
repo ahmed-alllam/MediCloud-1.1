@@ -73,7 +73,7 @@
                                     وتقديم احسن المنتجات و البرامج بشكل سهل للجميع و بأقل الأسعار
                                 </p>
                                 <a class="btn-solid-lg page-scroll" href="javascript:void()"
-                                    @click="scrollTo('details')">اشترك الآن</a>
+                                    @click="scrollTo('details')">اشترك الآن مجاناً</a>
                             </div> <!-- end of text-container -->
                         </div> <!-- end of col -->
                     </div> <!-- end of row -->
@@ -312,7 +312,7 @@
                                         والمميزات المقدمه
                                     </p>
 
-                                    <p style="color:#26b3ff; font-size: 18px">سجل الآن مجاناً</p>
+                                    <p style="color:#26b3ff; font-size: 18px">سجل الآن مجاناً وسيتم التواصل معك</p>
                                 </div>
 
                                 <form class="form-group col-12 col-md-6 order-md-0">
@@ -325,7 +325,7 @@
                                             placeholder="رقم موبايل" required />
                                         <br />
                                         <a v-if="demoButtonEnabled" class="btn-solid-reg page-scroll"
-                                            href="javascript:void()" @click="sendDemoForm">سجل</a>
+                                            href="javascript:void()" @click="sendDemoForm">سجل مجاناً</a>
                                         <br />
                                         <br />
                                         <label>{{ demoError }}</label>
@@ -464,7 +464,7 @@
                                     </ul>
                                     <div class="button-wrapper">
                                         <a class="btn-solid-reg page-scroll pricing-signup" href="javascript:void()"
-                                            @click="scrollTo('details')">اشترك الآن</a>
+                                            @click="scrollTo('details')">اشترك الآن مجاناً</a>
                                     </div>
                                 </div>
                             </div> <!-- end of card -->
@@ -516,7 +516,7 @@
                                     </ul>
                                     <div class="button-wrapper">
                                         <a class="btn-solid-reg page-scroll pricing-signup" href="javascript:void()"
-                                            @click="scrollTo('details')">اشترك الآن</a>
+                                            @click="scrollTo('details')">اشترك الآن مجاناً</a>
                                     </div>
                                 </div>
                             </div> <!-- end of card -->
@@ -572,7 +572,7 @@
                                     </ul>
                                     <div class="button-wrapper">
                                         <a class="btn-solid-reg page-scroll pricing-signup" href="javascript:void()"
-                                            @click="scrollTo('details')">اشترك الآن</a>
+                                            @click="scrollTo('details')">اشترك الآن مجاناً</a>
                                     </div>
                                 </div>
                             </div> <!-- end of card -->
@@ -623,7 +623,7 @@
                                     </ul>
                                     <div class="button-wrapper">
                                         <a class="btn-solid-reg page-scroll pricing-signup" href="javascript:void()"
-                                            @click="scrollTo('details')">اشترك الآن</a>
+                                            @click="scrollTo('details')">اشترك الآن مجاناً</a>
                                     </div>
                                 </div>
                             </div> <!-- end of card -->
@@ -676,7 +676,7 @@
                                     </ul>
                                     <div class="button-wrapper">
                                         <a class="btn-solid-reg page-scroll pricing-signup" href="javascript:void()"
-                                            @click="scrollTo('details')">اشترك الآن</a>
+                                            @click="scrollTo('details')">اشترك الآن مجاناً</a>
                                     </div>
                                 </div>
                             </div> <!-- end of card -->
