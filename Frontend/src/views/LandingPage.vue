@@ -138,8 +138,8 @@
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="image-container">
-                                            <img class="img-fluid feature-img"
-                                                :src="require('@/assets/images/features-2.png')" alt="alternative">
+                                            <img loading="lazy" class="img-fluid feature-img"
+                                                :src="require('@/assets/images/features-2.jpg')" alt="alternative">
                                         </div> <!-- end of image-container -->
                                     </div> <!-- end of col -->
                                     <div class="col-lg-6 ">
@@ -162,7 +162,7 @@
                                 <div class="row">
                                     <div class="col-lg-6  order-lg-2">
                                         <div class="image-container">
-                                            <img class="img-fluid feature-img"
+                                            <img loading="lazy" class="img-fluid feature-img"
                                                 :src="require('@/assets/images/features-1.png')" alt="alternative">
                                         </div> <!-- end of image-container -->
                                     </div> <!-- end of col -->
@@ -184,7 +184,7 @@
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="image-container">
-                                            <img class="img-fluid feature-img"
+                                            <img loading="lazy" class="img-fluid feature-img"
                                                 :src="require('@/assets/images/features-3.png')" alt="alternative">
                                         </div> <!-- end of image-container -->
                                     </div> <!-- end of col -->
@@ -214,7 +214,7 @@
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="image-container">
-                                            <img class="img-fluid feature-img"
+                                            <img loading="lazy" class="img-fluid feature-img"
                                                 :src="require('@/assets/images/features-4.png')" alt="alternative">
                                         </div> <!-- end of image-container -->
                                     </div> <!-- end of col -->
@@ -237,7 +237,7 @@
                                 <div class="row">
                                     <div class="col-lg-6 order-lg-2">
                                         <div class="image-container">
-                                            <img class="img-fluid feature-img"
+                                            <img loading="lazy" class="img-fluid feature-img"
                                                 :src="require('@/assets/images/features-5.png')" alt="alternative">
                                         </div> <!-- end of image-container -->
                                     </div> <!-- end of col -->
@@ -260,8 +260,8 @@
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="image-container">
-                                            <img class="img-fluid feature-img"
-                                                :src="require('@/assets/images/features-6.png')" alt="alternative">
+                                            <img loading="lazy" class="img-fluid feature-img"
+                                                :src="require('@/assets/images/features-6.jpg')" alt="alternative">
                                         </div> <!-- end of image-container -->
                                     </div> <!-- end of col -->
                                     <div class="col-lg-6">
