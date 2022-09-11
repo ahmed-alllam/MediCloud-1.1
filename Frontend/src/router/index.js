@@ -39,6 +39,16 @@ const routes = [
     }
   },
   {
+    path: "/patient/:id/new",
+    name: "New Patient Profile",
+    props: true,
+    component: () => import("../views/AddPatient.vue"),
+    meta: {
+      // requireAuth: true,
+      title: 'New Patient'
+    }
+  },
+  {
     path: '/appointments',
     name: 'Appointments',
     component: () => import("../views/Appointments.vue"),
@@ -71,6 +81,7 @@ const routes = [
   {
     path: "/appointments/new/patient",
     name: "New Patient",
+    props: true,
     component: () => import("../views/AddPatient.vue"),
     meta: {
       requireAuth: true,

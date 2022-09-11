@@ -6,8 +6,8 @@
             </v-form>
         </div>
         <div class="end-buttons">
-            <v-btn text class="font-weight-bold add-button" @click="addPatient">Add Patient</v-btn>
-            <v-btn text class="cancel-button" router to="/appointments/new">Cancel</v-btn>
+            <v-btn text class="font-weight-bold add-button" @click="addPatient">Add User</v-btn>
+            <v-btn v-if="fromDoctor" text class="cancel-button" router to="/appointments/new">Cancel</v-btn>
         </div>
     </v-card>
 </template>
@@ -52,6 +52,14 @@ export default {
             required: ['First Name', 'Last Name'],
             type: 'object',
             properties: {
+                'Photo': {
+                    'x-col': '12',
+                    type: 'string', "contentMediaType": "image/*",
+                    "writeOnly": true,
+                    "x-options": {
+                        "filesAsDataUrl": true
+                    },
+                },
                 'First Name': { type: 'string', 'x-col': '12', "x-class": "mr-10 col-sm-5" },
                 'Last Name': { type: 'string', 'x-col': '12', "x-class": "col-sm-5" },
                 'Phone': { type: 'number', 'x-col': '12', "x-class": "mr-10 col-sm-5" },
@@ -64,6 +72,7 @@ export default {
                     'x-class': 'col-sm-5'
                 },
                 'Gender': { type: 'string', 'enum': ['Male', 'Female'], 'x-col': '12', "x-class": "mr-10 col-sm-5" },
+                'MediCard ID': { type: 'string', 'x-col': '12', "x-class": "col-sm-5" },
 
                 'Emergency Contacts': {
                     type: 'array', 'x-col': '12', 'x-class': 'col-sm-5',
@@ -215,11 +224,17 @@ export default {
                 ...send_model
             }).then(res => {
                 const Patient = res.data;
-                this.$toast.success('Patient added successfully, redirecting to patient profile...');
+                this.$toast.success('User added successfully, redirecting to user profile...');
 
-                this.$router.push({
-                    path: '/appointments/new/patient/' + Patient._id,
-                })
+                if(this.fromDoctor){
+                    this.$router.push({
+                        path: '/appointments/new/patient/' + Patient._id,
+                    })
+                    console.log('from doctor')
+                }else {
+                    console.log('from patient')
+                    this.$router.push({ name: 'Patient Detail', params: { id: this.medicardID} });
+                }
             }).catch(err => {
                 console.log(err);
                 this.$toast.clear();
@@ -228,6 +243,21 @@ export default {
             )
         }
     },
+    props: {
+        fromDoctor: {
+            type: Boolean,
+            default: true
+        },
+        medicardID: {
+            type: String,
+            default: ''
+        }
+    },
+    mounted() {
+        if (this.medicardID) {
+            this.model['MediCard ID'] = this.medicardID;
+        }
+    }
 }
 </script>
 
