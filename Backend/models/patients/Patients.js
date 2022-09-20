@@ -18,6 +18,10 @@ const PatientSchema = mongoose.Schema({
   patientEmail: {
     type: String
   },
+  patientPIN : {
+    type: Number,
+    required: true
+  },
   patientMediCardID: {
     type: String,
   },
