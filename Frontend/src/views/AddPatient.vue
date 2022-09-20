@@ -29,6 +29,7 @@ export default {
             "First Name": '',
             'Last Name': '',
             'Email': '',
+            'PIN': '',
             'MediCard ID': '',
             'Blood Type': null,
             'Status': '',
@@ -54,16 +55,23 @@ export default {
             properties: {
                 'Photo': {
                     'x-col': '12',
+                    'x-class': 'col-sm-5 mr-10',
+                    'x-props': {
+                        'prepend-icon': 'mdi-camera',
+                    },
                     type: 'string', "contentMediaType": "image/*",
                     "writeOnly": true,
                     "x-options": {
                         "filesAsDataUrl": true
                     },
                 },
-                'First Name': { type: 'string', 'x-col': '12', "x-class": "mr-10 col-sm-5" },
-                'Last Name': { type: 'string', 'x-col': '12', "x-class": "col-sm-5" },
-                'Phone': { type: 'number', 'x-col': '12', "x-class": "mr-10 col-sm-5" },
-                'Email': { type: 'string', 'x-col': '12', 'x-class': 'col-sm-5' },
+                'First Name': { type: 'string', 'x-col': '12', "x-class": "col-sm-5" },
+                'Last Name': { type: 'string', 'x-col': '12', "x-class": "mr-10 col-sm-5" },
+                'PIN': { type: 'string', 'x-col': '12', 'x-class': 'col-sm-5',
+                'Email': { type: 'string', 'x-col': '12', 'x-class': 'mr-10 col-sm-5' },
+                'Phone': { type: 'number', 'x-col': '12', "x-class": "col-sm-5" },
+                'minLength': 6, 'maxLength': 6, 'x-props': { 'type': 'password', 'hint': "Password used to access patient's sensitive data" } },
+            
                 'Birth Date': { type: 'string', format: 'date', 'x-col': '12', "x-class": "mr-10 col-sm-5" },
                 'Blood Type': {
                     type: 'string',
@@ -75,7 +83,7 @@ export default {
                 'MediCard ID': { type: 'string', 'x-col': '12', "x-class": "col-sm-5" },
 
                 'Emergency Contacts': {
-                    type: 'array', 'x-col': '12', 'x-class': 'col-sm-5',
+                    type: 'array', 'x-col': '12', 'x-class': 'col-sm-5 mr-10 mt-5',
                     items: {
                         type: 'object',
                         properties: {
@@ -86,7 +94,7 @@ export default {
                     },
                 },
                 'Medications': {
-                    type: 'array', 'x-col': '12', "x-class": "mr-10 col-sm-5",
+                    type: 'array', 'x-col': '12', "x-class": "mr-10 col-sm-5 mt-5",
                     items: {
                         type: 'object',
                         properties: {
@@ -99,7 +107,7 @@ export default {
                     },
                 },
                 'Diseases': {
-                    type: 'array', 'x-col': '12', 'x-class': 'col-sm-5'
+                    type: 'array', 'x-col': '12', 'x-class': 'col-sm-5 mr-10  mt-5'
                     , items: {
                         type: 'object',
                         properties: {
@@ -112,7 +120,7 @@ export default {
                     },
                 },
                 'Family History': {
-                    type: 'array', 'x-col': '12', "x-class": "mr-10 col-sm-5", items: {
+                    type: 'array', 'x-col': '12', "x-class": "col-sm-5 mt-5", items: {
                         type: 'object',
                         properties: {
                             'Name': { type: 'string', 'x-props': { 'hint': 'Ex: High Blood Pressure' } },
@@ -124,7 +132,7 @@ export default {
                     },
                 },
                 'Immunizations': {
-                    type: 'array', 'x-col': '12', 'x-class': 'col-sm-5', items: {
+                    type: 'array', 'x-col': '12', 'x-class': 'col-sm-5 mr-10  mt-5', items: {
                         type: 'object',
                         properties: {
                             'Name': { type: 'string', 'x-props': { 'hint': 'Ex: Pfizer Covid-19' } },
@@ -135,7 +143,7 @@ export default {
                     },
                 },
                 'Allergies': {
-                    type: 'array', 'x-col': '12', "x-class": "mr-10 col-sm-5", items: {
+                    type: 'array', 'x-col': '12', "x-class": "col-sm-5 mt-5", items: {
                         type: 'object',
                         properties: {
                             'Name': { type: 'string', 'x-props': { 'hint': 'Ex: Lactose Intolerance' } },
@@ -147,7 +155,7 @@ export default {
                     },
                 },
                 'Prescriptions': {
-                    type: 'array', 'x-col': '12', 'x-class': 'col-sm-5', items: {
+                    type: 'array', 'x-col': '12', 'x-class': 'col-sm-5 mr-10 mt-5', items: {
                         type: 'object',
                         properties: {
                             'Image': {
@@ -165,7 +173,7 @@ export default {
                     },
                 },
                 'Scans': {
-                    type: 'array', 'x-col': '12', "x-class": "mr-10 col-sm-5", items: {
+                    type: 'array', 'x-col': '12', "x-class": "mr-10 col-sm-5 mt-5", items: {
                         type: 'object',
                         properties: {
                             'Image': {
@@ -183,7 +191,7 @@ export default {
                     },
                 },
                 'Lab tests': {
-                    type: 'array', 'x-col': '12', 'x-class': 'col-sm-5', items: {
+                    type: 'array', 'x-col': '12', 'x-class': 'col-sm-5 mt-5 mb-5', items: {
                         type: 'object',
                         properties: {
                             'Image': {

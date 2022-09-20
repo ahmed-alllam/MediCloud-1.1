@@ -1,136 +1,137 @@
 <template>
-        <v-card class="pb-10 pt-10 mr-7 mb-7 ml-7 mt-7">
-            <div id="top-content" v-if="loaded">
-                <div id="row">
-                    <div v-if="patient_data.patientPhoto" id="image" class="col-xs-12 col-md-5 col-xl-2">
-                        <img id="profile-photo" :src="patient_data.patientPhoto" />
+    <v-card class="pb-10 pt-10 mr-7 mb-7 ml-7 mt-7">
+        <div id="top-content" v-if="loaded">
+            <div id="row">
+                <div v-if="patient_data.patientPhoto" id="image" class="col-xs-12 col-md-5 col-xl-2">
+                    <img id="profile-photo" :src="patient_data.patientPhoto" />
+                </div>
+
+                <div v-else-if="loaded" id="image" class="col-xs-12 col-md-5 col-xl-2">
+                    <img id="profile-photo" :src="require('@/assets/images/Profile.jpg')" />
+                </div>
+
+                <div id="name-container" class="col-xs-12 col-md-7 col-xl-3">
+                    <h3 id="name">
+                        {{ patient_data.patientFirstName }} {{ patient_data.patientLastName }}
+                    </h3>
+                    <h3 id="email">
+                        {{ patient_data.patientEmail }}
+                    </h3>
+                </div>
+
+                <div id="basic-info" class="col-sm-11 offset-xl-1 col-xl-6 float-right">
+                    <div id="id" v-if="patient_data.patientMediCardID">
+                        <span class="name">
+                            ID
+                        </span>
+
+                        <span class="value">
+                            {{ patient_data.patientMediCardID }}
+                        </span>
+
                     </div>
 
-                    <div v-else-if="loaded" id="image" class="col-xs-12 col-md-5 col-xl-2">
-                        <img id="profile-photo" :src="require('@/assets/images/Profile.jpg')" />
+                    <div id="birthdate" v-if="patient_data.patientBirthDate">
+                        <span class="name">
+                            Birthdate
+                        </span>
+
+                        <span class="value">
+                            {{ patient_data.patientBirthDate | formatDate }}
+                        </span>
                     </div>
 
-                    <div id="name-container" class="col-xs-12 col-md-7 col-xl-3">
-                        <h3 id="name">
-                            {{ patient_data.patientFirstName }} {{ patient_data.patientLastName }}
-                        </h3>
-                        <h3 id="email">
-                            {{ patient_data.patientEmail }}
-                        </h3>
+                    <div id="city" v-if="patient_data.patientCity">
+                        <span class="name">
+                            City
+                        </span>
+
+                        <span class="value">
+                            {{ patient_data.patientCity }}
+                        </span>
+
                     </div>
 
-                    <div id="basic-info" class="col-sm-11 offset-xl-1 col-xl-6 float-right">
-                        <div id="id" v-if="patient_data.patientMediCardID">
-                            <span class="name">
-                                ID
-                            </span>
+                    <div id="blood-type" v-if="patient_data.patientBloodType">
+                        <span class="name">
+                            Blood Type
+                        </span>
 
-                            <span class="value">
-                                {{ patient_data.patientMediCardID }}
-                            </span>
+                        <span class="value">
+                            {{ patient_data.patientBloodType }}
+                        </span>
 
-                        </div>
+                    </div>
 
-                        <div id="birthdate" v-if="patient_data.patientBirthDate">
-                            <span class="name">
-                                Birthdate
-                            </span>
+                    <div id="phone" v-if="patient_data.patientPhone">
+                        <span class="name">
+                            Phone
+                        </span>
 
-                            <span class="value">
-                                {{ patient_data.patientBirthDate | formatDate }}
-                            </span>
-                        </div>
+                        <span class="value">
+                            {{ patient_data.patientPhone }}
+                        </span>
 
-                        <div id="city" v-if="patient_data.patientCity">
-                            <span class="name">
-                                City
-                            </span>
+                    </div>
 
-                            <span class="value">
-                                {{ patient_data.patientCity }}
-                            </span>
+                    <div id="height" v-if="patient_data.patientHeight">
+                        <span class="name">
+                            Height
+                        </span>
 
-                        </div>
+                        <span class="value">
+                            {{ patient_data.patientHeight }}
+                        </span>
 
-                        <div id="blood-type" v-if="patient_data.patientBloodType">
-                            <span class="name">
-                                Blood Type
-                            </span>
+                    </div>
 
-                            <span class="value">
-                                {{ patient_data.patientBloodType }}
-                            </span>
+                    <div id="weight" v-if="patient_data.patientWeight">
+                        <span class="name">
+                            Weight
+                        </span>
 
-                        </div>
+                        <span class="value">
+                            {{ patient_data.patientWeight }}
+                        </span>
 
-                        <div id="phone" v-if="patient_data.patientPhone">
-                            <span class="name">
-                                Phone
-                            </span>
+                    </div>
 
-                            <span class="value">
-                                {{ patient_data.patientPhone }}
-                            </span>
+                    <div id="martial-status" v-if="patient_data.patientMartialStatus">
+                        <span class="name">
+                            Martial Status
+                        </span>
 
-                        </div>
+                        <span class="value">
+                            {{ patient_data.patientMartialStatus }}
+                        </span>
 
-                        <div id="height" v-if="patient_data.patientHeight">
-                            <span class="name">
-                                Height
-                            </span>
+                    </div>
 
-                            <span class="value">
-                                {{ patient_data.patientHeight }}
-                            </span>
+                    <div id="gender" v-if="patient_data.patientGender">
+                        <span class="name">
+                            Gender
+                        </span>
 
-                        </div>
+                        <span class="value">
+                            {{ patient_data.patientGender }}
+                        </span>
 
-                        <div id="weight" v-if="patient_data.patientWeight">
-                            <span class="name">
-                                Weight
-                            </span>
-
-                            <span class="value">
-                                {{ patient_data.patientWeight }}
-                            </span>
-
-                        </div>
-
-                        <div id="martial-status" v-if="patient_data.patientMartialStatus">
-                            <span class="name">
-                                Martial Status
-                            </span>
-
-                            <span class="value">
-                                {{ patient_data.patientMartialStatus }}
-                            </span>
-
-                        </div>
-
-                        <div id="gender" v-if="patient_data.patientGender">
-                            <span class="name">
-                                Gender
-                            </span>
-
-                            <span class="value">
-                                {{ patient_data.patientGender }}
-                            </span>
-
-                        </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div v-if="!loaded" class="loadingBar">
-                <v-progress-circular indeterminate color="primary" v-if="!errorLabel"></v-progress-circular>
-                <label class="errorLabel">
-                    {{ errorLabel }}
-                </label>
-            </div>
+        <div v-if="!loaded" class="loadingBar">
+            <v-progress-circular indeterminate color="primary" v-if="!errorLabel"></v-progress-circular>
+            <label class="errorLabel">
+                {{ errorLabel }}
+            </label>
+        </div>
 
-            <div id="medical-details" v-if="loaded">
-                <div v-for="(value, key, index) in this.patient_data.details_sections" :key="`${key}-${index}`">
+        <div id="medical-details" v-if="loaded">
+            <div v-for="(value, key, index) in this.patient_data.details_sections" :key="`${key}-${index}`" id="medical-detail">
 
+                <div v-if="!PINlocked || key === 'Emergency Contacts'">
                     <h2>{{ key }}</h2>
 
                     <div class="row no-gutters">
@@ -149,7 +150,7 @@
 
                                     <v-list>
                                         <v-list-item link @click="edit_dialog = true; current_dialog_item = [key, index2];
-current_dialog_data = patient_data.details_sections[current_dialog_item[0]][current_dialog_item[1]]
+                                        current_dialog_data = patient_data.details_sections[current_dialog_item[0]][current_dialog_item[1]]
                                         ">
                                             <v-list-item-title>Edit</v-list-item-title>
                                         </v-list-item>
@@ -196,73 +197,107 @@ current_dialog_data = patient_data.details_sections[current_dialog_item[0]][curr
                         </div>
                     </div>
                 </div>
+            </div>
 
 
-                <v-dialog v-model="edit_dialog" width="500">
-                    <EditRecord @update="edit_dialog = false" :section="current_dialog_item[0]"
-                        :index="current_dialog_item[1]" :patient_data="patient_data"
-                        :section_data="current_dialog_data" />
-                </v-dialog>
+            <v-dialog v-model="edit_dialog" width="500">
+                <EditRecord @update="edit_dialog = false" :section="current_dialog_item[0]"
+                    :index="current_dialog_item[1]" :patient_data="patient_data" :section_data="current_dialog_data" />
+            </v-dialog>
 
-                <v-dialog v-model="delete_dialog" width="500">
-                    <v-card>
-                        <v-card-title class="text-h5 grey lighten-2">
+            <v-dialog v-model="delete_dialog" width="500">
+                <v-card>
+                    <v-card-title class="text-h5 grey lighten-2">
+                        Delete
+                    </v-card-title>
+
+                    <v-card-text>
+                        Are you sure you want to delete this record?
+                    </v-card-text>
+
+                    <v-divider></v-divider>
+
+                    <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-btn color="red" text @click="deleteItem">
                             Delete
-                        </v-card-title>
+                        </v-btn>
+                    </v-card-actions>
+                </v-card>
+            </v-dialog>
 
-                        <v-card-text>
-                            Are you sure you want to delete this record?
-                        </v-card-text>
+            <div v-if="addMediCard && !PINlocked" class="medical-detail-div">
+                <h2>MediCard</h2>
 
-                        <v-divider></v-divider>
+                <div class="row no-gutters">
 
-                        <v-card-actions>
-                            <v-spacer></v-spacer>
-                            <v-btn color="red" text @click="deleteItem">
-                                Delete
-                            </v-btn>
-                        </v-card-actions>
-                    </v-card>
-                </v-dialog>
+                    <div class="col-md-6 col-xs-12">
+                        <div class="record-item row no-gutters">
 
-                <div v-if="addMediCard">
-                    <h2>MediCard</h2>
-
-                    <div class="row no-gutters">
-
-                        <div class="col-md-6 col-xs-12">
-                            <div class="record-item row no-gutters">
-
-                                <div>
-                                    <div class="record-details">
-                                        <span>Link a MediCard to this patient</span>
-                                    </div>
-
-                                    <v-form ref="medicardIDForm" v-model="valid" class="mb-5">
-                                        <v-jsf v-model="inputMedicardID" :schema="medicardIDSchema" />
-                                    </v-form>
-
-                                    <v-btn text large @click="addMediCardID"
-                                        class="font-weight-bold add-medicard-button">
-                                        SAVE</v-btn>
+                            <div>
+                                <div class="record-details">
+                                    <span>Link a MediCard to this patient</span>
                                 </div>
+
+                                <v-form ref="medicardIDForm" v-model="valid" class="mb-5">
+                                    <v-jsf v-model="inputMedicardID" :schema="medicardIDSchema" />
+                                </v-form>
+
+                                <v-btn text large @click="addMediCardID" class="font-weight-bold add-medicard-button">
+                                    SAVE</v-btn>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <v-dialog v-model="add_dialog" width="500" v-if="loaded && can_edit">
-                <template v-slot:activator="{ on, attrs }">
-                    <v-btn v-bind="attrs" v-on="on" text large class="font-weight-bold add-record-button">
-                        Add New Records
-                        <v-icon>mdi-plus-circle</v-icon>
-                    </v-btn>
-                </template>
+            <div v-if="PINlocked" class="medical-detail-div">
+                <h2>Patient PIN</h2>
 
-                <AddRecord @update="add_dialog = false" :patient_data="patient_data" />
-            </v-dialog>
-        </v-card>
+                <div class="row no-gutters">
+
+                    <div class="col-md-6 col-xs-12">
+                        <div class="record-item row no-gutters">
+
+                            <div>
+                                <div class="record-details">
+                                    <span>Enter the patient PIN to view their medical details</span>
+                                </div>
+
+                                <v-form ref="medicardIDForm" class="mb-5">
+                                    <v-jsf v-model="inputPIN" :schema="patientPINSchema" />
+                                </v-form>
+
+                                <v-btn text large @click="unlockPatientPIN"
+                                    class="font-weight-bold add-medicard-button">
+                                    UNLOCK</v-btn>
+
+                                <br />
+                                <br />
+
+                                <div class="record-details">
+                                    <span class="small">
+                                        Forgot your PIN? contact us at +20 155 355 4224</span>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <v-dialog v-model="add_dialog" width="500" v-if="loaded && can_edit && !PINlocked">
+            <template v-slot:activator="{ on, attrs }">
+                <v-btn v-bind="attrs" v-on="on" text large class="font-weight-bold add-record-button">
+                    Add New Records
+                    <v-icon>mdi-plus-circle</v-icon>
+                </v-btn>
+            </template>
+
+            <AddRecord @update="add_dialog = false" :patient_data="patient_data" />
+        </v-dialog>
+    </v-card>
 
 </template>
 
@@ -285,8 +320,23 @@ export default {
         }
     },
     data: () => ({
+        PINlocked: true,
         valid: null,
         errorLabel: "",
+        patientPINSchema: {
+            type: "object",
+            properties: {
+                PIN: {
+                    type: "string",
+                    title: "PIN",
+                    minLength: 6,
+                    maxLength: 6
+                }
+            }
+        },
+        inputPIN: {
+            PIN: ""
+        },
         medicardIDSchema: {
             title: 'MediCard ID',
             type: 'string',
@@ -324,6 +374,9 @@ export default {
                     const patient = response.data;
                     this.patient_data = patient;
 
+                    if (patient.patientPIN) {
+                        this.PINlocked = true;
+                    }
 
                     const details_sections = {};
 
@@ -349,7 +402,7 @@ export default {
                     if (error && error.response && error.response.status === 404) {
                         if (this.$route.params.id.length === 8) {
                             console.log("MediCard ID not found, redirecting to new patient");
-                            this.$router.push({ name: 'New Patient Profile', params: { fromDoctor: false , medicardID: this.$route.params.id} });
+                            this.$router.push({ name: 'New Patient Profile', params: { fromDoctor: false, medicardID: this.$route.params.id } });
                         } else {
                             this.errorLabel = "Wrong Patient ID";
                             console.log("wrong patient id");
@@ -394,6 +447,13 @@ export default {
                         console.log(error);
                         //todo
                     });
+            }
+        },
+        unlockPatientPIN() {
+            if (this.inputPIN.PIN == this.patient_data.patientPIN) {
+                this.PINlocked = false;
+            } else {
+                this.$toast.error("Wrong PIN, please try again");
             }
         }
     },
@@ -535,13 +595,22 @@ export default {
     margin: 10px 4%;
 }
 
-#medical-details>div {
+#medical-detail>div {
     padding: 10px;
     margin-top: 20px;
     /* box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); */
     border-radius: 10px;
     background-color: #FFFFFF;
 }
+
+.medical-detail-div {
+    padding: 10px;
+    margin-top: 20px;
+    /* box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); */
+    border-radius: 10px;
+    background-color: #FFFFFF; 
+}
+
 
 #medical-details h2 {
     font-size: 25px;
@@ -625,7 +694,7 @@ export default {
     border-radius: 25px;
     text-decoration: none;
 
-    margin: 0 auto;
+    margin: 50px auto;
     display: block;
 
     i {

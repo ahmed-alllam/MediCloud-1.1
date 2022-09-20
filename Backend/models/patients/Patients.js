@@ -19,7 +19,7 @@ const PatientSchema = mongoose.Schema({
     type: String
   },
   patientPIN : {
-    type: Number,
+    type: String,
     required: true
   },
   patientMediCardID: {
