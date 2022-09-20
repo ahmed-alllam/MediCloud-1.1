@@ -108,7 +108,7 @@ export default {
                         required: ['Name']
                     },
                 },
-            }, required: ['complaint', 'patientDiagnosis']
+            }, required: ['patientComplaint', 'patientDiagnosis']
         },
     }),
     methods: {
