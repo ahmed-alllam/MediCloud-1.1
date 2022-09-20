@@ -320,7 +320,7 @@ export default {
         }
     },
     data: () => ({
-        PINlocked: true,
+        PINlocked: false,
         valid: null,
         errorLabel: "",
         patientPINSchema: {
