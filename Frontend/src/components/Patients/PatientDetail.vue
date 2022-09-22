@@ -402,7 +402,7 @@ export default {
                     if (error && error.response && error.response.status === 404) {
                         if (this.$route.params.id.length === 8) {
                             console.log("MediCard ID not found, redirecting to new patient");
-                            this.$router.push({ name: 'New Patient Profile', params: { fromDoctor: false, medicardID: this.$route.params.id } });
+                            this.$router.push({ name: 'New Patient Profile', params: { id: this.$route.params.id } });
                         } else {
                             this.errorLabel = "Wrong Patient ID";
                             console.log("wrong patient id");
