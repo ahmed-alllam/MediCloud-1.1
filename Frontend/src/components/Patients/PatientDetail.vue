@@ -492,6 +492,8 @@ export default {
     height: 160px;
     border-radius: 50%;
     margin: auto;
+
+    object-fit: cover;
 }
 
 @media screen and (min-width: 768px) {
