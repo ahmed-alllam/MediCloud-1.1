@@ -13,9 +13,6 @@ module.exports = {
         contextRegExp: /moment$/,
       }),
     ],
-    optimization: {
-      concatenateModules: true,
-    }
   },
   chainWebpack: config => {
     config.plugins.delete('prefetch')
