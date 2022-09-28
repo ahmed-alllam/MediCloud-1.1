@@ -4,6 +4,14 @@
     "routes": {
       "/**": "index.html"
     },
-    "https_only": true
+    "https_only": true,
 
+    "headers": {
+      "/": {
+        "Cache-Control": "no-store, no-cache"
+      },
+      "/img": {
+        "Cache-Control": "public, max-age=31536000"
+      }
+    }
   }
