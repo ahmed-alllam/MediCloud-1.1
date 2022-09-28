@@ -60,7 +60,9 @@
                         <div class="col-lg-6">
                             <div class="image-container">
                                 <div class="img-wrapper">
-                                    <img class="img-fluid" :src="require('@/assets/images/header-software-app.png')"
+                                    <img rel="preload"
+                                    class="img-fluid" height="470" width="470"
+                                     :src="require('@/assets/images/header-software-app.png')"
                                         alt="alternative">
                                 </div> <!-- end of img-wrapper -->
                             </div> <!-- end of image-container -->
