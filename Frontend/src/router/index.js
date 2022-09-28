@@ -8,7 +8,7 @@ const routes = [
   {
     path: '/',
     name: 'Overview',
-    component: () => import("../views/Home.vue"),
+    component: () => import("../views/Home.vue" /* webpackChunkName: "Home" */),
     meta: {
       requireAuth: true,
       title: 'Overview'
@@ -17,7 +17,7 @@ const routes = [
   {
     path: '/',
     name: 'Landing Page',
-    component: () => import("../views/LandingPage.vue"),
+    component: () => import("../views/LandingPage.vue" /* webpackChunkName: "LandingPage" */),
     meta: {
       title: 'خليك دايماً مطمن'
     }
@@ -25,7 +25,7 @@ const routes = [
   {
     path: '/login',
     name: 'Login',
-    component: () => import("../views/Login.vue"),
+    component: () => import("../views/Login.vue", /* webpackChunkName: "Login" */),
     meta: {
       title: 'Login'
     }
@@ -33,7 +33,7 @@ const routes = [
   {
     path: '/patient/:id',
     name: 'Patient Detail',
-    component: () => import("../components/Patients/PatientDetail.vue"),
+    component: () => import("../components/Patients/PatientDetail.vue", /* webpackChunkName: "PatientDetail" */),
     meta: {
       title: 'Patient Details'
     }
@@ -42,7 +42,7 @@ const routes = [
     path: "/patient/:id/new",
     name: "New Patient Profile",
     props: true,
-    component: () => import("../views/AddPatient.vue"),
+    component: () => import("../views/AddPatient.vue", /* webpackChunkName: "AddPatient" */),
     meta: {
       // requireAuth: true,
       title: 'New Patient'
@@ -51,7 +51,7 @@ const routes = [
   {
     path: '/appointments',
     name: 'Appointments',
-    component: () => import("../views/Appointments.vue"),
+    component: () => import("../views/Appointments.vue", /* webpackChunkName: "Appointments" */),
     meta: {
       requireAuth: true,
       title: 'Appointments'
@@ -63,7 +63,7 @@ const routes = [
     props: {
       edit: true
     },
-    component: () => import("../views/PatientAppointment.vue"),
+    component: () => import("../views/PatientAppointment.vue", /* webpackChunkName: "PatientAppointment" */),
     meta: {
       requireAuth: true,
       title: 'Edit Appointment'
@@ -72,7 +72,7 @@ const routes = [
   {
     path: "/appointments/new",
     name: "New Appointment",
-    component: () => import("../views/AddAppointment.vue"),
+    component: () => import("../views/AddAppointment.vue", /* webpackChunkName: "AddAppointment" */),
     meta: {
       requireAuth: true,
       title: 'New Appointment'
@@ -82,7 +82,7 @@ const routes = [
     path: "/appointments/new/patient",
     name: "New Patient",
     props: true,
-    component: () => import("../views/AddPatient.vue"),
+    component: () => import("../views/AddPatient.vue", /* webpackChunkName: "AddPatient" */),
     meta: {
       requireAuth: true,
       title: 'New Patient'
@@ -91,7 +91,7 @@ const routes = [
   {
     path: "/appointments/new/patient/:id",
     name: "New Patient Appointment",
-    component: () => import("../views/PatientAppointment.vue"),
+    component: () => import("../views/PatientAppointment.vue", /* webpackChunkName: "PatientAppointment" */),
     meta: {
       requireAuth: true,
       title: 'New Appointment'
@@ -100,7 +100,7 @@ const routes = [
   {
     path: "/finances",
     name: "Finances",
-    component: () => import("../views/Billing.vue"),
+    component: () => import("../views/Billing.vue", /* webpackChunkName: "Billing" */),
     meta: {
       requireAuth: true,
       title: 'Finances'
@@ -109,7 +109,7 @@ const routes = [
   {
     path: "/messages",
     name: "Messages",
-    component: () => import("../views/Messages.vue"),
+    component: () => import("../views/Messages.vue", /* webpackChunkName: "Messages" */),
     meta: {
       requireAuth: true,
       title: 'Messages'
@@ -118,7 +118,7 @@ const routes = [
   {
     path: "/connect",
     name: "Connect",
-    component: () => import("../views/Connect.vue"),
+    component: () => import("../views/Connect.vue", /* webpackChunkName: "Connect" */),
     meta: {
       requireAuth: true,
       title: 'Connect'
@@ -127,7 +127,7 @@ const routes = [
   {
     path: "/manage-clinic",
     name: "Manage Clinic",
-    component: () => import("../views/ManageClinic.vue"),
+    component: () => import("../views/ManageClinic.vue", /* webpackChunkName: "ManageClinic" */),
     meta: {
       requireAuth: true,
       title: 'Manage Clinic'
@@ -136,7 +136,7 @@ const routes = [
   {
     path: "/logout",
     name: "Logout",
-    component: () => import("../views/Logout.vue"),
+    component: () => import("../views/Logout.vue", /* webpackChunkName: "Logout" */),
     meta: {
       requireAuth: true,
       title: 'Logout'
@@ -145,7 +145,7 @@ const routes = [
   {
     path: "/test", // todo: remove this
     name: "test",
-    component: () => import("../views/test.vue"),
+    component: () => import("../views/test.vue", /* webpackChunkName: "test" */),
   }
 
 ]

@@ -12,7 +12,9 @@ module.exports = {
         resourceRegExp: /^\.\/locale$/,
         contextRegExp: /moment$/,
       }),
-    ],
+    ]
   }, 
-
+  optimization: {
+    concatenateModules: true,
+  }
 }

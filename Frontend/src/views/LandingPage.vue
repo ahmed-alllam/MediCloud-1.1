@@ -1771,7 +1771,7 @@ screen and (-ms-high-contrast: none) {
 .fa,
 .fas {
     font-family: 'FontAwesome' !important;
-    font-display: swap;
+    // <!-- font-display: swap; -->
 }
 
 
