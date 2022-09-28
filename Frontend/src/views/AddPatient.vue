@@ -100,7 +100,7 @@ export default {
                     title: {
                         "$ref": "#/i18n/~$locale~/phone"
                     },
-                    type: 'number', 'x-col': '12', "x-class": "col-sm-5"
+                    type: 'string', 'x-col': '12', "x-class": "col-sm-5"
                 },
 
                 'Birth Date': {
@@ -122,7 +122,9 @@ export default {
                     title: {
                         "$ref": "#/i18n/~$locale~/gender"
                     },
-                    type: 'string', 'enum': ['Male', 'Female'], 'x-col': '12', "x-class": "me-10 col-sm-5"
+                    type: 'string', 
+                    'enum': ['ذكر', 'انثي'],
+                     'x-col': '12', "x-class": "me-10 col-sm-5"
                 },
                 'MediCard ID': {
                     type: 'string', 'x-col': '12', "x-class": "col-sm-5"
@@ -151,7 +153,7 @@ export default {
                                 title: {
                                     "$ref": "#/i18n/~$locale~/contact_phone"
                                 },
-                                type: 'number', 'x-props': {
+                                type: 'string', 'x-props': {
                                     'hint':
                                     {
                                         "$ref": "#/i18n/~$locale~/contact_phone_hint"
@@ -503,6 +505,8 @@ export default {
             },
             "i18n": {
                 "en": {
+                    "male": "Male",
+                    "female": "Female",
                     "pin": "PIN",
                     "photo": "Photo",
                     "first_name": "First Name",
@@ -588,6 +592,8 @@ export default {
                 },
 
                 "ar": {
+                    "male": "ذكر",
+                    "female": "انثي",
                     "pin": "كلمة السر",
                     "photo": "صورة شخصية",
                     "first_name": "الاسم الاول",
@@ -699,6 +705,12 @@ export default {
                 send_model['patient' + String(key).replace(/ /g, '')] = this.model[key]
             }
 
+            if (send_model.patientGender == "ذكر") {
+                send_model.patientGender = "Male"
+            } else if (send_model.patientGender == "انثي") {
+                send_model.patientGender = "Female"
+            }
+
             axios.post("https://api.medicloud.care/api/patients/", {
                 ...send_model
             }).then(res => {
@@ -739,9 +751,13 @@ export default {
             if (this.$store.state.isLoggedIn) {
                 this.options.locale = 'en';
                 this.fromDoctor = true;
+
+                this.schema.properties.Gender.enum = ['Male', 'Female']
             } else {
                 this.$vuetify.lang.current = 'ar';
                 this.$vuetify.rtl = true;
+
+                this.schema.properties['MediCard ID'] = {}
             }
         },
     },

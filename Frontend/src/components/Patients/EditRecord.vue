@@ -45,7 +45,7 @@ export default {
                 type: 'object',
                 properties: {
                     'Name': { type: 'string', default: '', 'x-props': { 'hint': 'Ex: Father' } },
-                    'Phone': { type: 'number', 'x-props': { 'hint': 'Ex: 01123456789' } }
+                    'Phone': { type: 'string', 'x-props': { 'hint': 'Ex: 01123456789' } }
                 },
                 required: ['Phone']
             },
