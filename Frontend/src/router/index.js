@@ -142,6 +142,11 @@ const routes = [
       title: 'Logout'
     }
   },
+  {
+    path: "/test", // todo: remove this
+    name: "test",
+    component: () => import("../views/test.vue"),
+  }
 
 ]
 
