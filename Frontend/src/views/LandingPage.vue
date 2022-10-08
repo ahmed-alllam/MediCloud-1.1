@@ -535,7 +535,7 @@
                                 <div class="card-body card-body-doctors">
                                     <div class="card-title">الباقه الاساسيه</div>
                                     <div class="frequency">١٤ يوم مجاناً</div>
-                                    <div class="price"><span class="value">٣٠٠</span><span class="currency">جنيه</span>
+                                    <div class="price"><span class="value">٤٠٠</span><span class="currency">جنيه</span>
                                         <div class="frequency">لكل مستخدم شهرياً</div>
                                     </div>
                                     <div class="divider"></div>
@@ -586,7 +586,7 @@
                                 <div class="card-body card-body-doctors">
                                     <div class="card-title">الباقه المتقدمه</div>
                                     <div class="frequency">١٤ يوم مجاناَ</div>
-                                    <div class="price"><span class="value">٥٠٠</span><span class="currency">جنيه</span>
+                                    <div class="price"><span class="value">٦٠٠</span><span class="currency">جنيه</span>
                                     </div>
                                     <div class="frequency">لكل مستخدم شهرياَ</div>
                                     <div class="divider"></div>
