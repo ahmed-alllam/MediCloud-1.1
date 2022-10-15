@@ -10,9 +10,11 @@
             Send and recieve medical data with your nearby Clinics, Labs, and Pharmacies.
         </h3>
 
-        <h5>
-            Coming Soon...
-        </h5>
+        <h4>
+            Subscribe in our premium plan to get access 
+            <br/>
+            Contact us at +20 1000 170 715
+        </h4>
 
     </v-card>
 
@@ -25,7 +27,7 @@ h3 {
     margin: 20px 5vw;
 }
 
-h5 {
+h4 {
     text-align: center;
     color: orange;
     margin-top: 40px;

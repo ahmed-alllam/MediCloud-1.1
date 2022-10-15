@@ -7,13 +7,14 @@
             Send and reply to Messages of your patients
         </h3>
         <h3>
-
-            Announce offers and Broadcasts to all of our clients
+            Increase your clinic's flow rate of patients by our marketing tools
         </h3>
 
-        <h5>
-            Coming Soon...
-        </h5>
+        <h4>
+            Subscribe in our premium plan to get access 
+            <br/>
+            Contact us at +20 1000 170 715
+        </h4>
 
     </v-card>
 
@@ -26,7 +27,7 @@ h3 {
     margin-top: 20px;
 }
 
-h5 {
+h4 {
     text-align: center;
     color: orange;
     margin-top: 40px;

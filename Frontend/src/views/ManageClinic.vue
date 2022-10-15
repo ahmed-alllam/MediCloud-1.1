@@ -7,12 +7,14 @@
             Manage, add, view the staff in your clinic
         </h3>
         <h3>
-            Review best performers using leadership board
+            Add and link multiple branches of your clinic with each other
         </h3>
 
-        <h5>
-            Coming Soon...
-        </h5>
+        <h4>
+            Subscribe in our premium plan to get access 
+            <br/>
+            Contact us at +20 1000 170 715
+        </h4>
 
     </v-card>
 
@@ -25,7 +27,7 @@ h3 {
     margin-top: 20px;
 }
 
-h5 {
+h4 {
     text-align: center;
     color: orange;
     margin-top: 40px;
