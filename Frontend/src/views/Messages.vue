@@ -11,9 +11,7 @@
         </h3>
 
         <h4>
-            Subscribe in our premium plan to get access 
-            <br/>
-            Contact us at +20 1000 170 715
+            Coming Soon...
         </h4>
 
     </v-card>

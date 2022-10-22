@@ -129,7 +129,7 @@
                         </v-card-title>
 
                         <v-card-text class="text-center heading font-weight-bold text-black pb-10 mt-10">
-                            Subscribe in our premium plan to get access 
+                            Coming Soon...
                         </v-card-text>
                     </v-card>
 
