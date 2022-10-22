@@ -23,11 +23,11 @@ const VisitSchema = mongoose.Schema({
   },
   patientComplaint: {
     type: String,
-    required: true
+    // required: true
   },
   patientDiagnosis: {
     type: String,
-    required: true
+    // required: true
   },
   prescription:
     [
