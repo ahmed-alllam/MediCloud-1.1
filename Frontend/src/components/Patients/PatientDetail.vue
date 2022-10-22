@@ -375,7 +375,8 @@ export default {
                     this.patient_data = patient;
 
                     if (patient.patientPIN) {
-                        this.PINlocked = true;
+                        // this.PINlocked = true;
+                        this.PINlocked = false;
                     }
 
                     const details_sections = {};

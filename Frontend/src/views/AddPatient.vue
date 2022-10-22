@@ -88,7 +88,7 @@ export default {
                         "$ref": "#/i18n/~$locale~/pin"
                     },
                     type: 'string', 'x-col': '12', 'x-class': 'col-sm-5',
-                    'minLength': 6, 'maxLength': 6, 'x-props': { 'type': 'password', 'hint': "Password used to access patient's sensitive data" }
+                    'maxLength': 6, 'x-props': { 'type': 'password', 'hint': "Password used to access patient's sensitive data" }
                 },
                 'Email': {
                     title: {
